@@ -1,1 +1,33 @@
-<mxfile host="app.diagrams.net" modified="2021-03-12T15:12:59.193Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36" version="14.4.7" etag="VUvz0MX4BYcN3q-SBkOy" type="github"><diagram id="RY-5stFYAUdmnsDvwjBE">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-03-12T15:20:53.168Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36" etag="m3RBfNYEvlXo2fVOd2Xw" version="14.4.7" type="github">
+  <diagram id="RY-5stFYAUdmnsDvwjBE" name="Page-1">
+    <mxGraphModel dx="3671" dy="1522" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <object placeholders="1" c4Name="Web Application" c4Type="Container" c4Technology="JavaScript" c4Description="Livreaza continutul static pentru chat si pentu pagina administratorului" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="42MwVDSx2arR-wDK26Vb-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#438DD5;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#3C7FC0;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="1">
+            <mxGeometry x="250" y="165" width="470" height="280" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="ChatScript" c4Type="ExecutionEnvironment" c4Application="" label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;%c4Name%&lt;/div&gt;&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;[%c4Application%]&lt;/div&gt;" id="42MwVDSx2arR-wDK26Vb-2">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#ffffff;fontColor=#000000;align=left;arcSize=5;strokeColor=#000000;verticalAlign=bottom;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="1">
+            <mxGeometry x="-770" y="40" width="840" height="560" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Chat Initializer" c4Type="Component" c4Technology="technology" c4Description="verifica daca un chat&#xa;a fost initializat intr-o&#xa;alta vizitare a siteului ,&#xa;daca nu creaza un chat nou&#xa;si face o cerere pentru&#xa;primirea chatului corespunzator " label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="42MwVDSx2arR-wDK26Vb-3">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#85BBF0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#78A8D8;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="1">
+            <mxGeometry x="-700" y="100" width="600" height="410" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="HTTP" c4Description="Face o cerere" label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="42MwVDSx2arR-wDK26Vb-5">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=2;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;fontSize=30;" edge="1" parent="1" source="42MwVDSx2arR-wDK26Vb-3" target="42MwVDSx2arR-wDK26Vb-1">
+            <mxGeometry width="160" relative="1" as="geometry">
+              <mxPoint x="360" y="550" as="sourcePoint" />
+              <mxPoint x="520" y="550" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
