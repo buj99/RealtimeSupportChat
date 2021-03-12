@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-03-12T15:03:19.907Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36" etag="NTa63KJmuCXygKTTaqqq" version="14.4.7" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-12T15:06:18.509Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36" etag="4u-7uMd0_3BZ8y1qACb9" version="14.4.7" type="github">
   <diagram id="09QfUkjnvgGYkH65p0EQ" name="Page-1">
     <mxGraphModel dx="4740" dy="4875" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -11,7 +11,7 @@
         </object>
         <object placeholders="1" c4Name="End user" c4Type="Person" c4Description="Persoana care foloseste&#xa;pop-up chatul implementat&#xa; de client" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="Br8_Ab8YKEwOugRyF4kc-4">
           <mxCell style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.c4.person;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};labelBackgroundColor=none;flipH=1;flipV=0;fillColor=#08427B;strokeColor=#08427B;fontColor=#FFFFFF;fontSize=30;" vertex="1" parent="1">
-            <mxGeometry x="1214.99" y="-1550" width="390.01" height="390" as="geometry" />
+            <mxGeometry x="599.99" y="-1559" width="390.01" height="390" as="geometry" />
           </mxCell>
         </object>
         <object placeholders="1" c4Type="Relationship" c4Technology="HTPP/JSON" c4Description="Face calluri API" label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Br8_Ab8YKEwOugRyF4kc-5">
