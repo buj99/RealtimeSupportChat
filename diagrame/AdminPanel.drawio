@@ -1,0 +1,115 @@
+<mxfile host="app.diagrams.net" modified="2021-03-13T12:10:56.372Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36" etag="c1dpRHnLVbmHF7jJguBl" version="14.4.8" type="github">
+  <diagram id="OaBE8Bw1-iT0I6OUdc20" name="Page-1">
+    <mxGraphModel dx="2728" dy="3072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <object placeholders="1" c4Name="Admin" c4Type="Person" c4Description="Persoana care &#xa;interactioneaza&#xa;cu mai multe &#xa;instante de chat&#xa;" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-1">
+          <mxCell style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.c4.person;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};labelBackgroundColor=none;flipH=1;flipV=0;fontColor=#ffffff;strokeColor=#08427B;fillColor=#08427B;fontSize=30;" vertex="1" parent="1">
+            <mxGeometry x="1150" y="820" width="400.01" height="400" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="API Application" c4Type="Container" c4Technology="JavaScript" c4Description="API ul care care menegeriaza mesajele , sesiunile si setarile chatului" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-4">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#438DD5;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#3C7FC0;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="1">
+            <mxGeometry x="3620" y="1020" width="470" height="280" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Web Application" c4Type="Container" c4Technology="JavaScript" c4Description="Livreaza continutul static pentru chat si pentu pagina administratorului" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-5">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#438DD5;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#3C7FC0;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="1">
+            <mxGeometry x="2223" y="-10" width="470" height="280" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="Gs4DRhsx2FhvI49a5k0T-16" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="2068" y="550" width="1520" height="1550" as="geometry" />
+        </mxCell>
+        <object placeholders="1" c4Name="Admin Panel" c4Type="ExecutionEnvironment" c4Application="" label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;%c4Name%&lt;/div&gt;&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;[%c4Application%]&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-7">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#ffffff;fontColor=#000000;align=left;arcSize=5;strokeColor=#000000;verticalAlign=bottom;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="Gs4DRhsx2FhvI49a5k0T-16">
+            <mxGeometry y="-10" width="780" height="1390" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Login panel" c4Type="Component" c4Technology="HTML,CSS,JavaScript" c4Description="Pentru a putea primi functionalitatea siteului de administrare mai intai trebuie sa fii conectat" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-10">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#85BBF0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#78A8D8;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="Gs4DRhsx2FhvI49a5k0T-16">
+            <mxGeometry x="50" y="40" width="510" height="310" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Chat costumization panel" c4Type="Component" c4Technology="HTML,CSS,JavaScript" c4Description="Este utilizat pentru a&#xa;costumiza interfata chatului&#xa;care apare pentru end user" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-12">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#85BBF0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#78A8D8;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="Gs4DRhsx2FhvI49a5k0T-16">
+            <mxGeometry x="50" y="450" width="510" height="310" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Chats Manager" c4Type="Component" c4Technology="HTML,CSS,JavaScript" c4Description="Contine mai multe instante de chat prin intermediul carora se poate comunica cu end userii" label="&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Name%&lt;/b&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br style=&quot;font-size: 30px;&quot;&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-15">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#85BBF0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#78A8D8;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];fontSize=30;" vertex="1" parent="Gs4DRhsx2FhvI49a5k0T-16">
+            <mxGeometry x="50" y="860" width="510" height="310" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="" c4Description="Introduce user si parola in " label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-13">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=6;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};fontSize=30;exitX=0;exitY=0.75;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Gs4DRhsx2FhvI49a5k0T-1" target="Gs4DRhsx2FhvI49a5k0T-12">
+            <mxGeometry x="-0.3024" y="-89" width="160" relative="1" as="geometry">
+              <mxPoint x="1599.9999999999993" y="1265.0000000000005" as="sourcePoint" />
+              <mxPoint x="2219.99" y="1010.0000000000005" as="targetPoint" />
+              <mxPoint as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="" c4Description="Introduce user si parola in " label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-6">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=6;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};fontSize=30;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Gs4DRhsx2FhvI49a5k0T-1" target="Gs4DRhsx2FhvI49a5k0T-10">
+            <mxGeometry x="-0.3024" y="-89" width="160" relative="1" as="geometry">
+              <mxPoint x="1548.3321241830063" y="1505" as="sourcePoint" />
+              <mxPoint x="2135" y="875" as="targetPoint" />
+              <mxPoint as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="JSON" c4Description="Trimite user si parola&#xa; catre API si asteapta confirmare " label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-11">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=6;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};fontSize=30;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Gs4DRhsx2FhvI49a5k0T-10" target="Gs4DRhsx2FhvI49a5k0T-4">
+            <mxGeometry x="-0.5142" y="-2" width="160" relative="1" as="geometry">
+              <mxPoint x="3246.004999999999" y="1030" as="sourcePoint" />
+              <mxPoint x="3049.999999999999" y="520" as="targetPoint" />
+              <mxPoint as="offset" />
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="JSON" c4Description="Trimite schimbarile facute&#xa;asupra chatului realizate&#xa;de administrator " label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-14">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=6;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};fontSize=30;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Gs4DRhsx2FhvI49a5k0T-12" target="Gs4DRhsx2FhvI49a5k0T-4">
+            <mxGeometry x="-0.533" y="6" width="160" relative="1" as="geometry">
+              <mxPoint x="2929.999999999999" y="1190.0000000000005" as="sourcePoint" />
+              <mxPoint x="3255.764705882354" y="479.99999999999955" as="targetPoint" />
+              <mxPoint x="-1" as="offset" />
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="HTTP" c4Description="Trimite catre administrator" label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-3">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=6;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};fontSize=30;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Gs4DRhsx2FhvI49a5k0T-5" target="Gs4DRhsx2FhvI49a5k0T-7">
+            <mxGeometry x="-0.2739" y="-42" width="160" relative="1" as="geometry">
+              <mxPoint x="1023.2699999999995" y="890.1325815106711" as="sourcePoint" />
+              <mxPoint x="1900" y="735" as="targetPoint" />
+              <mxPoint x="1" as="offset" />
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="" c4Description="Converseaza cu userii folosind " label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-17">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=6;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};fontSize=30;exitX=0.25;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Gs4DRhsx2FhvI49a5k0T-1" target="Gs4DRhsx2FhvI49a5k0T-15">
+            <mxGeometry x="-0.3024" y="-89" width="160" relative="1" as="geometry">
+              <mxPoint x="1539.9999999999993" y="1390" as="sourcePoint" />
+              <mxPoint x="2107.99" y="1400.3523129078121" as="targetPoint" />
+              <mxPoint as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="HTTP/JSON" c4Description="Face call uri API" label="&lt;div style=&quot;text-align: left; font-size: 30px;&quot;&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;&lt;b style=&quot;font-size: 30px;&quot;&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center; font-size: 30px;&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="Gs4DRhsx2FhvI49a5k0T-18">
+          <mxCell style="edgeStyle=none;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#707070;strokeWidth=6;fontColor=#707070;jumpStyle=none;dashed=1;metaEdit=1;metaData={&quot;c4Type&quot;:{&quot;editable&quot;:false}};fontSize=30;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Gs4DRhsx2FhvI49a5k0T-15" target="Gs4DRhsx2FhvI49a5k0T-4">
+            <mxGeometry x="-0.653" y="-61" width="160" relative="1" as="geometry">
+              <mxPoint x="2680" y="1540" as="sourcePoint" />
+              <mxPoint x="3802" y="1544.1341193809876" as="targetPoint" />
+              <mxPoint x="1" y="-1" as="offset" />
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
