@@ -1,59 +1,86 @@
-.chat{
-    border-style: solid;
-    border-color: black;
-    border-radius: 1em;
-    height: 35vh;
-    width: 18vw;
-    position:absolute;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    margin :5em;
-    
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.message-displayer{
-
-    height: 70%;
-    width: 100%;
-    
+#chat-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  right: 5em;
+  bottom: 5em;
+  height: 22em;
+  width: 17em;
+  background-color: #253d5b;
+  color: #e7ecef;
+}
+#chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 0em;
+  position: relative;
+  background-color: #33547c;
 }
 
-.line{
-    width: 100%;
-    height: 3px;
-    background-color: black;
-    margin: 0 0.2em 
+#messages-container {
+  overflow-y: scroll;
 }
-.input-controls{
-
-    height: 20%;
-    display: flex;
+.message {
+  margin: 0.5em 0.2em;
+  padding: 0.5em;
+  border-radius: 1em;
 }
-
-#user-input {
-    width: 90%;
-    height: 100%;
-    resize: none;
-
+.message-image {
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
 }
-
-.input-controls button{
-    border: none;
-    background: none;
-    margin-bottom: auto;
-    margin-top : 0.5em;
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5em;
 }
-
-.message-container{
-    border-radius: 1em;
-    color :white;
-    background-color: black;
-    padding: 0.5em;
-    margin :1em;
+.moderator {
+  background-color: #33547c;
 }
-
-.message-container p{
-    margin: 0 ;
-    
+.user {
+  background-color: #446da0;
+}
+#input-container {
+  margin-top: 1em;
+  width: 100%;
+  display: flex;
+}
+#text-input {
+  width: 85%;
+  resize: none;
+}
+#send-btn {
+  width: 15%;
+  height: 100%;
+}
+#minimize-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 2.2em;
+  width: 2.2em;
+  background-color: transparent;
+  border: none;
+}
+#minimize-btn i {
+  color: black;
+  font-size: 9px;
+}
+#chat-title {
+  font-size: 1.3em;
+}
+#maximize-btn {
+}
+.hiden {
+  display: none;
 }
