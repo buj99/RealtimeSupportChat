@@ -19,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/buj99/RealtimeSupportChat/issues"
   },
-  "homepage": "https://github.com/buj99/RealtimeSupportChat#readme"
+  "homepage": "https://github.com/buj99/RealtimeSupportChat#readme",
+  "dependencies": {}
 }

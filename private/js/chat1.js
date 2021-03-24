@@ -41,7 +41,7 @@ chatHeader.appendChild(title);
 //buton minimizare
 const minimizeBtn = document.createElement("button");
 minimizeBtn.id = "minimize-btn";
-minimizeBtn.innerText = "X";
+minimizeBtn.innerHTML = "<i class=\"fas fa-times\"></i>";
 chatHeader.appendChild(minimizeBtn);
 
 //buton maximizare
@@ -107,5 +107,5 @@ inputContainer.appendChild(textInput);
 //buton trimitere
 const sendBtn = document.createElement("button");
 sendBtn.id = "send-btn";
-sendBtn.innerText = ">";
+sendBtn.innerHTML = "<i class=\"fas fa-arrow-right\"></i>";
 inputContainer.appendChild(sendBtn);

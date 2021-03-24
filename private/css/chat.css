@@ -28,6 +28,26 @@
 #messages-container {
   overflow-y: scroll;
 }
+
+#messages-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+#messages-container::-webkit-scrollbar-thumb {
+  background: #33547c;
+}
+
+/* Handle on hover */
+#messages-container::-webkit-scrollbar-thumb:hover {
+  background: #446da0;
+}
+
 .message {
   margin: 0.5em 0.2em;
   padding: 0.5em;
@@ -62,6 +82,12 @@
 #send-btn {
   width: 15%;
   height: 100%;
+  border: none;
+  background-color: #33547c;
+}
+#send-btn i {
+  font-size: 1.5em;
+  color: #e7ecef;
 }
 #minimize-btn {
   position: absolute;
@@ -73,8 +99,8 @@
   border: none;
 }
 #minimize-btn i {
-  color: black;
-  font-size: 9px;
+  color: #e7ecef;
+  font-size: 1.5em;
 }
 #chat-title {
   font-size: 1.3em;
