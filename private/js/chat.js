@@ -1,59 +1,111 @@
-//create chat element
-let chat = document.createElement("div");
-chat.classList.add("chat");
+const mesaje = [
+  {
+    autor: "moderator",
+    text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium cumque aliquid sequi ipsa veniam quis, impedit quaerat fugiat nihil modi." ,
+    time: "12:00",
+    photo: "../public/images/buj.jpg",
+    isModerator: "true",
+  },
+  {
+    autor: "user",
+    text: "hello from the othe side",
+    time: "12:01",
+    photo: "../public/images/user.svg",
+    isModerator: "false",
+  },
+  {
+    autor: "moderator",
+    text: "Hello again",
+    time: "12:02",
+    photo: "../public/images/buj.jpg",
+    isModerator: "true",
+  },
+];
+//body element
 let body = document.getElementsByTagName("body")[0];
-body.appendChild(chat);
+//chat container
+const chatContainer = document.createElement("div");
+chatContainer.id = "chat-container";
+body.appendChild(chatContainer);
 
-//create message displayer
-let messageDisplayer = document.createElement("div");
-messageDisplayer.classList.add("message-displayer");
-chat.appendChild(messageDisplayer);
+//chat header
+const chatHeader = document.createElement("header");
+chatHeader.id = "chat-header";
+chatContainer.appendChild(chatHeader);
+//titlu suport chat
+const title = document.createElement("p");
+title.id = "chat-title";
+title.innerText = "Suport chat";
+chatHeader.appendChild(title);
 
-//create separator line
-let line = document.createElement("div");
-line.classList.add("line");
-chat.appendChild(line);
+//buton minimizare
+const minimizeBtn = document.createElement("button");
+minimizeBtn.id = "minimize-btn";
+minimizeBtn.innerHTML = "<i class=\"fas fa-times\"></i>";
+chatHeader.appendChild(minimizeBtn);
 
-//create input controls container
-let inputControls = document.createElement("div");
-inputControls.classList.add("input-controls");
-chat.appendChild(inputControls);
+//buton maximizare
+const maximizeBtn = document.createElement("button");
+maximizeBtn.id = "maximize-btn";
+maximizeBtn.classList.toggle("hiden"); // trebuie schimbat invers 
+maximizeBtn.innerHTML = "+";
+chatHeader.appendChild(maximizeBtn);
 
-// create input element
-let input = document.createElement("textarea");
-input.id = "user-input";
-input.cols = 50;
-input.rows = 6;
-inputControls.appendChild(input);
+//messages container
+const messagesContainer = document.createElement("div");
+messagesContainer.id = "messages-container";
+chatContainer.appendChild(messagesContainer);
 
-// create send button
-let sendButton = document.createElement("button");
-sendButton.innerText = ">";
-inputControls.appendChild(sendButton);
+//creare mesaje
+mesaje.map((mesaj) => {
+  //message container
+  const messageContainer = document.createElement("div");
+  messageContainer.classList.add("message");
+  messageContainer.classList.add(`${mesaj.autor}`);
 
-// creare mesaj
+  //message meta
+  const messageMeta = document.createElement("div");
+  messageMeta.classList.add("message-meta");
+  messageContainer.appendChild(messageMeta);
 
-let messageContainer = document.createElement("div");
-messageContainer.classList.add("message-container");
+  //poza suport
+  const messageImage = document.createElement("img");
+  messageImage.classList.add("message-image");
+  messageImage.src = mesaj.photo;
+  messageMeta.appendChild(messageImage);
 
-//message meta
-let mesageMeta = document.createElement("header");
-//numele celui care a trimis
-let sendBy = document.createElement("span");
-sendBy.innerText = "Buj";
-mesageMeta.appendChild(sendBy);
+  //message author
+  const messageAuthor = document.createElement("span");
+  messageAuthor.classList.add("message-author");
+  messageAuthor.innerText = mesaj.autor;
+  messageMeta.appendChild(messageAuthor);
 
-//ora trimiterii
-let hour = document.createElement("span");
-hour.innerText = "12:00";
-mesageMeta.appendChild(hour);
+  //ora trimitere mesaj
+  const messageHour = document.createElement("span");
+  messageHour.classList.add("message-hour");
+  messageHour.innerText = mesaj.time;
+  messageMeta.appendChild(messageHour);
 
-messageContainer.appendChild(mesageMeta);
-//mesajul primit
-let message = document.createElement("p");
-message.innerText = "Hello from the other side :D";
-messageContainer.appendChild(message);
+  //mesaj text
+  const messageText = document.createElement("p");
+  messageText.classList.add("message-text");
+  messageText.innerText = mesaj.text;
+  messageContainer.appendChild(messageText);
+  messagesContainer.appendChild(messageContainer);
+});
 
-messageDisplayer.appendChild(messageContainer);
+//input container
+const inputContainer = document.createElement("div");
+inputContainer.id = "input-container";
+chatContainer.appendChild(inputContainer);
 
-messageDisplayer.appendChild(messageContainer);
+//textarea  in care se introduce mesajul
+const textInput = document.createElement("textarea");
+textInput.id = "text-input";
+inputContainer.appendChild(textInput);
+
+//buton trimitere
+const sendBtn = document.createElement("button");
+sendBtn.id = "send-btn";
+sendBtn.innerHTML = "<i class=\"fas fa-arrow-right\"></i>";
+inputContainer.appendChild(sendBtn);
