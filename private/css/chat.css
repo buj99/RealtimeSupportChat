@@ -106,7 +106,20 @@
   font-size: 1.3em;
 }
 #maximize-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 3em;
+  width: 3em;
+  background-color: transparent;
+  border: none;
+  background-color: #33547c;
+  border-radius: 50%;
+}
+#maximize-btn i {
+  color: #e7ecef;
+  font-size: 1.5em;
 }
 .hiden {
-  display: none;
+  display: none !important;
 }

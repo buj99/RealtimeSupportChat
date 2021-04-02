@@ -26,12 +26,14 @@ let body = document.getElementsByTagName("body")[0];
 //chat container
 const chatContainer = document.createElement("div");
 chatContainer.id = "chat-container";
+chatContainer.classList.toggle('hiden');
 body.appendChild(chatContainer);
 
 //chat header
 const chatHeader = document.createElement("header");
 chatHeader.id = "chat-header";
 chatContainer.appendChild(chatHeader);
+// chatHeader.classList.toggle("hiden");
 //titlu suport chat
 const title = document.createElement("p");
 title.id = "chat-title";
@@ -43,13 +45,20 @@ const minimizeBtn = document.createElement("button");
 minimizeBtn.id = "minimize-btn";
 minimizeBtn.innerHTML = "<i class=\"fas fa-times\"></i>";
 chatHeader.appendChild(minimizeBtn);
+minimizeBtn.onclick=()=>{
+  chatContainer.classList.toggle("hiden");
+  maximizeBtn.classList.toggle("hiden");
+}
 
 //buton maximizare
 const maximizeBtn = document.createElement("button");
 maximizeBtn.id = "maximize-btn";
-maximizeBtn.classList.toggle("hiden"); // trebuie schimbat invers 
-maximizeBtn.innerHTML = "+";
-chatHeader.appendChild(maximizeBtn);
+maximizeBtn.innerHTML = "<i class=\"fas fa-plus\"></i>";
+maximizeBtn.onclick=()=>{
+  chatContainer.classList.toggle("hiden");
+  maximizeBtn.classList.toggle("hiden");
+}
+body.appendChild(maximizeBtn);
 
 //messages container
 const messagesContainer = document.createElement("div");
@@ -109,3 +118,7 @@ const sendBtn = document.createElement("button");
 sendBtn.id = "send-btn";
 sendBtn.innerHTML = "<i class=\"fas fa-arrow-right\"></i>";
 inputContainer.appendChild(sendBtn);
+
+
+
+
