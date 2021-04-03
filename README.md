@@ -6,7 +6,7 @@ Este un serviciu care ofera posibilitatea inserarii in site-ul detinut de tine u
 De asemeni poti crea propiul tau content management system utilizand API-ul pus la dispozitie de catre noi . 
 
 
-## Mine descriere pentru file structure : 
+## Mini descriere pentru file structure : 
 - frontend ***aici se gasesc toate fisierele pentru frontend***
   - private ***aici se gasesc toate sursele statice (html , scss, js , images )***
     - adminpanel ***aici se gasesc fisierele statice folosite pentru admin panel***
