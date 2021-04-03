@@ -3,21 +3,21 @@ const mesaje = [
     autor: "moderator",
     text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium cumque aliquid sequi ipsa veniam quis, impedit quaerat fugiat nihil modi." ,
     time: "12:00",
-    photo: "../public/images/buj.jpg",
+    photo: "./images/buj.jpg",
     isModerator: "true",
   },
   {
     autor: "user",
     text: "hello from the othe side",
     time: "12:01",
-    photo: "../public/images/user.svg",
+    photo: "./images/user.svg",
     isModerator: "false",
   },
   {
     autor: "moderator",
     text: "Hello again",
     time: "12:02",
-    photo: "../public/images/buj.jpg",
+    photo: "./images/buj.jpg",
     isModerator: "true",
   },
 ];
@@ -118,7 +118,3 @@ const sendBtn = document.createElement("button");
 sendBtn.id = "send-btn";
 sendBtn.innerHTML = "<i class=\"fas fa-arrow-right\"></i>";
 inputContainer.appendChild(sendBtn);
-
-
-
-
