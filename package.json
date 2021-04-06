@@ -7,6 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
+    "server": "node ./backend/serverStatic.js",
+    "server:dev": "nodemon ./backend/serverStatic.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,10 @@
     "url": "https://github.com/buj99/RealtimeSupportChat/issues"
   },
   "homepage": "https://github.com/buj99/RealtimeSupportChat#readme",
-  "dependencies": {}
+  "dependencies": {
+    "mime-types": "^2.1.30"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
