@@ -1,0 +1,152 @@
+*{
+    margin:0;
+    box-sizing: border-box;
+    padding: 0;
+  }
+  .custom-container{
+    width:100%;
+    background-color: #0A1E25;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  body{
+    display:flex;
+    height:100vh;
+  
+  }
+  .txt{
+    font-size: 1.5em;
+    text-align: center;
+    color: #BFE1ED;
+  }
+  header{
+    flex: 0.5;
+    width:60%;
+    margin:0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+ 
+  form{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    flex: 2.5;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    flex: 0.3;
+    align-items: center;
+    justify-content: center;
+
+  }
+  select{
+      box-shadow:0 5px 12px black;
+      padding:0.5em 4em;
+      background-color: #BFE1ED;
+  }
+ 
+.reg{
+    font-size: 1.1em;
+    text-align: center;
+    color: #9db9c5;
+    
+}
+.container{
+    font-size: 1em;
+    text-align: start;
+    padding: 0.5em 0.5em;
+    color: #BFE1ED;
+}
+
+ 
+  .label{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    flex: 0.3;
+    align-items: flex-start;
+    justify-content: center;
+    border: none;
+    border-radius: 0.4em;
+  }
+  .select-btn{
+    padding: 1em;
+    width: 50%;
+    border:solid;
+    border-radius: 0.4em;
+    border-color: #BFE1ED ;
+    background-color: transparent;
+    color: #BFE1ED;
+  }
+   
+  .input{
+    height: 3em;
+    width: 70%;
+    margin:1.5em 0;
+    background-color: #BFE1ED;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.4em;
+  }
+  .button{
+    padding: 1em;
+    width: 50%;
+    border:solid;
+    border-radius: 0.4em;
+    border-color: #BFE1ED ;
+    background-color: transparent;
+    color: #BFE1ED;
+  }
+
+ 
+  @media screen and (max-width:700px){
+    .reg,.container{
+        font-size: 1em;
+    }
+    .txt{
+        font-size: 1.1em;
+    }
+    header,form{
+        width:80%;
+    }
+    footer{
+       align-items: center;
+    }
+  }
+  @media screen and (max-width:600px){
+    .reg,.container{
+        font-size: 0.9em;
+    }
+    .txt{
+        font-size: 1em;
+    }
+   
+  }
+  @media screen and (max-width:500px){
+  
+    header,form{
+        margin:0;
+        width:100%;
+  
+    }
+    .reg,.container{
+        font-size: 0.8em;
+    }
+    .txt{
+        font-size: 0.9em;
+    }
+  }
+ 

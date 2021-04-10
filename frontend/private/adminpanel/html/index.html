@@ -1,25 +1,45 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Login Form</title>
-        <!-- <link rel="stylesheet" href="./css/login.css"> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Document</title>
+</head>
+<body>
+    <section class="image-container">
+        <img src="background.jpg"/> 
 
-    </head>
-    <body>
-    <div class="login-box">
-        <h1>Login</h1>
-        <div class="textbox">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <input type="email" placeholder="Email" name="" value="">
-        </div>
+    </section>
 
-        <div class="textbox">
-            <i class="fa fa-lock" aria-hidden="true"></i>
-            <input type="password" placeholder="Password" name="" value="">
-        </div>
-
-        <input class="btn" type="button" name="" value="Sign in">
-    </div>
-    </body>
+    <section class="login-container">
+        <header>
+            <h1 class="welcome-txt">
+                We can help you communicate with clients fast and efficient.
+                Real Time Support Chat waits for you. Connect with us! 
+            </h1>
+        </header>
+       
+        <form>
+            <label class="label" for="email-input">
+                <input class="input" type="email" placeholder="Email" id="email-input">
+            </label>
+            <label class="label" for="password-input">
+                <input class="input" type="password" placeholder="Password" id="password-input">
+            </label>
+            <button class="login-button" type="submit">
+                Login
+            </button>
+        </form>
+        <footer>
+        <div class="register-box">
+            <p class="reg">You don't have an account? </p>
+            <input class="btn2" type="button" name="" value="Register here">  
+        </div> 
+    </footer>
+    </section>
+    
+    
+</body>
 </html>

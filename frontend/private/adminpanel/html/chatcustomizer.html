@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chatcustomizer.css">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <section class="custom-container">
+        <header>
+            <h1 class="txt">
+                Personalize your chat! 
+            </h1>
+        </header>
+       
+        <form>
+            <div class="box">
+                <p class="reg">Background theme: </p>  
+                <label class="label" style="width:200px;">
+                    <select>
+                    <option   value="0">Light</option>
+                    <option   value="1">Dark</option>    
+                    </select>
+                </label>
+            </div>
+
+            <div class="box">
+                <p class="reg">Text color: </p>  
+                <label class="label" style="width:200px;">
+                    <select>
+                    <option  value="0">Black</option>
+                    <option  value="1">Red</option> 
+                    <option  value="2">Blue</option> 
+                    <option  value="3">Purple</option>    
+                    </select>
+                </label>        
+            </div>
+
+            <div class="box">
+                <p class="reg">Choose your message:</p>
+                <label class="container">Hello!What cand I help you with?
+                    <input type="radio" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Hi! I am here to help you!
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Hello! Can you explain me your problem?
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <label class="label" for="number-input">
+                <input class="input" type="number" placeholder="Font-size" id="number-input">
+            </label>
+            <div class="box">
+            <button class="button" type="submit">
+                Apply changes
+            </button>
+        </div>
+
+        </form>
+    </section>
+    
+    
+</body>
+</html>
