@@ -123,3 +123,17 @@
 .hiden {
   display: none !important;
 }
+
+@media screen and (max-width: 500px) {
+  #chat-container {
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  #chat-container {
+    width: 100%;
+    height: 65%;
+  }
+}
