@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+#app {
+  max-height: 100vh;
+}
+.image-container img {
+  height: 100%;
+  object-fit: cover;
+}
+.login-box {
+  display: flex;
+  height: 100vh;
+}
+.login-container {
+  width: 60%;
+  background-color: #0a1e25;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.image-container {
+  width: 40%;
+  overflow: hidden;
+}
+.input {
+  height: 3em;
+  width: 100%;
+  margin: 1.5em 0;
+  padding: 0.5em;
+  border: none;
+  border-radius: 0.4em;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+  flex: 1.5;
+  align-items: center;
+  justify-content: center;
+}
+.label {
+  width: 80%;
+}
+.welcome-txt {
+  font-size: 1.5em;
+  text-align: center;
+  color: #bfe1ed;
+}
+header {
+  flex: 1;
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.login-button {
+  padding: 1em;
+  width: 50%;
+  border: solid;
+  border-radius: 0.4em;
+  border-color: #bfe1ed;
+  background-color: transparent;
+  color: #bfe1ed;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex: 0.5;
+  justify-content: center;
+}
+.register-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+}
+.reg {
+  color: #bfe1ed;
+  font-size: 1em;
+  text-align: center;
+}
+.btn2 {
+  margin: 0.5em 0;
+  padding: 0.5em 1em;
+  border-radius: 0.4em;
+  border-color: #bfe1ed;
+  background-color: transparent;
+  border: solid;
+  color: #bfe1ed;
+}
+@media screen and (max-width: 700px) {
+  .welcome-txt {
+    font-size: 1.2em;
+  }
+  header,
+  form {
+    width: 80%;
+  }
+  footer {
+    align-items: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  .welcome-txt {
+    font-size: 1.1em;
+  }
+}
+@media screen and (max-width: 500px) {
+  header,
+  form {
+    margin: 0;
+    width: 100%;
+  }
+}
