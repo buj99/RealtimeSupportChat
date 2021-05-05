@@ -1,30 +1,34 @@
 import AbstractView from "./AbstractView.js";
-
+import { navigateTo } from "../utils.js";
 export default class extends AbstractView {
-    constructor(params) {
-        super(params);
-        this.credentials;
-        this.setTitle("Login");
-    }
-    loadSetupDomElements() {
-        const loginForm = document.getElementById("loginForm");
-        const email = document.getElementById("email-input");
-        const pass = document.getElementById("password-input");
+  constructor(params) {
+    super(params);
+    this.credentials;
+    this.setTitle("Login");
+  }
+  loadSetupDomElements() {
+    const loginForm = document.getElementById("loginForm");
+    const username = document.getElementById("username-input");
+    const pass = document.getElementById("password-input");
 
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            this.credentials = {
-                email: email.value,
-                pass: pass.value
-            }
-            console.log(this.credentials);
-        });
-    }
-    getCredentials() {
-        return this.credentials;
-    }
-    async getHTML() {
-        return `<div class="login-box">
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.credentials = {
+        username: username.value,
+        pass: pass.value,
+      };
+      //persist data using local storage
+      window.localStorage.setItem(
+        "credentials",
+        JSON.stringify(this.credentials)
+      );
+      //change view
+      navigateTo("http://127.0.0.1:8125/" + this.credentials.username);
+    });
+  }
+
+  async getHTML() {
+    return `<div class="login-box">
         <section class="image-container">
         <img src="./static/Images/background.jpg"/> 
 
@@ -39,8 +43,8 @@ export default class extends AbstractView {
         </header>
        
         <form id="loginForm">
-            <label class="label" for="email-input">
-                <input class="input" type="email" placeholder="Email" id="email-input" required>
+            <label class="label" for="username-input">
+                <input class="input" type="text" placeholder="Username" id="username-input" required>
             </label>
             <label class="label" for="password-input">
                 <input class="input" type="password" placeholder="Password" id="password-input" required>
@@ -57,5 +61,5 @@ export default class extends AbstractView {
     </footer>
     </section>
     </div>`;
-    }
+  }
 }
