@@ -1,13 +1,30 @@
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
-  constructor(params) {
-    super(params);
-    this.setTitle("Login");
-  }
+    constructor(params) {
+        super(params);
+        this.credentials;
+        this.setTitle("Login");
+    }
+    loadSetupDomElements() {
+        const loginForm = document.getElementById("loginForm");
+        const email = document.getElementById("email-input");
+        const pass = document.getElementById("password-input");
 
-  async getHTML() {
-    return `<div class="login-box">
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            this.credentials = {
+                email: email.value,
+                pass: pass.value
+            }
+            console.log(this.credentials);
+        });
+    }
+    getCredentials() {
+        return this.credentials;
+    }
+    async getHTML() {
+        return `<div class="login-box">
         <section class="image-container">
         <img src="./static/Images/background.jpg"/> 
 
@@ -21,12 +38,12 @@ export default class extends AbstractView {
             </h1>
         </header>
        
-        <form>
+        <form id="loginForm">
             <label class="label" for="email-input">
-                <input class="input" type="email" placeholder="Email" id="email-input">
+                <input class="input" type="email" placeholder="Email" id="email-input" required>
             </label>
             <label class="label" for="password-input">
-                <input class="input" type="password" placeholder="Password" id="password-input">
+                <input class="input" type="password" placeholder="Password" id="password-input" required>
             </label>
             <button class="login-button" type="submit">
                 Login
@@ -40,5 +57,5 @@ export default class extends AbstractView {
     </footer>
     </section>
     </div>`;
-  }
+    }
 }
