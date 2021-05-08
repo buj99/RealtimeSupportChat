@@ -35,7 +35,44 @@ async function getConversations(req, res) {
     console.log(error);
   }
 }
+//@desc Add new username and password to admins list
+//@route POST/register
+async function registerNewAdmin(req, res) {
+  try {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", async () => {
+      const { userName, password, confrimPassword } = JSON.parse(body);
+      if (password !== confrimPassword) {
+        res.writeHead(406, { "Content-Type": "application/json" });
+        res.end(
+          JSON.stringify({
+            message: "Password and confirmation password don't match",
+          })
+        );
+      } else {
+        const adminAdded = await Conversation.addNewAdmin(userName, password);
+        if (!adminAdded) {
+          res.writeHead(409, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ success: false }));
+        } else {
+          res.writeHead(201, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          });
+          res.end(JSON.stringify({ success: true }));
+        }
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 module.exports = {
   getConversations,
+  registerNewAdmin,
 };

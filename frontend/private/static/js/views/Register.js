@@ -7,10 +7,37 @@ export default class extends AbstractView {
     this.setTitle("Costumize");
   }
   loadSetupDomElements() {
+    this.addEventListenerToRegisterButton();
+  }
+  addEventListenerToRegisterButton() {
+    const username = document.getElementById("username-input");
+    const password = document.getElementById("password-input");
+    const confirmPassword = document.getElementById("confirm-password-input");
     document
       .getElementsByClassName("register-button")[0]
-      .addEventListener("click", () => {
-        navigateTo(`http://${window.location.host}`);
+      .addEventListener("click", (e) => {
+        e.preventDefault();
+        if (confirmPassword.value === password.value) {
+          fetch("http://localhost:5000/register", {
+            method: "POST",
+            body: JSON.stringify({
+              userName: username.value,
+              password: password.value,
+                confrimPassword: confirmPassword.value,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.success === true) {
+                navigateTo(`http://${window.location.host}`);
+              } else {
+                alert("Something went rong");
+              }
+            });
+        } else {
+          alert("Password confirmation failed");
+        }
       });
   }
   async getHTML() {
