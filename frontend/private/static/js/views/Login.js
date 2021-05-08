@@ -17,14 +17,38 @@ export default class extends AbstractView {
         username: username.value,
         pass: pass.value,
       };
+      var credentialsOK = verifyCredentials(this.credentials);
       //persist data using local storage
-      window.localStorage.setItem(
-        "credentials",
-        JSON.stringify(this.credentials)
-      );
-      //change view
-      navigateTo("http://127.0.0.1:8125/" + this.credentials.username);
+      if (credentialsOK) {
+        window.localStorage.setItem(
+          "credentials",
+          JSON.stringify(this.credentials)
+        );
+        //change view
+        if (this.credentials.username) {
+          navigateTo(window.location.href + this.credentials.username);
+        }
+      }
     });
+    //helper functions
+    const verifyCredentials = (credentials) => {
+      var credentials = {
+        username: "buj",
+        passwor: "password",
+      };
+      fetch("http://localhost:8080/login", {
+        method: "POST",
+        body: JSON.stringify(credentials),
+      })
+        .then((res) => {
+          res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          console.log("data get");
+        });
+      return true;
+    };
   }
 
   async getHTML() {

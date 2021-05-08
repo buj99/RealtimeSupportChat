@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "server::dev": "nodemon ./frontend/server.js"
+    "server::dev": "nodemon ./frontend/server.js",
+    "api::express::dev": "nodemon ./backend_tests/api.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "dependencies": {},
   "devDependencies": {
     "css-loader": "^5.2.0",
+    "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
