@@ -1,0 +1,105 @@
+[{
+        "admin": "Emi",
+        "conversations": [{
+                "user": "Claudiu",
+                "messages": [{
+                        "isSentByAdmin": "true",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Ce faci?",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Bine, tu?",
+                        "date": "21-03-2021"
+                    }
+                ]
+            },
+            {
+                "user": "Alexandra",
+                "messages": [{
+                        "isSentByAdmin": "true",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Ce faci?",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Bine, tu?",
+                        "date": "21-03-2021"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "admin": "Andrei",
+        "conversations": [{
+                "user": "Claudiu",
+                "messages": [{
+                        "isSentByAdmin": "true",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Ce faci?",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Bine, tu?",
+                        "date": "21-03-2021"
+                    }
+                ]
+            },
+            {
+                "user": "Alexandra",
+                "messages": [{
+                        "isSentByAdmin": "true",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Salut!",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Ce faci?",
+                        "date": "21-03-2021"
+                    },
+                    {
+                        "isSentByAdmin": "false",
+                        "message": "Bine, tu?",
+                        "date": "21-03-2021"
+                    }
+                ]
+            }
+        ]
+    }
+]
