@@ -1,0 +1,52 @@
+[{
+    "admin": "Emi",
+    "conversations": [{
+            "user": "Claudiu",
+            "messages": [{
+                    "isSentByAdmin": "true",
+                    "message": "Salut!",
+                    "date" :"28.03"
+                },
+                {
+                    "isSentByAdmin": "false",
+                    "message": "Salut!",
+                    "date" :"28.03"
+                },
+                {
+                    "isSentByAdmin": "false",
+                    "message": "Ce faci?",
+                    "date" :"28.03"
+                },
+                {
+                    "isSentByAdmin": "false",
+                    "message": "Bine, tu?",
+                    "date" :"28.03"
+                }
+            ]
+        },
+        {
+            "user": "Alexandra",
+            "messages": [{
+                    "isSentByAdmin": "true",
+                    "message": "Salut!",
+                    "date" :"28.05"
+                },
+                {
+                    "isSentByAdmin": "false",
+                    "message": "Salut!",
+                    "date" :"28.05"
+                },
+                {
+                    "isSentByAdmin": "false",
+                    "message": "Ce faci?",
+                    "date" :"28.05"
+                },
+                {
+                    "isSentByAdmin": "false",
+                    "message": "Bine, tu?",
+                    "date" :"28.05"
+                }
+            ]
+        }
+    ]
+}]
