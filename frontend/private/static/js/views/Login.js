@@ -78,7 +78,7 @@ export default class extends AbstractView {
             </button>
         </form>
         <footer>
-        <div class="register-box">
+        <div class="register-box-button">
             <p class="reg">You don't have an account? </p>
             <a href="/register" data-link><input class="btn2" type="button" name="" value="Register here"> </a> 
         </div> 
