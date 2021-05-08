@@ -3,13 +3,14 @@ import Login from "./views/Login.js";
 import Chat from "./views/Chat.js";
 import UserMeniu from "./views/UserMeniu.js";
 import Costumize from "./views/Costumize.js";
-
+import Register from "./views/Register.js";
 export const router = async () => {
   const root = document.getElementById("app");
   const routes = [
     { path: "/404", view: Login },
     { path: "/", view: Login },
     { path: "/login", view: Login },
+    { path: "/register", view: Register },
     { path: "/-username", view: UserMeniu },
     { path: "/-username/@chatname", view: Chat },
     { path: "/-username/costumize", view: Costumize },

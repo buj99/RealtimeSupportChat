@@ -4,48 +4,23 @@ export default class extends AbstractView {
   constructor(params) {
     super(params);
     this.setTitle("User meniu ");
-    console.log(this.params);
     this.loginCredentials = JSON.parse(
       window.localStorage.getItem("credentials")
     );
     this.searchWidget;
     this.conversationList;
     this.isConversationListModified;
-
-    //mocking
-    this.conversations = [
-      {
-        user: "Claudiu",
-        messages: [
-          { isSentByAdmin: true, message: "Salut!", date: "28.03" },
-          { isSentByAdmin: false, message: "Salut!", date: "28.03" },
-          { isSentByAdmin: false, message: "gierbnk!", date: "28.03" },
-        ],
-      },
-      {
-        user: "User2",
-        messages: [
-          { isSentByAdmin: true, message: "Salut user2!", date: "28.03" },
-          { isSentByAdmin: false, message: "Salut!", date: "28.03" },
-          { isSentByAdmin: false, message: "sunt user 2!", date: "28.03" },
-        ],
-      },
-    ];
-    this.messages = [
-      { isSentByAdmin: true, message: "Salut!", date: "28.03" },
-      { isSentByAdmin: false, message: "Salut!", date: "28.03" },
-      { isSentByAdmin: false, message: "gierbnk!", date: "28.03" },
-    ];
+    this.chatTitleElemen;
+    this.conversations = [];
   }
   //event listeners
-  #searchEventListener(e) {
-    console.log(this.searchWidget.value);
+  searchEventListener(e) {
     if (this.searchWidget.value != "") {
       this.isConversationListModified = true;
       this.conversationList.innerHTML = "";
       this.conversations.map((conversation) => {
         if (conversation.user.includes(this.searchWidget.value)) {
-          this.#createUser(conversation);
+          this.createUser(conversation);
         }
       });
     } else {
@@ -56,11 +31,21 @@ export default class extends AbstractView {
   }
   //load dom
   loadSetupDomElements() {
+    this.chatTitleElemen = document.getElementById("chat-title");
     this.searchWidget = document.querySelector(".search-widget");
     this.conversationList = document.querySelector(".conversation-list");
-    this.createUsers();
+    //fatching users from api
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      body: JSON.stringify({ userName: "Emi", password: "password" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.conversations = [...data.conversations];
+        this.createUsers();
+      });
     document.querySelector(".search-widget").addEventListener("input", (e) => {
-      this.#searchEventListener(e);
+      this.searchEventListener(e);
     });
   }
   createMesages(messages) {
@@ -78,7 +63,7 @@ export default class extends AbstractView {
         messageRow.classList.add("message-row");
         messageDate.innerText = msg.date;
         messageText.innerText = msg.message;
-        if (msg.isSentByAdmin == true) {
+        if (msg.isSentByAdmin == "true") {
           messageRow.classList.add("other-message-row");
           messageText.classList.add("other-message-text");
         } else {
@@ -91,7 +76,7 @@ export default class extends AbstractView {
         chatMesagesList.appendChild(messageRow);
       });
   }
-  #createUser(conversation) {
+  createUser(conversation) {
     const divConversation = document.createElement("div");
     divConversation.classList.add("conversation");
     const img = document.createElement("img");
@@ -107,6 +92,7 @@ export default class extends AbstractView {
       conversation.messages[conversation.messages.length - 1].message;
     divLastMessage.classList.add("last-message");
     divConversation.addEventListener("click", () => {
+      this.chatTitleElemen.innerText = conversation.user;
       this.createMesages(conversation.messages);
     });
     divConversation.appendChild(divLastMessage);
@@ -118,7 +104,7 @@ export default class extends AbstractView {
       .slice(0)
       .reverse()
       .map((conversation) => {
-        this.#createUser(conversation);
+        this.createUser(conversation);
       });
     this.isConversationListModified = false;
   }
@@ -134,8 +120,7 @@ export default class extends AbstractView {
             <div class="menuBtn">
                 <img src="./static/Images/BackButton.png" alt="Back Button">
             </div>
-            <span>
-                ${this.params.username} 
+            <span id="chat-title">
             </span>
             <div class="three-dots-button">
                 <div class="three-dots-button__dot"></div>

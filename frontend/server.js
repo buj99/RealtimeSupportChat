@@ -13,7 +13,7 @@ http
       if (filePath == "./private/") {
         filePath = "./private/index.html";
       }
-
+      console.log(filePath);
       var extname = String(path.extname(filePath)).toLowerCase();
       var mimeTypes = {
         ".html": "text/html",
@@ -41,7 +41,10 @@ http
             fs.readFile(
               path.resolve(__dirname, "./private/index.html"),
               function (error, content) {
-                response.writeHead(200, { "Content-Type": "text/html" });
+                response.writeHead(200, {
+                  "Content-Type": "text/html",
+                  "Access-Control-Allow-Origin": "*",
+                });
                 response.end(content, "utf-8");
               }
             );
@@ -54,7 +57,10 @@ http
             );
           }
         } else {
-          response.writeHead(200, { "Content-Type": contentType });
+          response.writeHead(200, {
+            "Content-Type": contentType,
+            "Access-Control-Allow-Origin": "*",
+          });
           response.end(content, "utf-8");
         }
       });
