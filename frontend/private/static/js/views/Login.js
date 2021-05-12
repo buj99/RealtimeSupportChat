@@ -17,6 +17,7 @@ export default class extends AbstractView {
         username: username.value,
         pass: pass.value,
       };
+
       var credentialsOK = verifyCredentials(this.credentials);
       //persist data using local storage
       if (credentialsOK) {
@@ -32,22 +33,23 @@ export default class extends AbstractView {
     });
     //helper functions
     const verifyCredentials = (credentials) => {
+      var changePage = true;
       var credentials = {
-        username: "buj",
-        passwor: "password",
+        username: this.credentials.username,
+        passwor: this.credentials.pass,
       };
       fetch("http://localhost:8080/login", {
         method: "POST",
         body: JSON.stringify(credentials),
       })
         .then((res) => {
+          if (res.status === 404) changePage = false;
           res.json();
         })
         .then((data) => {
           console.log(data);
-          console.log("data get");
         });
-      return true;
+      return changePage;
     };
   }
 

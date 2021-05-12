@@ -8,11 +8,19 @@ function findConversationsForUserName(userName) {
 }
 function addNewAdmin(userName, password) {
   return new Promise((resolve, reject) => {
-    const adminAdded = allConversations.push({
-      admin: userName,
-      conversations: [],
-    });
-    resolve(adminAdded);
+    const userNameMatches = allConversations.find(
+      (adminObj) => adminObj.admin === username
+    );
+    if (!userNameMatches) {
+      const adminAdded = allConversations.push({
+        admin: userName,
+        conversations: [],
+      });
+
+      resolve(adminAdded);
+    } else {
+      reject("Username exists");
+    }
   });
 }
 module.exports = {

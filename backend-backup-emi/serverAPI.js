@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
   if (req.method === "POST" && req.url === "/login") {
     getConversations(req, res);
   } else if (req.method === "POST" && req.url === "/register") {
-    registerNewAdmin(req, res);
+    registerNewAdmin(req, res).catch((err)=>{console.log(err)});
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: "Route not found" }));

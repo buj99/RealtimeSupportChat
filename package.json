@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "server::dev": "nodemon ./frontend/server.js",
-    "api::dev": "nodemon ./backend/serverAPI.js"
+    "api::dev": "nodemon ./backend/api.js "
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,10 @@
     "url": "https://github.com/buj99/RealtimeSupportChat/issues"
   },
   "homepage": "https://github.com/buj99/RealtimeSupportChat#readme",
-  "dependencies": {},
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "mongoose": "^5.12.8"
+  },
   "devDependencies": {
     "css-loader": "^5.2.0",
     "express": "^4.17.1",

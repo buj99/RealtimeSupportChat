@@ -4,11 +4,6 @@ const Conversation = require("../models/conversationModel");
 //@route POST/login/
 async function getConversations(req, res) {
   try {
-    // const credentialsFromBody = {
-    //     userName: 'Emi',
-    //     password: 'password'
-    // }
-
     let body = "";
     req.on("data", (chunk) => {
       body += chunk.toString();
@@ -16,12 +11,17 @@ async function getConversations(req, res) {
 
     req.on("end", async () => {
       const { userName, password } = JSON.parse(body);
+      console.log(userName);
+      console.log(password);
 
       const conversations = await Conversation.findConversationsForUserName(
         userName
       );
       if (!conversations) {
-        res.writeHead(404, { "Content-Type": "application/json" });
+        res.writeHead(404, {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        });
         res.end(JSON.stringify({ message: "Conversations not found" }));
       } else {
         res.writeHead(200, {
@@ -54,17 +54,30 @@ async function registerNewAdmin(req, res) {
           })
         );
       } else {
-        const adminAdded = await Conversation.addNewAdmin(userName, password);
-        if (!adminAdded) {
-          res.writeHead(409, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ success: false }));
-        } else {
-          res.writeHead(201, {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+        // const adminAdded = await Conversation.addNewAdmin(userName, password);
+        Conversation.addNewAdmin(userName, password)
+          .then((response) => {
+            console.log(response);
+            res.writeHead(201, {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            });
+            res.end(JSON.stringify({ success: true }));
+          })
+          .catch((err) => {
+            res.writeHead(409, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false }));
           });
-          res.end(JSON.stringify({ success: true }));
-        }
+        // if (!adminAdded) {
+        //   res.writeHead(409, { "Content-Type": "application/json" });
+        //   res.end(JSON.stringify({ success: false }));
+        // } else {
+        //   res.writeHead(201, {
+        //     "Content-Type": "application/json",
+        //     "Access-Control-Allow-Origin": "*",
+        //   });
+        //   res.end(JSON.stringify({ success: true }));
+        // }
       }
     });
   } catch (error) {

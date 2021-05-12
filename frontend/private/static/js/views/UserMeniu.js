@@ -7,6 +7,7 @@ export default class extends AbstractView {
     this.loginCredentials = JSON.parse(
       window.localStorage.getItem("credentials")
     );
+    window.localStorage.removeItem("credentials");
     this.searchWidget;
     this.conversationList;
     this.isConversationListModified;
@@ -37,11 +38,15 @@ export default class extends AbstractView {
     //fatching users from api
     fetch("http://localhost:5000/login", {
       method: "POST",
-      body: JSON.stringify({ userName: "Emi", password: "password" }),
+      body: JSON.stringify({
+        userName: this.loginCredentials.username,
+        password: this.loginCredentials.pass,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
         this.conversations = [...data.conversations];
+        console.log(this.conversations);
         this.createUsers();
       });
     document.querySelector(".search-widget").addEventListener("input", (e) => {
