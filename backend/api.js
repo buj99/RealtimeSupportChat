@@ -7,6 +7,8 @@ dotenv.config();
 
 //server setup
 const server = http.createServer((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  
   router(req, res);
 });
 //database conection

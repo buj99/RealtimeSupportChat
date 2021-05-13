@@ -1,5 +1,6 @@
 const { parse } = require("dotenv");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const Admin = require("../models/AdminModel");
 const registerUser = async (req, res) => {
   //verify if the corect method is used
@@ -110,8 +111,14 @@ const loginUser = async (req, res) => {
                 JSON.stringify({ message: "Password is incorect" })
               );
             }
+            //Create and asing token
+            const token = jwt.sign(
+              { _id: admin._id },
+              process.env.TOKEN_SECRET
+            );
             res.statusCode = 200;
-            res.end(JSON.stringify({ message: "You are loged in " }));
+            res.setHeader("auth-token", token);
+            res.end();
           })
           .catch((error) => {
             console.log(error);

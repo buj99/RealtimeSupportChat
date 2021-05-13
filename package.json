@@ -28,6 +28,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^9.0.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.8",
     "node-input-validator": "^4.4.1"
   },
