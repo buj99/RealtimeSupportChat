@@ -1,9 +1,8 @@
 //Importing Routes
-
 const { registerUser, loginUser } = require("./routes/authRout");
 
 //Router Function
-const router = (req, res) => {
+const router = async (req, res) => {
   const urlComponents = req.url.split("/");
   switch (urlComponents[1]) {
     case "auth":
@@ -12,7 +11,7 @@ const router = (req, res) => {
           loginUser(req, res);
           break;
         case "register":
-          registerUser(req, res);
+          await registerUser(req, res);
           break;
 
         default:
@@ -25,7 +24,6 @@ const router = (req, res) => {
       break;
     default:
       res.statusCode = 404;
-      console.log(urlComponents);
       res.end(JSON.stringify({ message: `Route ${req.url} doesn't exist` }));
       break;
   }

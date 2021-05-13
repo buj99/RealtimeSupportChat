@@ -12,7 +12,7 @@ const server = http.createServer((req, res) => {
 //database conection
 mongoose.connect(
   process.env.DB_CONNECTION_LINK,
-  { useNewUrlParser: true },
+  { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("API conected to DB");
   }
