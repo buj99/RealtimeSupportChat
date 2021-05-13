@@ -1,6 +1,6 @@
 //Importing Routes
 const { registerUser, loginUser } = require("./routes/authRout");
-
+const { posts } = require("./routes/postRoute");
 //Router Function
 const router = async (req, res) => {
   const urlComponents = req.url.split("/");
@@ -8,7 +8,7 @@ const router = async (req, res) => {
     case "auth":
       switch (urlComponents[2]) {
         case "login":
-          loginUser(req, res);
+          await loginUser(req, res);
           break;
         case "register":
           await registerUser(req, res);
@@ -21,6 +21,9 @@ const router = async (req, res) => {
           );
           break;
       }
+      break;
+    case "posts":
+      await posts(req, res);
       break;
     default:
       res.statusCode = 404;

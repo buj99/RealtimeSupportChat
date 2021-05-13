@@ -1,4 +1,3 @@
-const { parse } = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Admin = require("../models/AdminModel");
@@ -117,7 +116,7 @@ const loginUser = async (req, res) => {
               process.env.TOKEN_SECRET
             );
             res.statusCode = 200;
-            res.setHeader("auth-token", token);
+            res.setHeader("auth_token", token);
             res.end();
           })
           .catch((error) => {
