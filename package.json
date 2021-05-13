@@ -25,6 +25,7 @@
   "homepage": "https://github.com/buj99/RealtimeSupportChat#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^9.0.2",
     "mongoose": "^5.12.8",
