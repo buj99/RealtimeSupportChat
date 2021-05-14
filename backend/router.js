@@ -5,6 +5,7 @@ const {
   getUniqueChatKey,
 } = require("./routes/authRout");
 const { asignChat } = require("./routes/asignchatRoute");
+const { sendMessage } = require("./routes/messageRoute");
 //Router Function
 const router = async (req, res) => {
   const urlComponents = req.url.split("/");
@@ -31,6 +32,16 @@ const router = async (req, res) => {
       break;
     case "asignchat":
       await asignChat(req, res);
+      break;
+    case "conversation":
+      switch (urlComponents[2]) {
+        case "send":
+          await sendMessage(req, res);
+          break;
+
+        default:
+          break;
+      }
       break;
     default:
       res.statusCode = 404;

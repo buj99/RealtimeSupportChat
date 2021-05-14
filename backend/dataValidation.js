@@ -13,5 +13,12 @@ const loginValidation = async (data) => {
   });
   return await v.check();
 };
+const messageValidation = async (data) => {
+  const v = new Validator(data, {
+    message: "required|maxLength:255|string",
+  });
+  return await v.check();
+};
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.messageValidation = messageValidation;

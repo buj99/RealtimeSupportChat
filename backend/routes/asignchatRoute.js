@@ -55,6 +55,10 @@ const asignChat = async (req, res) => {
                   { _id: data._id },
                   process.env.TOKEN_SECRET_CHAT_IDENTIFIER
                 );
+                //save acces token for admin chat acces
+                data.admin_acces_token=token;
+                data.save().catch(error=>console.log(error));
+                //send response to client 
                 res.stautsCode = 200;
                 res.end(JSON.stringify({ token: token }));
               })
