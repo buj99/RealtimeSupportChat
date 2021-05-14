@@ -2,25 +2,15 @@ const { authChatToken } = require("../verifyToken");
 const { messageValidation } = require("../dataValidation");
 const { adminAuthVerify } = require("../verifyToken");
 const Conversation = require("../models/ConversationModel");
-//method for  : /conversation/
+//method for  : /conversation:POST
 const sendMessage = async (req, res) => {
   //check if URI is corect
-  if (req.url.split("/").length != 3) {
+  if (req.url.split("/").length != 2) {
     res.statusCode = 414;
     res.end(JSON.stringify({ message: "The request url is too long" }));
     return;
   }
 
-  //check if the method is POST
-  if (req.method != "POST") {
-    res.statusCode = 405;
-    res.end(
-      JSON.stringify({
-        message: "This route can be accesed only using POST method",
-      })
-    );
-    return;
-  }
   //check if unique auth admin key is corect
 
   const verifiedChat = authChatToken(req, res);
@@ -77,4 +67,29 @@ const sendMessage = async (req, res) => {
   }
 };
 
+//method for  /conversation : GET
+const getMessages = async (req, res) => {
+  //check if URI is corect
+  if (req.url.split("/").length != 2) {
+    res.statusCode = 414;
+    res.end(JSON.stringify({ message: "The request url is too long" }));
+    return;
+  }
+
+  //check if unique auth admin key is corect
+
+  const verifiedChat = authChatToken(req, res);
+  if (!verifiedChat.succes) return;
+  Conversation.findById(verifiedChat.verified._id)
+    .then((conversation) => {
+      res.statusCode = 200;
+      res.end(JSON.stringify(conversation.messages));
+    })
+    .catch((error) => {
+      console.log(error);
+      res.statusCode = 500;
+      res.end(JSON.stringify({ message: "Someting went rong" }));
+    });
+};
 module.exports.sendMessage = sendMessage;
+module.exports.getMessages = getMessages;
