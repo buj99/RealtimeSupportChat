@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-
 //admin token verify
 function authVerify(req, res) {
   const token = req.headers.auth_token;
@@ -29,7 +28,7 @@ function authChatAdminTokenVerify(req, res) {
   }
   let verified;
   try {
-    verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    verified = jwt.verify(token, process.env.TOKEN_SECRET_UNIQUE_CHAT);
   } catch (error) {
     res.statusCode = 400;
     res.end(JSON.stringify({ message: "Invalid token" }));

@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Admin = require("../models/AdminModel");
+const { authVerify } = require("../verifyToken");
 const registerUser = async (req, res) => {
   //verify if the corect method is used
   if (req.method != "POST") {
@@ -134,6 +135,38 @@ const loginUser = async (req, res) => {
       });
   });
 };
+const getUniqueChatKey = async (req, res) => {
+  //check if URI is corect
+  if (req.url.split("/").length != 3) {
+    res.statusCode = 414;
+    res.end(JSON.stringify({ message: "The request url is too long" }));
+    return;
+  }
+  //check if the method is GET
+  if (req.method != "GET") {
+    res.statusCode = 405;
+    res.end(
+      JSON.stringify({
+        message: "This route can be accesed only using GET method",
+      })
+    );
+    return;
+  }
+  //check if unique auth admin key is corect
+  const verified = authVerify(req, res);
+  if (verified.succes) {
+    Admin.findById(verified.verified._id)
+      .then((admin) => {
+        res.statusCode = 200;
+        res.end(JSON.stringify({ token: admin.unique_chat_key }));
+      })
+      .catch((error) => {
+        console.log(error);
+        res.stautscode = 500;
+        res.end(JSON.stringify({ message: "Someting went rong ." }));
+      });
+  }
+};
 
 const addAdminInstanceInDB = async (parsedBody, res) => {
   //hashing the password
@@ -145,9 +178,17 @@ const addAdminInstanceInDB = async (parsedBody, res) => {
   });
   newAdmin
     .save()
-    .then((data) => {
+    .then((admin) => {
+      //create jwt unique token for admin chats
+      const jwtUniqueToken = jwt.sign(
+        { _id: admin._id },
+        process.env.TOKEN_SECRET_UNIQUE_CHAT
+      );
+      admin.unique_chat_key = jwtUniqueToken;
+      admin.save().catch((error) => console.log(error));
+      //send succes response
       res.statusCode = 201;
-      res.end(JSON.stringify(data._id));
+      res.end(JSON.stringify(admin._id));
     })
     .catch((error) => {
       console.log(error);
@@ -161,3 +202,4 @@ const addAdminInstanceInDB = async (parsedBody, res) => {
 };
 module.exports.registerUser = registerUser;
 module.exports.loginUser = loginUser;
+module.exports.getUniqueChatKey = getUniqueChatKey;

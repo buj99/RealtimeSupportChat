@@ -43,7 +43,6 @@ const asignChat = async (req, res) => {
           .save()
           .then((data) => {
             //add created chat to admin chat list
-            console.log(admin);
             admin.conversations = [
               ...admin.conversations,
               { _id_chat: data._id },
@@ -54,7 +53,7 @@ const asignChat = async (req, res) => {
                 //create token identifyer for chat
                 const token = jwt.sign(
                   { _id: data._id },
-                  process.env.TOKEN_SECRET
+                  process.env.TOKEN_SECRET_CHAT_IDENTIFIER
                 );
                 res.stautsCode = 200;
                 res.end(JSON.stringify({ token: token }));

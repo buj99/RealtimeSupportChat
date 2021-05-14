@@ -1,5 +1,9 @@
 //Importing Routes
-const { registerUser, loginUser } = require("./routes/authRout");
+const {
+  registerUser,
+  loginUser,
+  getUniqueChatKey,
+} = require("./routes/authRout");
 const { asignChat } = require("./routes/asignchatRoute");
 //Router Function
 const router = async (req, res) => {
@@ -12,6 +16,9 @@ const router = async (req, res) => {
           break;
         case "register":
           await registerUser(req, res);
+          break;
+        case "uniquechattoke":
+          await getUniqueChatKey(req, res);
           break;
 
         default:

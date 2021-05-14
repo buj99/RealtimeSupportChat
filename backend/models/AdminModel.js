@@ -16,6 +16,10 @@ const AdminSchema = new mongoose.Schema({
   conversations: {
     type: Array,
   },
+  unique_chat_key: {
+    type: String,
+    requered: true,
+  },
   date: {
     type: Date,
     default: Date.now,
