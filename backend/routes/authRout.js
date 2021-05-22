@@ -2,10 +2,19 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Admin = require("../models/AdminModel");
 const { authVerify } = require("../verifyToken");
+
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Max-Age": 2592000, // 30 days
+  /** add other headers as per requirement */
+};
+
 const registerUser = async (req, res) => {
   //verify if the corect method is used
   if (req.method != "POST") {
-    res.statusCode = 405;
+    res.writeHead(405, headers);
     return res.end(
       JSON.stringify({
         message: "This route can be used only using POST method",
@@ -37,7 +46,7 @@ const registerUser = async (req, res) => {
           .then((admin) => {
             if (admin) {
               usernameExists = true;
-              res.statusCode = 409;
+              res.writeHead(409, headers);
               return res.end(
                 JSON.stringify({ message: "This username already exists" })
               );
@@ -49,7 +58,7 @@ const registerUser = async (req, res) => {
           });
       })
       .catch((error) => {
-        res.statusCode = 500;
+        res.writeHead(500, headers);
         res.end(
           JSON.stringify({
             message:
@@ -63,7 +72,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   //verify if the corect method is used
   if (req.method != "POST") {
-    res.statusCode = 405;
+    res.writeHead(405, headers);
     return res.end(
       JSON.stringify({
         message: "This route can be used only using POST method",
@@ -81,19 +90,23 @@ const loginUser = async (req, res) => {
   //parse the data from the body
   req.on("end", async () => {
     var parsedBody = JSON.parse(body);
-
+    console.log(parsedBody);
     //validation for request data
     loginValidation(parsedBody)
       .then((isValid) => {
         var validInput = isValid;
-        if (!isValid)
+        if (!isValid) {
+          res.writeHead(500, headers);
           return res.end(JSON.stringify({ message: "Please send valid data" }));
+        }
 
         //validation for unique username
         Admin.findOne({ username: parsedBody.username })
           .then(async (admin) => {
             if (!admin) {
-              res.statusCode = 406;
+              // res.statusCode = 406;
+              res.writeHead(406, headers);
+
               return res.end(
                 JSON.stringify({
                   message: "This username doesn't exist , please register",
@@ -106,7 +119,9 @@ const loginUser = async (req, res) => {
               admin.password
             );
             if (!passwordIsValid) {
-              res.statusCode = 400;
+              // res.statusCode = 400;
+              res.writeHead(400, headers);
+
               return res.end(
                 JSON.stringify({ message: "Password is incorect" })
               );
@@ -116,16 +131,15 @@ const loginUser = async (req, res) => {
               { _id: admin._id },
               process.env.TOKEN_SECRET
             );
-            res.statusCode = 200;
-            res.setHeader("auth_token", token);
-            res.end();
+            res.writeHead(200, headers);
+            res.end(JSON.stringify({ auth_token: token }));
           })
           .catch((error) => {
             console.log(error);
           });
       })
       .catch((error) => {
-        res.statusCode = 500;
+        res.writeHead(500, headers);
         res.end(
           JSON.stringify({
             message:
@@ -138,13 +152,13 @@ const loginUser = async (req, res) => {
 const getUniqueChatKey = async (req, res) => {
   //check if URI is corect
   if (req.url.split("/").length != 3) {
-    res.statusCode = 414;
+    res.writeHead(414, headers);
     res.end(JSON.stringify({ message: "The request url is too long" }));
     return;
   }
   //check if the method is GET
   if (req.method != "GET") {
-    res.statusCode = 405;
+    res.writeHead(405, headers);
     res.end(
       JSON.stringify({
         message: "This route can be accesed only using GET method",
@@ -157,12 +171,12 @@ const getUniqueChatKey = async (req, res) => {
   if (verified.succes) {
     Admin.findById(verified.verified._id)
       .then((admin) => {
-        res.statusCode = 200;
+        res.writeHead(200, headers);
         res.end(JSON.stringify({ token: admin.unique_chat_key }));
       })
       .catch((error) => {
         console.log(error);
-        res.stautscode = 500;
+        res.writeHead(500, headers);
         res.end(JSON.stringify({ message: "Someting went rong ." }));
       });
   }
@@ -187,12 +201,12 @@ const addAdminInstanceInDB = async (parsedBody, res) => {
       admin.unique_chat_key = jwtUniqueToken;
       admin.save().catch((error) => console.log(error));
       //send succes response
-      res.statusCode = 201;
+      res.writeHead(201, headers);
       res.end(JSON.stringify(admin._id));
     })
     .catch((error) => {
       console.log(error);
-      res.statusCode = 500;
+      res.writeHead(500, headers);
       res.end(
         JSON.stringify({
           message: "Register failed , try again in a fiew minutes",

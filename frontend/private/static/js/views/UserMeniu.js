@@ -36,19 +36,19 @@ export default class extends AbstractView {
     this.searchWidget = document.querySelector(".search-widget");
     this.conversationList = document.querySelector(".conversation-list");
     //fatching users from api
-    fetch("http://localhost:5000/login", {
-      method: "POST",
-      body: JSON.stringify({
-        userName: this.loginCredentials.username,
-        password: this.loginCredentials.pass,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.conversations = [...data.conversations];
-        console.log(this.conversations);
-        this.createUsers();
-      });
+    // fetch("http://localhost:5000/login", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     userName: this.loginCredentials.username,
+    //     password: this.loginCredentials.pass,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     this.conversations = [...data.conversations];
+    //     console.log(this.conversations);
+    //     this.createUsers();
+    //   });
     document.querySelector(".search-widget").addEventListener("input", (e) => {
       this.searchEventListener(e);
     });

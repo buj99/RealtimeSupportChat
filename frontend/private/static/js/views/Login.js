@@ -32,15 +32,16 @@ export default class extends AbstractView {
       }
     });
     //helper functions
-    const verifyCredentials = (credentials) => {
+    const verifyCredentials = async (credentials) => {
       var changePage = true;
       var credentials = {
         username: this.credentials.username,
-        passwor: this.credentials.pass,
+        password: this.credentials.pass,
       };
-      fetch("http://localhost:8080/login", {
+      fetch("http://localhost:3000/auth/login", {
         method: "POST",
         body: JSON.stringify(credentials),
+        headers: { "Content-Type": "Application/json" },
       })
         .then((res) => {
           if (res.status === 404) changePage = false;
@@ -48,8 +49,8 @@ export default class extends AbstractView {
         })
         .then((data) => {
           console.log(data);
+          return changePage;
         });
-      return changePage;
     };
   }
 

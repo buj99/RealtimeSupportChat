@@ -8,6 +8,10 @@ const { asignChat } = require("./routes/asignchatRoute");
 const { sendMessage, getMessages } = require("./routes/messageRoute");
 //Router Function
 const router = async (req, res) => {
+  //CORS SETUP
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  //routing
   const urlComponents = req.url.split("/");
   switch (urlComponents[1]) {
     case "auth":
