@@ -38,17 +38,18 @@ export default class extends AbstractView {
         username: this.credentials.username,
         password: this.credentials.pass,
       };
-      fetch("http://localhost:3000/auth/login", {
+      await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         body: JSON.stringify(credentials),
         headers: { "Content-Type": "Application/json" },
       })
         .then((res) => {
           if (res.status === 404) changePage = false;
-          res.json();
+          return res.json();
         })
         .then((data) => {
           console.log(data);
+          window.localStorage.setItem("auth_token", data.auth_token);
           return changePage;
         });
     };

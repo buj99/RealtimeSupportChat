@@ -4,10 +4,6 @@ export default class extends AbstractView {
   constructor(params) {
     super(params);
     this.setTitle("User meniu ");
-    this.loginCredentials = JSON.parse(
-      window.localStorage.getItem("credentials")
-    );
-    window.localStorage.removeItem("credentials");
     this.searchWidget;
     this.conversationList;
     this.isConversationListModified;
@@ -31,10 +27,12 @@ export default class extends AbstractView {
     }
   }
   //load dom
-  loadSetupDomElements() {
+  async loadSetupDomElements () {
     this.chatTitleElemen = document.getElementById("chat-title");
     this.searchWidget = document.querySelector(".search-widget");
     this.conversationList = document.querySelector(".conversation-list");
+    const auth_token = window.localStorage.getItem("auth_token");
+    console.log(auth_token);
     //fatching users from api
     // fetch("http://localhost:5000/login", {
     //   method: "POST",
