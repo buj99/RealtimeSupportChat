@@ -7,33 +7,31 @@ dotenv.config();
 
 //server setup
 const server = http.createServer((req, res) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
-    "Access-Control-Allow-Headers":
-      "Content-Type auth_token auth_unique_admin_token auth_chat",
-    "Access-Control-Max-Age": 2592000, // 30 days
-    /** add other headers as per requirement */
-  };
+    const headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+        "Access-Control-Allow-Headers": "Content-Type, auth_token, auth_unique_admin_token, auth_chat",
+        "Access-Control-Max-Age": 2592000, // 30 days
+        /** add other headers as per requirement */
+    };
 
-  if (req.method === "OPTIONS") {
-    res.writeHead(204, headers);
-    res.end();
-    return;
-  }
-  // if (["GET", "POST"].indexOf(req.method) > -1) {
-  //   router(req, res);
-  //   return;
-  // }
-  router(req, res);
+    if (req.method === "OPTIONS") {
+        res.writeHead(204, headers);
+        res.end();
+        return;
+    }
+    // if (["GET", "POST"].indexOf(req.method) > -1) {
+    //   router(req, res);
+    //   return;
+    // }
+    router(req, res);
 });
 //database conection
 mongoose.connect(
-  process.env.DB_CONNECTION_LINK,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("API conected to DB");
-  }
+    process.env.DB_CONNECTION_LINK, { useNewUrlParser: true, useUnifiedTopology: true },
+    () => {
+        console.log("API conected to DB");
+    }
 );
 
 //server start listening
