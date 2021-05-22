@@ -2,17 +2,27 @@ const { authChatAdminTokenVerify } = require("../verifyToken");
 const Conversation = require("../models/ConversationModel");
 const Admin = require("../models/AdminModel");
 const jwt = require("jsonwebtoken");
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+  "Access-Control-Allow-Headers":
+    "Content-Type auth_token auth_unique_admin_token auth_chat",
+  "Access-Control-Max-Age": 2592000, // 30 days
+  /** add other headers as per requirement */
+};
 const asignChat = async (req, res) => {
   //check if URI is corect
   if (req.url.split("/").length != 2) {
-    res.statusCode = 414;
+    // res.statusCode = 414;
+    res.writeHead(414, headers);
     res.end(JSON.stringify({ message: "The request url is too long" }));
     return;
   }
 
   //check if the method is GET
   if (req.method != "GET") {
-    res.statusCode = 405;
+    // res.statusCode = 405;
+    res.writeHead(405, headers);
     res.end(
       JSON.stringify({
         message: "This route can be accesed only using GET method",
@@ -29,7 +39,8 @@ const asignChat = async (req, res) => {
         console.log(admin);
         if (!admin) {
           //admin doesn't exist
-          res.statusCode = 400;
+          // res.statusCode = 400;
+          res.writeHead(400, headers);
           res.end(
             JSON.stringify({ message: "This admin key is not eligible" })
           );
@@ -59,25 +70,29 @@ const asignChat = async (req, res) => {
                 data.admin_acces_token=token;
                 data.save().catch(error=>console.log(error));
                 //send response to client 
-                res.stautsCode = 200;
+                // res.stautsCode = 200;
+                res.writeHead(200, headers);
                 res.end(JSON.stringify({ token: token }));
               })
               .catch((error) => {
                 //error when trying to add the new created chat to admin  chat list
                 console.log(error);
-                res.statusCode = 500;
+                // res.statusCode = 500;
+                res.writeHead(500, headers);
                 res.end(JSON.stringify({ message: "Something went rong ." }));
               });
           })
           .catch((error) => {
             //error when tring to save in database the new chat
             console.log(error);
-            res.statusCode = 500;
+            // res.statusCode = 500;
+            res.writeHead(500, headers);
             res.end(JSON.stringify({ message: "Something went rong ." }));
           });
       })
       .catch((error) => {
-        res.statusCode = 500;
+        // res.statusCode = 500;
+        res.writeHead(500, headers);
         res.end(JSON.stringify({ message: "Something went rong ." }));
       });
   }
