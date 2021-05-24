@@ -5,7 +5,11 @@ const {
   getUniqueChatKey,
 } = require("./routes/authRout");
 const { asignChat } = require("./routes/asignchatRoute");
-const { sendMessage, getMessages } = require("./routes/messageRoute");
+const {
+  sendMessage,
+  getMessages,
+  getConversationsList,
+} = require("./routes/messageRoute");
 //Router Function
 const router = async (req, res) => {
   //CORS SETUP
@@ -38,14 +42,22 @@ const router = async (req, res) => {
       await asignChat(req, res);
       break;
     case "conversation":
-      switch (req.method) {
-        case "POST":
-          await sendMessage(req, res);
+      switch (urlComponents[2]) {
+        case "list":
+          await getConversationsList(req, res);
           break;
-        case "GET":
-          await getMessages(req, res);
-          break;
+
         default:
+          switch (req.method) {
+            case "POST":
+              await sendMessage(req, res);
+              break;
+            case "GET":
+              await getMessages(req, res);
+              break;
+            default:
+              break;
+          }
           break;
       }
       break;
