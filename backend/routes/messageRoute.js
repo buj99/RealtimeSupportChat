@@ -138,28 +138,6 @@ const getConversationsList = async (req, res) => {
       response = [...response, { token: token, lastMsg: lastMsg }];
     });
     res.writeHead(200, headers);
-    res.end(JSON.stringify(response));
-
-    /*AdminModel.findById(validAdmin.verified._id).then(async (admin) => {
-      var chatTokens = [];
-      var lastMsg = "";
-      await admin.conversations.forEach(async (conversation) => {
-        try {
-          const conv = await Conversation.findById(conversation._id_chat);
-          lastMSg = conv.messages[conv.messages.length - 1];
-          const token = jwt.sign(
-            { _id: conversation._id_chat },
-            process.env.TOKEN_SECRET_CHAT_IDENTIFIER
-          );
-          chatTokens = [...chatTokens, { token: token, lastMsg: lastMsg }];
-          console.log(chatTokens);
-        } catch (error) {
-          console.log(error);
-        }
-      });
-      res.writeHead(200, headers);
-      res.end(JSON.stringify(chatTokens));
-    });*/
   }
 };
 
