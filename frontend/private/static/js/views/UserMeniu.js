@@ -1,6 +1,7 @@
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
+
     constructor(params) {
             super(params);
             this.setTitle("User meniu ");
@@ -38,9 +39,43 @@ export default class extends AbstractView {
         document.querySelector(".search-widget").addEventListener("input", (e) => {
             this.searchEventListener(e);
         });
+        window.addEventListener('message', event => this.createMesages(event.data))
 
-        window.addEventListener('message', function(event) { console.log(event.data) })
+        document.querySelector(".chat-form img").addEventListener('click', () => this.sendMessage(document.querySelector(".chat-form input").value))
+
     }
+
+    sendMessage(message) {
+        var authChat = window.sessionStorage.getItem('auth_chat')
+        if (authChat != null) {
+            // console.log(authChat) //debug
+            // console.log(message) //debug
+            fetch("http://localhost:3000/conversation", {
+                    method: "POST",
+                    headers: { "auth_chat": authChat },
+                    body: JSON.stringify({ message: message }),
+                })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    fetch("http://localhost:3000/conversation", {
+                            method: "GET",
+                            headers: { "auth_chat": authChat },
+                        })
+                        .then((res) => {
+                            return res.json();
+                        })
+                        .then((data2) => {
+                            this.createMesages(data2)
+                        })
+                })
+        } else {
+            console.log('please, wait a moment!')
+        }
+
+    }
+
     createMesages(messages) {
         const chatMesagesList = document.querySelector(".chat-message-list");
         chatMesagesList.innerHTML = "";
@@ -56,7 +91,7 @@ export default class extends AbstractView {
                 messageRow.classList.add("message-row");
                 messageDate.innerText = msg.date;
                 messageText.innerText = msg.message;
-                if (msg.isSentByAdmin == "true") {
+                if (msg.isAdmin == "true") {
                     messageRow.classList.add("other-message-row");
                     messageText.classList.add("other-message-text");
                 } else {
@@ -101,6 +136,8 @@ export default class extends AbstractView {
             });
         this.isConversationListModified = false;
     }
+
+
     async getHTML() {
         return `<div class="user-meniu">
               <div class="chat-container">
@@ -127,7 +164,7 @@ export default class extends AbstractView {
         <div class="chat-form">
 
             <input type="text" placeholder="Type here!">
-            <img src="" alt="Send Message" />
+            <img src="./static/Images/SendIcon.png" alt="Send Message" />
         </div>
     </div>
     <nav>
