@@ -71,7 +71,7 @@ export default class extends AbstractView {
                         })
                 })
         } else {
-            console.log('please, wait a moment!')
+            console.log('please, wait a moment!') //debug
         }
 
     }
@@ -83,6 +83,7 @@ export default class extends AbstractView {
             .slice(0)
             .reverse()
             .map((msg) => {
+                console.log(msg.isAdmin)
                 const dot = document.createElement("span");
                 const messageRow = document.createElement("div");
                 const messageText = document.createElement("div");
@@ -91,7 +92,7 @@ export default class extends AbstractView {
                 messageRow.classList.add("message-row");
                 messageDate.innerText = msg.date;
                 messageText.innerText = msg.message;
-                if (msg.isAdmin == "true") {
+                if (msg.isAdmin == true) {
                     messageRow.classList.add("other-message-row");
                     messageText.classList.add("other-message-text");
                 } else {
@@ -153,9 +154,6 @@ export default class extends AbstractView {
             <span id="chat-title">
             </span>
             <div class="three-dots-button">
-                <div class="three-dots-button__dot"></div>
-                <div class="three-dots-button__dot"></div>
-                <div class="three-dots-button__dot"></div>
             </div>
         </div>
         <div class="chat-message-list">

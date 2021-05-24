@@ -70,7 +70,7 @@ export default class extends AbstractView {
                                     window.sessionStorage.setItem('auth_chat', data2.token)
                                     fetch("http://localhost:3000/conversation", {
                                             method: "POST",
-                                            headers: { "auth_chat": data2.token },
+                                            headers: { "auth_chat": data2.token, "auth_token": data.auth_token },
                                             body: JSON.stringify({ message: "salut" }),
                                         })
                                         .then((res) => {
@@ -86,7 +86,7 @@ export default class extends AbstractView {
                                                     return res.json();
                                                 })
                                                 .then((data4) => {
-                                                    //console.log(data4) //debug
+                                                    // console.log(data4) //debug
                                                     //sent data to UserMeniu
                                                     window.postMessage(data4)
                                                 })
