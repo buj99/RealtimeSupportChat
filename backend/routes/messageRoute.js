@@ -130,14 +130,15 @@ const getConversationsList = async (req, res) => {
     });
     conversations.forEach((conversation) => {
       //   console.log(conversation.messages[conversation.messages.length - 1]);
-      const lastMsg = conversation.messages[conversation.messages.length - 1];
-      const token = jwt.sign(
-        { _id: conversation._id_chat },
+      var lastMsg = conversation.messages[conversation.messages.length - 1];
+      var token = jwt.sign(
+        { _id: conversation._id },
         process.env.TOKEN_SECRET_CHAT_IDENTIFIER
       );
       response = [...response, { token: token, lastMsg: lastMsg }];
     });
     res.writeHead(200, headers);
+    res.end(JSON.stringify(response));
   }
 };
 
