@@ -13,7 +13,7 @@ export default class extends AbstractView {
             this.conversationList;
             this.isConversationListModified;
             this.chatTitleElemen;
-            this.conversations = [];
+            // this.conversations = [];
         }
         //event listeners
     searchEventListener(e) {
@@ -39,10 +39,29 @@ export default class extends AbstractView {
         document.querySelector(".search-widget").addEventListener("input", (e) => {
             this.searchEventListener(e);
         });
-        window.addEventListener('message', event => this.createMesages(event.data))
+        window.addEventListener('message', event => this.populatePage(event.data))
 
         document.querySelector(".chat-form img").addEventListener('click', () => this.sendMessage(document.querySelector(".chat-form input").value))
 
+    }
+
+    populatePage(message) {
+        console.log(message.auth_token)
+        fetch("http://localhost:3000/conversation/list", {
+                method: "GET",
+                headers: {
+                    "auth_token": message.auth_token
+                }
+            })
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                this.createUsers(data)
+            })
+
+
+        this.createMesages(message.message)
     }
 
     sendMessage(message) {
@@ -83,7 +102,6 @@ export default class extends AbstractView {
             .slice(0)
             .reverse()
             .map((msg) => {
-                console.log(msg.isAdmin)
                 const dot = document.createElement("span");
                 const messageRow = document.createElement("div");
                 const messageText = document.createElement("div");
@@ -114,22 +132,23 @@ export default class extends AbstractView {
         divConversation.appendChild(img);
         const divClientName = document.createElement("div");
         divClientName.classList.add("client-name");
-        divClientName.innerText = conversation.user;
+        divClientName.innerText = conversation.token.slice(-10);
         divConversation.appendChild(divClientName);
         const divLastMessage = document.createElement("div");
         divLastMessage.innerText =
-            conversation.messages[conversation.messages.length - 1].message;
+            conversation.lastMsg.message;
         divLastMessage.classList.add("last-message");
         divConversation.addEventListener("click", () => {
-            this.chatTitleElemen.innerText = conversation.user;
-            this.createMesages(conversation.messages);
+            // functionality for displaying the proper conversation should be implemented here
+            this.chatTitleElemen.innerText = divClientName.innerText;
+            // this.createMesages(conversation.messages);                   this has to be modified
         });
         divConversation.appendChild(divLastMessage);
         document.querySelector(".conversation-list").appendChild(divConversation);
     }
-    createUsers() {
+    createUsers(conversations) {
         this.conversationList.innerHTML = "";
-        this.conversations
+        conversations
             .slice(0)
             .reverse()
             .map((conversation) => {
@@ -145,7 +164,7 @@ export default class extends AbstractView {
         <div class="search-container">
             <input class="search-widget" type="text" placeholder=" Search" />
         </div>
-        <div class="conversation-list">     
+        <div class="conversation-list">          
         </div>
         <div class="chat-title">
             <div class="menuBtn">
@@ -161,7 +180,7 @@ export default class extends AbstractView {
         </div>
         <div class="chat-form">
 
-            <input type="text" placeholder="Type here!">
+            <input type="text" placeholder="Type here!" />
             <img src="./static/Images/SendIcon.png" alt="Send Message" />
         </div>
     </div>

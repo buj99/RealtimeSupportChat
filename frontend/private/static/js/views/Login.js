@@ -48,7 +48,8 @@ export default class extends AbstractView {
                     return res.json();
                 })
                 .then((data) => {
-                    // console.log(data.auth_token); //debug
+                    console.log(data.auth_token); //debug
+                    // window.localStorage.setItem('auth_token', data.auth_token)
                     fetch("http://localhost:3000/auth/uniquechattoke", {
                             method: "GET",
                             headers: { "auth_token": data.auth_token },
@@ -88,7 +89,7 @@ export default class extends AbstractView {
                                                 .then((data4) => {
                                                     // console.log(data4) //debug
                                                     //sent data to UserMeniu
-                                                    window.postMessage(data4)
+                                                    window.postMessage({ message: data4, auth_token: data.auth_token })
                                                 })
                                         })
                                 })
