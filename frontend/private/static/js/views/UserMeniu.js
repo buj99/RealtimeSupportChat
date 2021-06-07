@@ -82,7 +82,7 @@ export default class extends AbstractView {
             fetch("http://localhost:3000/conversation", {
                     method: "POST",
                     headers: { "auth_chat": this.currentAuthChat },
-                    body: JSON.stringify({ message: message }),
+                    body: JSON.stringify({ message: message })
                 })
                 .then((res) => {
                     return res.json();

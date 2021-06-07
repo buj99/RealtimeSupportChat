@@ -1,26 +1,42 @@
-const mesaje = [
-  {
-    autor: "moderator",
-    text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium cumque aliquid sequi ipsa veniam quis, impedit quaerat fugiat nihil modi." ,
-    time: "12:00",
-    photo: "./images/buj.jpg",
-    isModerator: "true",
-  },
-  {
-    autor: "user",
-    text: "hello from the othe side",
-    time: "12:01",
-    photo: "./images/user.svg",
-    isModerator: "false",
-  },
-  {
-    autor: "moderator",
-    text: "Hello again",
-    time: "12:02",
-    photo: "./images/buj.jpg",
-    isModerator: "true",
-  },
+const mesaje = [{
+        autor: "moderator",
+        text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium cumque aliquid sequi ipsa veniam quis, impedit quaerat fugiat nihil modi.",
+        time: "12:00",
+        photo: "./images/buj.jpg",
+        isModerator: "true",
+    },
+    {
+        autor: "user",
+        text: "hello from the othe side",
+        time: "12:01",
+        photo: "./images/user.svg",
+        isModerator: "false",
+    },
+    {
+        autor: "moderator",
+        text: "Hello again",
+        time: "12:02",
+        photo: "./images/buj.jpg",
+        isModerator: "true",
+    },
 ];
+const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJlNTdhZjgxMjQ5ZDQxYzQ5MzdhNWMiLCJpYXQiOjE2MjMwODcwMjN9.9kqBNFHtMBQtAieuCf8jpjEk4iAzyoR7J0vZLdkCwds";
+fetch(fetch("http://localhost:3000/asignchat", {
+        method: "GET",
+        headers: {
+            "auth_unique_admin_token": authToken
+        }
+    })
+    .then((res) => {
+        return res.json()
+    })
+    .then((data) => {
+        console.log(data.token)
+        window.localStorage.setItem("conversationToken", data.token);
+    })
+
+
+);
 //body element
 let body = document.getElementsByTagName("body")[0];
 //chat container
@@ -45,18 +61,18 @@ const minimizeBtn = document.createElement("button");
 minimizeBtn.id = "minimize-btn";
 minimizeBtn.innerHTML = "<i class=\"fas fa-times\"></i>";
 chatHeader.appendChild(minimizeBtn);
-minimizeBtn.onclick=()=>{
-  chatContainer.classList.toggle("hiden");
-  maximizeBtn.classList.toggle("hiden");
+minimizeBtn.onclick = () => {
+    chatContainer.classList.toggle("hiden");
+    maximizeBtn.classList.toggle("hiden");
 }
 
 //buton maximizare
 const maximizeBtn = document.createElement("button");
 maximizeBtn.id = "maximize-btn";
 maximizeBtn.innerHTML = "<i class=\"fas fa-plus\"></i>";
-maximizeBtn.onclick=()=>{
-  chatContainer.classList.toggle("hiden");
-  maximizeBtn.classList.toggle("hiden");
+maximizeBtn.onclick = () => {
+    chatContainer.classList.toggle("hiden");
+    maximizeBtn.classList.toggle("hiden");
 }
 body.appendChild(maximizeBtn);
 
@@ -67,40 +83,40 @@ chatContainer.appendChild(messagesContainer);
 
 //creare mesaje
 mesaje.map((mesaj) => {
-  //message container
-  const messageContainer = document.createElement("div");
-  messageContainer.classList.add("message");
-  messageContainer.classList.add(`${mesaj.autor}`);
+    //message container
+    const messageContainer = document.createElement("div");
+    messageContainer.classList.add("message");
+    messageContainer.classList.add(`${mesaj.autor}`);
 
-  //message meta
-  const messageMeta = document.createElement("div");
-  messageMeta.classList.add("message-meta");
-  messageContainer.appendChild(messageMeta);
+    //message meta
+    const messageMeta = document.createElement("div");
+    messageMeta.classList.add("message-meta");
+    messageContainer.appendChild(messageMeta);
 
-  //poza suport
-  const messageImage = document.createElement("img");
-  messageImage.classList.add("message-image");
-  messageImage.src = mesaj.photo;
-  messageMeta.appendChild(messageImage);
+    //poza suport
+    const messageImage = document.createElement("img");
+    messageImage.classList.add("message-image");
+    messageImage.src = mesaj.photo;
+    messageMeta.appendChild(messageImage);
 
-  //message author
-  const messageAuthor = document.createElement("span");
-  messageAuthor.classList.add("message-author");
-  messageAuthor.innerText = mesaj.autor;
-  messageMeta.appendChild(messageAuthor);
+    //message author
+    const messageAuthor = document.createElement("span");
+    messageAuthor.classList.add("message-author");
+    messageAuthor.innerText = mesaj.autor;
+    messageMeta.appendChild(messageAuthor);
 
-  //ora trimitere mesaj
-  const messageHour = document.createElement("span");
-  messageHour.classList.add("message-hour");
-  messageHour.innerText = mesaj.time;
-  messageMeta.appendChild(messageHour);
+    //ora trimitere mesaj
+    const messageHour = document.createElement("span");
+    messageHour.classList.add("message-hour");
+    messageHour.innerText = mesaj.time;
+    messageMeta.appendChild(messageHour);
 
-  //mesaj text
-  const messageText = document.createElement("p");
-  messageText.classList.add("message-text");
-  messageText.innerText = mesaj.text;
-  messageContainer.appendChild(messageText);
-  messagesContainer.appendChild(messageContainer);
+    //mesaj text
+    const messageText = document.createElement("p");
+    messageText.classList.add("message-text");
+    messageText.innerText = mesaj.text;
+    messageContainer.appendChild(messageText);
+    messagesContainer.appendChild(messageContainer);
 });
 
 //input container
@@ -118,3 +134,19 @@ const sendBtn = document.createElement("button");
 sendBtn.id = "send-btn";
 sendBtn.innerHTML = "<i class=\"fas fa-arrow-right\"></i>";
 inputContainer.appendChild(sendBtn);
+sendBtn.onclick = () => {
+    console.log('sendWasPressed')
+    let conversationToken = window.localStorage.getItem('conversationToken');
+    console.log(conversationToken)
+    fetch("http://localhost:3000/conversation", {
+            method: "POST",
+            headers: { "auth_chat": conversationToken },
+            body: JSON.stringify({ message: "urmatorul pas" })
+        })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data2) => {
+            console.log(data2)
+        })
+}

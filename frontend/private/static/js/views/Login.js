@@ -29,7 +29,6 @@ export default class extends AbstractView {
                     headers: { "Content-Type": "Application/json" },
                 })
                 .then((res) => {
-                    console.log(res.status)
                     if (res.status != 200) {
                         this.isLoginValid = false;
                         window.alert('Incorrect credentials!')
