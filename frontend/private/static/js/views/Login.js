@@ -48,53 +48,8 @@ export default class extends AbstractView {
                     return res.json();
                 })
                 .then((data) => {
-                    console.log(data.auth_token); //debug
-                    // window.localStorage.setItem('auth_token', data.auth_token)
-                    fetch("http://localhost:3000/auth/uniquechattoke", {
-                            method: "GET",
-                            headers: { "auth_token": data.auth_token },
-                        })
-                        .then((res) => {
-                            return res.json();
-                        })
-                        .then((data1) => {
-                            // console.log(data1.token) // debug
-                            fetch("http://localhost:3000/asignchat", {
-                                    method: "GET",
-                                    headers: { "auth_unique_admin_token": data1.token },
-                                })
-                                .then((res) => {
-                                    return res.json();
-                                })
-                                .then((data2) => {
-                                    // console.log(data2.token) //debug
-                                    window.sessionStorage.setItem('auth_chat', data2.token)
-                                    fetch("http://localhost:3000/conversation", {
-                                            method: "POST",
-                                            headers: { "auth_chat": data2.token, "auth_token": data.auth_token },
-                                            body: JSON.stringify({ message: "salut" }),
-                                        })
-                                        .then((res) => {
-                                            return res.json();
-                                        })
-                                        .then((data3) => {
-                                            // console.log(data3.succes) //debug
-                                            fetch("http://localhost:3000/conversation", {
-                                                    method: "GET",
-                                                    headers: { "auth_chat": data2.token },
-                                                })
-                                                .then((res) => {
-                                                    return res.json();
-                                                })
-                                                .then((data4) => {
-                                                    // console.log(data4) //debug
-                                                    //sent data to UserMeniu
-                                                    window.postMessage({ message: data4, auth_token: data.auth_token })
-                                                })
-                                        })
-                                })
 
-                        })
+                    window.postMessage({ auth_token: data.auth_token })
 
                     return changePage;
                 });
