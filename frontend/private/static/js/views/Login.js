@@ -18,22 +18,7 @@ export default class extends AbstractView {
                 pass: pass.value,
             };
 
-            var credentialsOK = verifyCredentials(this.credentials);
-            //persist data using local storage
-            if (credentialsOK) {
-                window.localStorage.setItem(
-                    "credentials",
-                    JSON.stringify(this.credentials)
-                );
-                //change view
-                if (this.credentials.username) {
-                    navigateTo(window.location.href + this.credentials.username);
-                }
-            }
-        });
-        //helper functions
-        const verifyCredentials = async(credentials) => {
-            var changePage = true;
+            this.isLoginValid = true;
             var credentials = {
                 username: this.credentials.username,
                 password: this.credentials.pass,
@@ -44,16 +29,28 @@ export default class extends AbstractView {
                     headers: { "Content-Type": "Application/json" },
                 })
                 .then((res) => {
-                    if (res.status === 404) changePage = false;
+                    console.log(res.status)
+                    if (res.status != 200) {
+                        this.isLoginValid = false;
+                        window.alert('Incorrect credentials!')
+                    }
                     return res.json();
                 })
                 .then((data) => {
-
-                    window.postMessage({ auth_token: data.auth_token })
-
-                    return changePage;
+                    if (this.isLoginValid) {
+                        window.postMessage({ auth_token: data.auth_token })
+                        window.localStorage.setItem(
+                            "credentials",
+                            JSON.stringify(this.credentials)
+                        );
+                        //change view
+                        if (this.credentials.username) {
+                            navigateTo(window.location.href + this.credentials.username);
+                        }
+                    }
                 });
-        };
+        });
+
     }
 
     async getHTML() {

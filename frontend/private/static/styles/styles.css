@@ -90,6 +90,7 @@ header {
     border-color: #bfe1ed;
     background-color: transparent;
     color: #bfe1ed;
+    cursor: pointer;
 }
 
 .register-button {
@@ -100,6 +101,7 @@ header {
     border-color: #bfe1ed;
     background-color: transparent;
     color: #bfe1ed;
+    cursor: pointer;
 }
 
 footer {
@@ -132,6 +134,7 @@ footer {
     background-color: transparent;
     border: solid;
     color: #bfe1ed;
+    cursor: pointer;
 }
 
 
