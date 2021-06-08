@@ -16,6 +16,7 @@ export default class extends AbstractView {
             //map to store conversationTokens mapped to their shortcuts
             this.conversationTokens = new Map();
             this.currentAuthChat;
+            this.authToken;
         }
         //event listeners
     searchEventListener(e) {
@@ -59,10 +60,11 @@ export default class extends AbstractView {
     }
 
     populatePage(message) {
+        this.authToken = message.auth_token
         fetch("http://localhost:3000/conversation/list", {
                 method: "GET",
                 headers: {
-                    "auth_token": message.auth_token
+                    "auth_token": this.authToken
                 }
             })
             .then((res) => {
@@ -78,10 +80,12 @@ export default class extends AbstractView {
         if (this.currentAuthChat == undefined) {
             console.log('currentAuthChat is undefined')
         } else {
-
             fetch("http://localhost:3000/conversation", {
                     method: "POST",
-                    headers: { "auth_chat": this.currentAuthChat },
+                    headers: {
+                        "auth_chat": this.currentAuthChat,
+                        "auth_token": this.authToken
+                    },
                     body: JSON.stringify({ message: message })
                 })
                 .then((res) => {

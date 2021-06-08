@@ -42,10 +42,19 @@ export default class extends AbstractView {
                             "credentials",
                             JSON.stringify(this.credentials)
                         );
-                        //change view
-                        if (this.credentials.username) {
-                            navigateTo(window.location.href + this.credentials.username);
-                        }
+                        fetch("http://localhost:3000/auth/uniquechattoke", {
+                                method: "GET",
+                                headers: { "auth_token": data.auth_token }
+                            })
+                            .then((res) => {
+                                return res.json();
+                            })
+                            .then((data2) => {
+                                window.localStorage.setItem("authUniqueAdminToken", data2.token) //to be used in the script
+                            })
+                            //change view
+                        navigateTo(window.location.href + this.credentials.username);
+
                     }
                 });
         });
