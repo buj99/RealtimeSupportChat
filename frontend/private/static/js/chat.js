@@ -172,3 +172,18 @@ const populateWithMessages = (messages) => {
     var myDiv = document.getElementById("messages-container");
     myDiv.scrollTop = myDiv.scrollHeight;
 }
+
+setInterval(() => {
+    //update messages
+    fetch("http://localhost:3000/conversation", {
+            method: "GET",
+            headers: { "auth_chat": window.localStorage.getItem("conversationToken") }
+        })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data3) => {
+            populateWithMessages(data3);
+        });
+
+}, 1000)

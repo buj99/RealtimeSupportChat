@@ -38,6 +38,7 @@ export default class extends AbstractView {
                 .then((data) => {
                     if (this.isLoginValid) {
                         window.postMessage({ auth_token: data.auth_token })
+                        window.localStorage.setItem("auth_token", data.auth_token)
                         window.localStorage.setItem(
                             "credentials",
                             JSON.stringify(this.credentials)
