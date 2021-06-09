@@ -1,5 +1,5 @@
 import AbstractView from "./AbstractView.js";
-
+import { formatDateForChat } from "../utils.js";
 export default class extends AbstractView {
 
     constructor(params) {
@@ -133,18 +133,21 @@ export default class extends AbstractView {
                 const messageDate = document.createElement("div");
                 dot.classList.add("dot");
                 messageRow.classList.add("message-row");
-                messageDate.innerText = msg.date;
+                messageDate.innerText = formatDateForChat(msg.date);
                 messageText.innerText = msg.message;
                 if (msg.isAdmin == true) {
-                    messageRow.classList.add("other-message-row");
-                    messageText.classList.add("other-message-text");
-                } else {
                     messageRow.classList.add("your-message-row");
                     messageText.classList.add("your-message-text");
+                    messageRow.appendChild(messageDate);
+                    messageRow.appendChild(dot);
+                    messageRow.appendChild(messageText);
+                } else {
+                    messageRow.classList.add("other-message-row");
+                    messageText.classList.add("other-message-text");
+                    messageRow.appendChild(messageText);
+                    messageRow.appendChild(dot);
+                    messageRow.appendChild(messageDate);
                 }
-                messageRow.appendChild(messageText);
-                messageRow.appendChild(dot);
-                messageRow.appendChild(messageDate);
                 chatMesagesList.appendChild(messageRow);
             });
     }
