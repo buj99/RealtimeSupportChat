@@ -8,10 +8,14 @@
     max-height: 100vh;
 }
 
+.custom-container{
+    background-color: #9924a8;
+}
 .image-container img {
     height: 100%;
     object-fit: cover;
 }
+
 
 .login-box {
     display: flex;

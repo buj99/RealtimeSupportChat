@@ -244,10 +244,10 @@ export default class extends AbstractView {
          <a href="https://www.oracle.com/ro/java/technologies/javase-downloads.html" data-link>
             <input class="nav-button" type="button" name="" value="Download">
          </a> 
-         <a href="/login" data-link>
+         <a href="" data-link>
             <input class="nav-button" type="button" name="" value="All Conversations">
          </a> 
-         <a href="/-username/costumize" data-link>
+         <a href="/${this.authToken}/costumize"  data-link>
             <input class="nav-button" type="button" name="" value="Customize">
          </a> 
         
