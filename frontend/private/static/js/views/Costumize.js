@@ -32,9 +32,9 @@ export default class extends AbstractView{
                 <p class="reg-costumize">Text color: </p>  
                 <label class="label-costumize" style="width:200px;">
                     <select>
-                    <option  value="0">Black</option>
+                    <option  value="0">Blue</option>
                     <option  value="1">Red</option> 
-                    <option  value="2">Blue</option> 
+                    <option  value="2">Black</option> 
                     <option  value="3">Purple</option>    
                     </select>
                 </label>        
@@ -64,9 +64,13 @@ export default class extends AbstractView{
                 Apply changes
             </button>
         </div>
-
+        
         </form>
+        <a href="/login" data-link>
+            <input class="nav-button" type="button" name="" value="Back ">
+         </a> 
     </section>
+    
     `
     };
 }
