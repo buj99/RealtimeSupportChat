@@ -51,6 +51,24 @@ export default class extends AbstractView {
 
         document.querySelector(".chat-form img").addEventListener('click', () => this.sendMessage(document.querySelector(".chat-form input").value))
 
+        const threeDotsButton = document.querySelector(".three-dots-button");
+        // let menuBtn = document.querySelector(".menuBtn");
+        const nav = document.getElementsByTagName("nav")[0];
+
+        threeDotsButton.addEventListener('click', (e) => { nav.classList.add('is--open'); });
+        // menuBtn.addEventListener('click', onClick);
+        document.body.addEventListener('click', (e) => {
+            console.log(e);
+            if (
+                threeDotsButton.contains(e.target) ||
+                nav.contains(e.target)
+            ) {
+                return;
+            }
+
+            nav.classList.remove('is--open');
+        });
+
 
 
 
@@ -214,6 +232,7 @@ export default class extends AbstractView {
     }
 
 
+
     async getHTML() {
         return `<div class="user-meniu">
               <div class="chat-container">
@@ -240,12 +259,18 @@ export default class extends AbstractView {
             <img src="./static/Images/SendIcon.png" alt="Send Message" />
         </div>
     </div>
-    <nav>
-        <a href="https://www.javascript.com/"> Download Script </a>
-        <a href="https://www.javascript.com/"> Logout </a>
-        <a href="https://www.javascript.com/"> All Conversations </a>
-    </nav>
-    </div>
+    <nav class>
+        <a href="/login" data-link>
+            <input class="nav-button" type="button" name="" value="Logout">
+         </a> 
+         <a href="https://www.oracle.com/ro/java/technologies/javase-downloads.html" data-link>
+            <input class="nav-button" type="button" name="" value="Download">
+         </a> 
+         <a href="/${this.authToken}/costumize"  data-link>
+            <input class="nav-button" type="button" name="" value="Customize">
+         </a> 
+        
+        </nav>
     `;
     }
 }

@@ -4,7 +4,7 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params);
-        this.setTitle("Costumize");
+        this.setTitle("Register");
     }
     loadSetupDomElements() {
         this.addEventListenerToRegisterButton();
