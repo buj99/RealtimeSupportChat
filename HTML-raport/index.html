@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Raport HTML</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body prefix="schema: http://schema.org">
+    <header>
+      <div class="banner">
+        <img src="images.jpg" width="227" height="150" alt="Scholarly HTML logo">
+      </div>
+      <h1>Real Time Suport Chat</h1>
+    </header>
+    <div role="contentinfo">
+        <ol role="directory">
+            <li><a href="#abstract"><span>1. </span>Abstract</a></li>
+            <li><a href="#introduction"><span>2. </span>Introducere</a></li>
+            <li><a href="#structure"><span>3. </span>Structura</a><ol role="directory">
+                <li><a href="#Root"><span>3.1 </span>Tehnologii utilizate</a></li>
+                <li><a href="#article"><span>3.2 </span>Pagina html</a></li>
+                <li><a href="#hunk"><span>3.3 </span>Pagina de login</a></li>
+                <li><a href="#inline"><span></span>3.4 </span>Pagina de register</a></li>
+                <li><a href="#references"><span>3.5 </span>Pagina userului(UserMenu)</a></li>
+                <li><a href="#interactive"><span>3.6 </span>Pagina de costumizare</a></li>
+                <li><a href="#HTMLRoles"><span>3.7 </span>Pagina de descarcare</a></li>
+        </ol></li>
+    <li><a href="#semantics"><span>4. </span>Caracteristicile sistemului</a>
+        <li><a href="#scholarly-article"><span>5. </span>Constrangeri</a></li>
+                <li><a href="#hypermedia"><span>6. </span>Functionalitatea site-ul</a></li>
+                <li><a href="#processing-model"><span>7. </span>Bibliografie</a></li>
+                
+      <dl>
+        <dt>Autori</dt>
+        <dd>
+            Bujenita Claudiu Dumitrel 
+          &amp;
+         <a href="https://github.com/buj99">git</a>
+        </dd>
+        <dd>
+        Contur Alexandra Elena
+        &amp;   
+            <a href="https://github.com/alexxandra21">git</a>
+        </dd>
+        <dd>
+        Diag Emilian
+        &amp;
+             <a href="https://github.com/EmilianDiac">git</a>
+        </dd>
+        
+        <dt><a href="https://github.com/buj99/RealtimeSupportChat">Project repository</a></dt>
+        
+        
+      </dl>
+    </div>
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+      <h2><span>1. </span>Abstract</h2>
+      <p>
+        Realtime SupportChat este o extensie ce permite introducerea unei ferestre de chat in site-ul
+      propriu.
+      </p>
+    </section>
+    <section id="introduction" role="doc-introduction">
+      <!-- review? -->
+      <h2><span>2. </span>Introducere</h2>
+      <p>
+        Realtime SupportChat este o aplicatie web ce ofera un script cu ajutorul
+    caruia se poate introduce o fereastra de chat intr-un site. Conversatiile
+    sunt salvate si afisate in meniul dedicat administratorului, unde acesta
+    poate sa si downloadeze scriptul si sa customizeze designul ferestrei de
+    chat.
+      </p>
+      <p>
+        Scopul aplicatiei:
+      </p>
+      <ul>
+        <li>se incadreaza in domeniul business-management</li>
+        <li>aduce o modalitate rapida si eficienta de comunicare cu echipa de suport tehnic</li>
+        <li>
+          usureaza comunicarea client-moderator
+        </li>
+      </ul>
+    </section>
+    <section id="structure">
+      <!-- review? -->
+      <h2><span>3. </span>Structura</h2>
+      <p>
+        Site-ul este de tipul single-page aplication, are un API la care se fac call-uri si un server
+         care retine continutul static al aplicatiei, avand de asemenea o baza de date ce stocheaza mesajele
+         primite de administrator si detalii despre acestea.
+      </p>
+      <section id="Root">
+        <!-- review? -->
+        <h3><span>3.1 </span> Tehnologii utilizate</h3>
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JS </li>
+          </ul>
+        <section id="article">
+            <!-- review? -->
+        <h3><span>3.2 </span>Pagina html</h3>
+        <p>
+            Documentul este codat in UTF-8 si este transmis cu un tip media text/html.
+        </p>
+        <p>
+          Head-ul trebuie sa contina <code>&lt;meta charset="utf-8"&gt;</code> si un
+          <code>titlu</code>.
+        </p>
+      </section>
+      <section id="hunk">
+        <!-- review? -->
+        <h3><span>3.3 </span>Pagina de login</code></h3>
+        <p>
+          Pagina de login asigura o modalitate utilizatorului de a se loga pentru ca acesta sa poata beneficia de serviciile site-ului.
+        </p>
+      </section>
+      <section id="inline">
+        <!-- review? -->
+        <h3><span>3.4 </span>Pagina de register</h3>
+        <p>
+          Pagina de register are functionalitatea de a crea conturi noi pentru utilizatorii site-ului.
+        </p>
+       </section>
+      <section id="references">
+        <!-- review? -->
+        <h3><span>3.5 </span>Pagina userului (UserMenu)</h3>
+        <p>
+          Aceasta pagina contine toate conversatiile administratorului si o bara de navigatie care permitere iesirea din
+          cont, download-ul scriptului pentru chat si intrarea pe o pagina de costumizare.
+        </p>
+        
+      </section>
+
+      <section id="interactive">
+        <!-- review? -->
+        <h3><span>3.6 </span>Pagina de costumizare</h3>
+        <p>
+          Pagina de costumizare permite utilizatorului schimbarea temei chat-ului, a culorii scrisului, a dimensiunii
+          fontului si a mesajului de intampinare by default al chat-ului.
+      </section>
+      <section id="HTMLRoles">
+        <!-- review? -->
+        <h3><span>3.7 </span>Pagina de descarcare</h3>
+        <p>
+          Pune la dispozitie scriptul pentru chat-ul costumizat de client.
+        </p>
+        
+      </section>
+      
+    <section id="semantics">
+      <!-- review? -->
+      <h2><span>4. </span>Caracteristicile sistemului</h2>
+      <p>
+        Pagina dedicata administratorului contine o coloana cu toate conversatiile     
+      ce au fost initiate de catre vizitatorii site-ului. In dreapta coloanei se  
+      afla conversatia curenta ce contine in partea de jos o zona de input in    
+      care se pot scrie mesaje si un buton pentru trimitre mesaj. Fereastra de
+      chat ce apare pe pagina site-ului contine initial un mesaj de intampinare
+      ce poate fi customizat de catre administrator si o zona de input in care
+      se pot scrie mesaje si un buton pentru trimitre mesaj Pagina de 
+      inregistrare contine un camp pentru email, 2 campuri pentru parola 
+      respectiv pentru confiramrea parolei si un buton de inregistrare. Pagina
+      de login contine 2 campuri de text pentru emai respectiv parola si un
+      buton de logare. Pagina de customizare a chatului contine un dropbox
+      pentru selectarea temei, unul pentru selectarea culorii textului si 3
+      radiobuttons pentru alegerea mesajului de intampinare din fereastra de
+      chat, precum si un camp text in care se poate introduce un alt text decat
+      variantele sugerate.
+      </p>
+      </section>
+    <section id="scholarly-article">
+      <!-- review? -->
+      <h2><span>5. </span>Constrangeri</h2>
+      <p>
+        Nu exista constrangeri de utilizare, deoarece site-ul e conceput pentru
+      orice tip de ecran, functionand si pe modul orizontal al unui telefon ,
+      tablete, etc.
+      </p>
+    </section>
+    <section id="hypermedia">
+      <!-- review? -->
+      <h2><span>6. </span>Functionalitatea site-ului</h2>
+      <p>
+        Site-ul este construit in asa fel incat utilizatorii, detinatori de 
+        site-uri care administreaza o afacere , fara limita de varsta, sa fie
+        atrasi de interfata placuta si usor de utilizat pentru o comunicare 
+        fructuoasa. Utilizatorii pot apartine unei singure categorii, cei logati,
+        pentru a putea beneficia de servicii.
+        Site-ul pune la dispozitie utilizatorului diverse functii precum crearea
+        unui cont, logarea, folosirea contului pentru a comunica cu clientii si
+        customizarea chat-ului cu chestii precum alegerea unui mesaj de 
+        intampinare, dimensiunea fontului, culoarea textului, si schimbarea temei
+        de fundal. Chatul nu poate fi pus la dispozitie unui utilizator nelogat.
+      </p>
+    </section>
+    <section id="processing-model">
+      <!-- review? -->
+      <h2><span>7. </span>Bibliografie</h2>
+      <p>
+      <a href="https://w3c.github.io/scholarly-html/?fbclid=IwAR1KXp2BioDB1D3dZELQKtFIU1TT0T6tR2EJFUq-n2zUVV5L7n0NJhk_nf0#article">Raport Model</a>
+    </p>
+    <p>
+      <a href="https://careers.upwork.com/blogs/startup-resources-upwork-blog/what-is-an-api-and-how-does-it-work"> What us API and how it works?</a>
+    </p>
+    <p>
+        <a href="https://www.w3schools.com/js/"> Java help</a>
+      </p>
+      <p>
+        <a href="https://www.w3schools.com/css/default.asp"> CSS help</a>
+      </p>
+    </section>
+
+    
+  </dd></dl>
+</section>
+</body>
+</html>
