@@ -47,7 +47,7 @@ const router = async (req, res) => {
     {
       path: "/conversations/-idadmin/@idchat",
       execute: conversations_admin_chat,
-    }, //ws path
+    },
   ];
 
   //testing routes for match
