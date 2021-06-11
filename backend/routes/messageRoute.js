@@ -135,7 +135,15 @@ const getConversationsList = async (pathParams, req, res) => {
         { _id: conversation._id },
         process.env.TOKEN_SECRET_CHAT_IDENTIFIER
       );
-      response = [...response, { auth_chat: token, lastMsg: lastMsg }];
+      response = [
+        ...response,
+        {
+          auth_chat: token,
+          lastMsg: lastMsg,
+          name: conversation.name,
+          photo_link: conversation.photo_link,
+        },
+      ];
     });
     res.writeHead(200, headers);
     res.end(JSON.stringify(response));
