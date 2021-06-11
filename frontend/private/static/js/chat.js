@@ -1,5 +1,5 @@
 import { formatDateForChat } from './/chatUtils.js';
-const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJlNTdhZjgxMjQ5ZDQxYzQ5MzdhNWMiLCJpYXQiOjE2MjMwODcwMjN9.9kqBNFHtMBQtAieuCf8jpjEk4iAzyoR7J0vZLdkCwds";
+const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJlNGE4M2QxMzg5NTQxYWM1NTk2YTciLCJpYXQiOjE2MjMwODM2NTF9.YZl3lcI_t93fvkNNTejUTyll2z2ZL03GQqPRCkx1JjQ";
 if (window.localStorage.getItem('conversationToken') == null) {
     fetch(fetch("http://localhost:3000/asignchat", {
             method: "GET",
@@ -113,19 +113,20 @@ sendBtn.onclick = () => {
                     return res.json()
                 })
                 .then((data3) => {
+
                     document.querySelector("textarea").value = "";
-                    Array.from(document.getElementsByClassName("message user")).forEach(message => {
-                        message.remove()
-                    })
-                    Array.from(document.getElementsByClassName("message moderator")).forEach(message => {
-                        message.remove()
-                    })
                     populateWithMessages(data3)
                 })
         })
 }
 
 const populateWithMessages = (messages) => {
+    Array.from(document.getElementsByClassName("message user")).forEach(message => {
+        message.remove()
+    })
+    Array.from(document.getElementsByClassName("message moderator")).forEach(message => {
+        message.remove()
+    })
     messages.forEach(message => {
         //message container
         let author = "";

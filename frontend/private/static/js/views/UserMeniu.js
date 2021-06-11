@@ -75,24 +75,31 @@ export default class extends AbstractView {
         setInterval(() => {
             //update the current message
             let token = window.sessionStorage.getItem('conversationToken');
-            fetch("http://localhost:3000/conversation", {
-                    method: "GET",
-                    headers: { "auth_chat": token },
-                })
-                .then((res) => {
-                    return res.json();
-                })
-                .then((data2) => {
-                    this.createMesages(data2)
-                })
-                //updateConversations
-                // this.populatePage(window.localStorage.getItem("auth_token"))
+            // console.log('token' + token) //debug
+            if (token != null) {
+                fetch("http://localhost:3000/conversation", {
+                        method: "GET",
+                        headers: { "auth_chat": token },
+                    })
+                    .then((res) => {
+                        return res.json();
+                    })
+                    .then((data2) => {
+                        this.createMesages(data2)
+                    })
+                    // updateConversations
+                    // this.populatePage(window.localStorage.getItem("auth_token"))
+            }
+
+            console.log('authToken' + this.authToken)
+                // this.populatePagepage(this.authToken)
 
         }, 1000)
     }
     populatePage(auth_token) {
-        this.authToken = auth_token;
-        console.log('in populate message ' + this.authToken)
+        this.authToken = window.localStorage.getItem('auth_token');
+        console.log(window.localStorage.getItem("auth_token"))
+        console.log('in populate message ' + this.authToken) //debug
         fetch("http://localhost:3000/conversation/list", {
                 method: "GET",
                 headers: {
