@@ -4,68 +4,68 @@ const {
   loginUser,
   getUniqueChatKey,
 } = require("./routes/authRout");
-const { asignChat } = require("./routes/asignchatRoute");
 const {
-  sendMessage,
-  getMessages,
-  getConversationsList,
-} = require("./routes/messageRoute");
-//Router Function
+  conversations_admin,
+  conversations_admin_chat,
+} = require("./routes/conversationsRouter");
+//import utils 
+const { pathToRegex, getParams } = require("./utils.js");
+
+//router function
 const router = async (req, res) => {
-  //CORS SETUP
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  const routes = [
+    {
+      path: "/",
+      execute: () => {
+        res.end("path : /");
+      },
+    },
+    {
+      path: "/admins",
+      execute: registerUser,
+    },
+    {
+      path: "/admins/-idadmin",
+      execute: loginUser,
+    },
+    {
+      path: "/admins/-idadmin/chatkey",
+      execute: getUniqueChatKey,
+    },
 
-  //routing
-  const urlComponents = req.url.split("/");
-  switch (urlComponents[1]) {
-    case "auth":
-      switch (urlComponents[2]) {
-        case "login":
-          await loginUser(req, res);
-          break;
-        case "register":
-          await registerUser(req, res);
-          break;
-        case "uniquechattoke":
-          await getUniqueChatKey(req, res);
-          break;
+    {
+      path: "/admins/customizations/-idadmin",
+      execute: () => {
+        //TO DO
+        res.end(`path : /admins/customizations/-idadmin`);
+      },
+    },
+    {
+      path: "/conversations/-idadmin",
+      execute: conversations_admin,
+    },
+    {
+      path: "/conversations/-idadmin/@idchat",
+      execute: conversations_admin_chat,
+    }, //ws path
+  ];
 
-        default:
-          res.statusCode = 404;
-          res.end(
-            JSON.stringify({ message: `Route ${req.url} doesn't exist` })
-          );
-          break;
-      }
-      break;
-    case "asignchat":
-      await asignChat(req, res);
-      break;
-    case "conversation":
-      switch (urlComponents[2]) {
-        case "list":
-          await getConversationsList(req, res);
-          break;
+  //testing routes for match
 
-        default:
-          switch (req.method) {
-            case "POST":
-              await sendMessage(req, res);
-              break;
-            case "GET":
-              await getMessages(req, res);
-              break;
-            default:
-              break;
-          }
-          break;
-      }
-      break;
-    default:
-      res.statusCode = 404;
-      res.end(JSON.stringify({ message: `Route ${req.url} doesn't exist` }));
-      break;
+  const potentialMatches = routes.map((route) => {
+    return {
+      route: route,
+      result: req.url.match(pathToRegex(route.path)),
+    };
+  });
+  let match = potentialMatches.find(
+    (potentialMatch) => potentialMatch.result !== null
+  );
+
+  if (!match) {
+    res.end("404");
   }
+  match.route.execute(getParams(match), req, res);
 };
 
 module.exports.router = router;

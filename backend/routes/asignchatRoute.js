@@ -10,22 +10,23 @@ const headers = {
   "Access-Control-Max-Age": 2592000, // 30 days
   /** add other headers as per requirement */
 };
-const asignChat = async (req, res) => {
+const asignChat = async (pathParams, req, res) => {
   //check if URI is corect
-  if (req.url.split("/").length != 2) {
+  console.log(req.url);
+  if (req.url.split("/").length != 3) {
     // res.statusCode = 414;
     res.writeHead(414, headers);
     res.end(JSON.stringify({ message: "The request url is too long" }));
     return;
   }
 
-  //check if the method is GET
-  if (req.method != "GET") {
+  //check if the method is POST
+  if (req.method != "POST") {
     // res.statusCode = 405;
     res.writeHead(405, headers);
     res.end(
       JSON.stringify({
-        message: "This route can be accesed only using GET method",
+        message: "This route can be accesed only using POST method",
       })
     );
     return;
@@ -67,12 +68,12 @@ const asignChat = async (req, res) => {
                   process.env.TOKEN_SECRET_CHAT_IDENTIFIER
                 );
                 //save acces token for admin chat acces
-                data.admin_acces_token=token;
-                data.save().catch(error=>console.log(error));
-                //send response to client 
+                data.admin_acces_token = token;
+                data.save().catch((error) => console.log(error));
+                //send response to client
                 // res.stautsCode = 200;
                 res.writeHead(200, headers);
-                res.end(JSON.stringify({ token: token }));
+                res.end(JSON.stringify({ auth_chat: token }));
               })
               .catch((error) => {
                 //error when trying to add the new created chat to admin  chat list
