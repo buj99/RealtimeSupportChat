@@ -116,7 +116,7 @@ export default class extends AbstractView {
 
     sendMessage(message) {
         if (this.currentAuthChat == undefined) {
-            console.log('currentAuthChat is undefined')
+            window.alert('Select a chat first!')
         } else {
             let admin = window.localStorage.getItem("admin");
             fetch("http://localhost:3000/conversations/" + admin + "/client", {
@@ -179,8 +179,7 @@ export default class extends AbstractView {
         let sortedConversations = filteredConversations.sort(
             (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date));
 
-        console.log('try')
-            //check if there is something different
+        //check if there is something different
         let isThereANewMessage = false;
         if (this.conversations == undefined) {
             isThereANewMessage = true;
@@ -205,13 +204,8 @@ export default class extends AbstractView {
         const divConversation = document.createElement("div");
         divConversation.classList.add("conversation");
         const img = document.createElement("img");
-        if (conversation.name != undefined) {
-            img.src = conversation.photo_link;
-        } else {
-            img.src = "./static/Images/user.svg";
-        }
+        img.src = conversation.photo_link;
         img.onerror = function() {
-            console.log('not loaded properly')
             img.src = "./static/Images/user.svg";
 
         }
