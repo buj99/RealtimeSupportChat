@@ -20,10 +20,6 @@ const server = http.createServer((req, res) => {
         res.end();
         return;
     }
-    // if (["GET", "POST"].indexOf(req.method) > -1) {
-    //   router(req, res);
-    //   return;
-    // }
     router(req, res);
 });
 //database conection

@@ -8,7 +8,7 @@ export const router = async () => {
   const root = document.getElementById("app");
   const routes = [
     { path: "/404", view: Login },
-    { path: "/", view: Login },
+    { path: "/", view: Costumize },
     { path: "/login", view: Login },
     { path: "/register", view: Register },
     { path: "/-username", view: UserMeniu },

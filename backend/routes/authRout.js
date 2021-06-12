@@ -11,7 +11,7 @@ const headers = {
   "Access-Control-Max-Age": 2592000, // 30 days
   /** add other headers as per requirement */
 };
-
+const { defaultCostumizations } = require("./adminCostumization");
 const registerUser = async (pathParams, req, res) => {
   //verify if the corect method is used
   if (req.method != "POST") {
@@ -91,7 +91,6 @@ const loginUser = async (pathParams, req, res) => {
   //parse the data from the body
   req.on("end", async () => {
     var parsedBody = JSON.parse(body);
-    console.log(parsedBody);
     //validation for request data
     loginValidation(parsedBody)
       .then((isValid) => {
@@ -190,6 +189,7 @@ const addAdminInstanceInDB = async (parsedBody, res) => {
   const newAdmin = Admin({
     username: parsedBody.username,
     password: hashedPassword,
+    costumizations: defaultCostumizations,
   });
   newAdmin
     .save()
