@@ -224,6 +224,7 @@ footer {
 .conversation>img {
     grid-area: img;
     height: 4rem;
+    width: 4rem;
     border-radius: 90%;
     background: rgb(216, 216, 216);
     margin: 20%;

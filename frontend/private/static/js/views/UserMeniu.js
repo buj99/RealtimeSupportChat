@@ -17,6 +17,7 @@ export default class extends AbstractView {
             this.conversationTokens = new Map();
             this.currentAuthChat;
             this.authToken;
+            this.conversations;
             // this.populatePage()
         }
         //load dom
@@ -159,7 +160,6 @@ export default class extends AbstractView {
     }
 
     createConversations(conversations) {
-        this.conversationList.innerHTML = "";
         let filteredConversations = conversations
             .filter(function(e) {
                 return e.lastMsg != undefined;
@@ -179,10 +179,25 @@ export default class extends AbstractView {
         let sortedConversations = filteredConversations.sort(
             (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date));
 
-        sortedConversations.forEach(conversation => {
-            if (conversation.lastMsg != undefined)
+        console.log('try')
+            //check if there is something different
+        let isThereANewMessage = false;
+        if (this.conversations == undefined) {
+            isThereANewMessage = true;
+        } else {
+            sortedConversations.forEach((conversation, index) => {
+                if (this.conversations[index].lastMsg.date != conversation.lastMsg.date) {
+                    isThereANewMessage = true;
+                }
+            })
+        }
+        if (isThereANewMessage) {
+            this.conversationList.innerHTML = "";
+            sortedConversations.forEach((conversation, index) => {
                 this.createConversation(conversation);
-        });
+            });
+            this.conversations = sortedConversations;
+        }
         this.isConversationListModified = false;
     }
 
@@ -194,6 +209,11 @@ export default class extends AbstractView {
             img.src = conversation.photo_link;
         } else {
             img.src = "./static/Images/user.svg";
+        }
+        img.onerror = function() {
+            console.log('not loaded properly')
+            img.src = "./static/Images/user.svg";
+
         }
         img.alt = "imagine";
         divConversation.appendChild(img);
@@ -208,7 +228,7 @@ export default class extends AbstractView {
         divConversation.appendChild(divClientName);
         const divLastMessage = document.createElement("div");
         if (conversation.lastMsg != undefined && conversation.lastMsg.message != undefined) {
-            let sentBy = 'Him/Her : '
+            let sentBy = conversation.name + ' : ';
             if (conversation.lastMsg.isAdmin) {
                 let sentBy = 'You : '
             }
