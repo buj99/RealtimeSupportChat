@@ -18,7 +18,7 @@ const router = async (req, res) => {
     {
       path: "/",
       execute: () => {
-        res.end("path : /");
+        res.end("API documentation at : http://localhost:8090/APIdoc.html");
       },
     },
     {

@@ -1,7 +1,22 @@
-import { formatDateForChat } from ".//chatUtils.js";
+import { formatDateForChat } from "./chatUtils.js";
+const css1 = document.createElement("link");
+css1.rel = "stylesheet";
+css1.href =
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
+css1.integrity =
+    "sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==";
+css1.crossOrigin = "anonymous";
+
+const css2 = document.createElement("link");
+css2.rel = "stylesheet";
+css2.href = "http://localhost:8090/static/styles/chat.css";
+document.head.appendChild(css1);
+document.head.appendChild(css2);
+
 var lastMessageDate;
 const authToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMzODVlMjk1ZmQwZmMwMjVkZDQwMjIiLCJpYXQiOjE2MjM0MjY1MzB9.JjTxGGQ_NobydTv6Nwm1oRrs0mRl9k6BvEm4OxpWEu0";
+
 
 let authChat = window.localStorage.getItem(authToken + "_auth_chat");
 
