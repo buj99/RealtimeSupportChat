@@ -114,54 +114,7 @@ export default class extends AbstractView {
                     this.conversationsList = data;
                     this.createConversations(data)
                 })
-        } else {
-            console.log('n-am intrat')
         }
-    }
-
-    sendMessage(message) {
-        if (this.currentAuthChat == undefined) {
-            console.log('currentAuthChat is undefined')
-        } else {
-            fetch("http://localhost:3000/conversation", {
-                    method: "POST",
-                    headers: {
-                        "auth_chat": this.currentAuthChat,
-                        "auth_token": this.authToken
-                    },
-                    body: JSON.stringify({ message: message })
-                })
-                .then((res) => {
-                    return res.json();
-                })
-                .then((data) => {
-                    fetch("http://localhost:3000/conversation", {
-                            method: "GET",
-                            headers: { "auth_chat": this.currentAuthChat },
-                        })
-                        .then((res) => {
-                            return res.json();
-                        })
-                        .then((data2) => {
-                            this.createMesages(data2)
-                        })
-                })
-
-            //update the last message sent in the conversationList
-            let shortCurrentAuthToken = this.currentAuthChat.slice(-10);
-            let sentMessage = document.querySelector(".chat-form input").value;
-            Array.from(document.getElementsByClassName("conversation")).forEach(element => {
-                let shortAuthToken = element.getElementsByClassName("client-name")[0].innerHTML
-                if (shortAuthToken == shortCurrentAuthToken) {
-                    //this is the conversation that has to be updated
-                    element.getElementsByClassName("last-message")[0].innerHTML = sentMessage
-                }
-            });
-            //clear the input
-            document.querySelector(".chat-form input").value = "";
-
-        }
-
     }
 
     createMesages(messages) {
@@ -196,18 +149,45 @@ export default class extends AbstractView {
             });
     }
 
+    updateMessages(data) {
+
+    }
+
+
+    createConversations(conversations) {
+        this.conversationList.innerHTML = "";
+        let filteredConversations = conversations.filter(function(e) {
+            return e.lastMsg != undefined;
+        })
+        let sortedConversations = filteredConversations.sort(
+            (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date));
+
+        sortedConversations.forEach(conversation => {
+            if (conversation.lastMsg != undefined)
+                this.createConversation(conversation);
+        });
+        this.isConversationListModified = false;
+    }
+
     createConversation(conversation) {
         const divConversation = document.createElement("div");
         divConversation.classList.add("conversation");
         const img = document.createElement("img");
-        img.src = "./static/Images/user.svg";
+        if (conversation.name != undefined) {
+            img.src = conversation.photo_link;
+        } else {
+            img.src = "./static/Images/user.svg";
+        }
         img.alt = "imagine";
         divConversation.appendChild(img);
         const divClientName = document.createElement("div");
         divClientName.classList.add("client-name");
+
         let shortToken = conversation.auth_chat.slice(-10);
-        divClientName.innerText = shortToken;
+        divClientName.innerText = conversation.name;
+
         this.conversationTokens.set(shortToken, conversation.token);
+
         divConversation.appendChild(divClientName);
         const divLastMessage = document.createElement("div");
         if (conversation.lastMsg != undefined && conversation.lastMsg.message != undefined) {
@@ -236,20 +216,6 @@ export default class extends AbstractView {
         });
         divConversation.appendChild(divLastMessage);
         document.querySelector(".conversation-list").appendChild(divConversation);
-    }
-    createConversations(conversations) { //change  to create conversations
-        this.conversationList.innerHTML = "";
-        let filteredConversations = conversations.filter(function(e) {
-            return e.lastMsg != undefined;
-        })
-        let sortedConversations = filteredConversations.sort(
-            (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date));
-
-        sortedConversations.forEach(conversation => {
-            if (conversation.lastMsg != undefined)
-                this.createConversation(conversation);
-        });
-        this.isConversationListModified = false;
     }
 
 
