@@ -45,7 +45,6 @@ const asignChat = async (pathParams, req, res) => {
       //check if admin exist in DB
       Admin.findById(verify.verified._id)
         .then((admin) => {
-          console.log(admin);
           if (!admin) {
             //admin doesn't exist
             // res.statusCode = 400;

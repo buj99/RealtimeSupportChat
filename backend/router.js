@@ -8,7 +8,8 @@ const {
   conversations_admin,
   conversations_admin_chat,
 } = require("./routes/conversationsRouter");
-//import utils 
+const { admins_costumizations_admin } = require("./routes/adminCostumization");
+//import utils
 const { pathToRegex, getParams } = require("./utils.js");
 
 //router function
@@ -35,10 +36,7 @@ const router = async (req, res) => {
 
     {
       path: "/admins/customizations/-idadmin",
-      execute: () => {
-        //TO DO
-        res.end(`path : /admins/customizations/-idadmin`);
-      },
+      execute: admins_costumizations_admin,
     },
     {
       path: "/conversations/-idadmin",
