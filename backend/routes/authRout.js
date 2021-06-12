@@ -39,9 +39,11 @@ const registerUser = async (pathParams, req, res) => {
     registerValidation(parsedBody)
       .then((isValid) => {
         var validInput = isValid;
-        if (!isValid)
+        if (!isValid){
+          res.writeHead(406, headers);
           return res.end(JSON.stringify({ message: "Please send valid data" }));
-
+        }
+    
         //validation for unique username
         Admin.findOne({ username: parsedBody.username })
           .then((admin) => {
@@ -96,7 +98,7 @@ const loginUser = async (pathParams, req, res) => {
       .then((isValid) => {
         var validInput = isValid;
         if (!isValid) {
-          res.writeHead(500, headers);
+          res.writeHead(406, headers);
           return res.end(JSON.stringify({ message: "Please send valid data" }));
         }
 
@@ -105,7 +107,7 @@ const loginUser = async (pathParams, req, res) => {
           .then(async (admin) => {
             if (!admin) {
               // res.statusCode = 406;
-              res.writeHead(406, headers);
+              res.writeHead(404, headers);
 
               return res.end(
                 JSON.stringify({
