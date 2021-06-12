@@ -15,17 +15,13 @@ export default class extends AbstractView {
             e.preventDefault();
             this.credentials = {
                 username: username.value,
-                pass: pass.value,
+                password: pass.value,
             };
 
             this.isLoginValid = true;
-            var credentials = {
-                username: this.credentials.username,
-                password: this.credentials.pass,
-            };
-            fetch("http://localhost:3000/auth/login", {
+            fetch("http://localhost:3000/admins/" + this.credentials.username, {
                     method: "POST",
-                    body: JSON.stringify(credentials),
+                    body: JSON.stringify(this.credentials),
                     headers: { "Content-Type": "Application/json" },
                 })
                 .then((res) => {
@@ -37,13 +33,11 @@ export default class extends AbstractView {
                 })
                 .then((data) => {
                     if (this.isLoginValid) {
-                        window.postMessage({ auth_token: data.auth_token })
-                        window.localStorage.setItem("auth_token", data.auth_token)
-                        window.localStorage.setItem(
-                            "credentials",
-                            JSON.stringify(this.credentials)
-                        );
-                        fetch("http://localhost:3000/auth/uniquechattoke", {
+                        window.postMessage({})
+                            //auth_token for this admin
+                        window.localStorage.setItem("auth_token_" + this.credentials.username, data.auth_token)
+                        window.localStorage.setItem("admin", this.credentials.username);
+                        fetch("http://localhost:3000/admins/" + this.credentials.username + "/chatkey", {
                                 method: "GET",
                                 headers: { "auth_token": data.auth_token }
                             })
@@ -51,7 +45,7 @@ export default class extends AbstractView {
                                 return res.json();
                             })
                             .then((data2) => {
-                                window.localStorage.setItem("authUniqueAdminToken", data2.token) //to be used in the script
+                                window.localStorage.setItem("unique_admin_token_" + this.credentials.username, data2.unique_admin_token) //to be used in the script
                             })
                             //change view
                         navigateTo(window.location.href + this.credentials.username);

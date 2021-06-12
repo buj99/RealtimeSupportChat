@@ -14,9 +14,9 @@ const headers = {
 };
 
 //method for  : /conversation:POST
-const sendMessage = async (req, res) => {
+const sendMessage = async (pathParams, req, res) => {
   //check if URI is corect
-  if (req.url.split("/").length != 2) {
+  if (req.url.split("/").length != 4) {
     // res.statusCode = 414;
     res.writeHead(414, headers);
     res.end(JSON.stringify({ message: "The request url is too long" }));
@@ -84,9 +84,9 @@ const sendMessage = async (req, res) => {
 };
 
 //method for  /conversation : GET
-const getMessages = async (req, res) => {
+const getMessages = async (pathParams, req, res) => {
   //check if URI is corect
-  if (req.url.split("/").length != 2) {
+  if (req.url.split("/").length != 4) {
     // res.statusCode = 414;
     res.writeHead(414, headers);
     res.end(JSON.stringify({ message: "The request url is too long" }));
@@ -111,7 +111,7 @@ const getMessages = async (req, res) => {
     });
 };
 
-const getConversationsList = async (req, res) => {
+const getConversationsList = async (pathParams, req, res) => {
   //check if URI is corect
   if (req.url.split("/").length != 3) {
     // res.statusCode = 414;
@@ -135,7 +135,7 @@ const getConversationsList = async (req, res) => {
         { _id: conversation._id },
         process.env.TOKEN_SECRET_CHAT_IDENTIFIER
       );
-      response = [...response, { token: token, lastMsg: lastMsg }];
+      response = [...response, { auth_chat: token, lastMsg: lastMsg }];
     });
     res.writeHead(200, headers);
     res.end(JSON.stringify(response));

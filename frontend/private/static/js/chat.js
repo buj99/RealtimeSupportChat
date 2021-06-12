@@ -1,42 +1,41 @@
-import { formatDateForChat } from './/chatUtils.js';
-const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJlNGE4M2QxMzg5NTQxYWM1NTk2YTciLCJpYXQiOjE2MjMwODM2NTF9.YZl3lcI_t93fvkNNTejUTyll2z2ZL03GQqPRCkx1JjQ";
-if (window.localStorage.getItem('conversationToken') == null) {
-    fetch(fetch("http://localhost:3000/asignchat", {
+import { formatDateForChat } from ".//chatUtils.js";
+const authToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJlNTdhZjgxMjQ5ZDQxYzQ5MzdhNWMiLCJpYXQiOjE2MjMwODcwMjN9.9kqBNFHtMBQtAieuCf8jpjEk4iAzyoR7J0vZLdkCwds";
+if (false && window.localStorage.getItem("conversationToken") == null) {
+    fetch(
+        fetch("http://localhost:3000/asignchat", {
             method: "GET",
             headers: {
-                "auth_unique_admin_token": authToken
-            }
+                auth_unique_admin_token: authToken,
+            },
         })
         .then((res) => {
-            return res.json()
+            return res.json();
         })
         .then((data) => {
-            console.log(data.token)
+            console.log(data.token);
             window.localStorage.setItem("conversationToken", data.token);
         })
-
-
     );
 }
-
-fetch("http://localhost:3000/conversation", {
+if (false)
+    fetch("http://localhost:3000/conversation", {
         method: "GET",
-        headers: { "auth_chat": window.localStorage.getItem("conversationToken") }
+        headers: { auth_chat: window.localStorage.getItem("conversationToken") },
     })
     .then((res) => {
-        return res.json()
+        return res.json();
     })
     .then((data3) => {
         populateWithMessages(data3);
     });
-
 
 //body element
 let body = document.getElementsByTagName("body")[0];
 //chat container
 const chatContainer = document.createElement("div");
 chatContainer.id = "chat-container";
-chatContainer.classList.toggle('hiden');
+chatContainer.classList.toggle("hiden");
 body.appendChild(chatContainer);
 
 //chat header
@@ -53,21 +52,21 @@ chatHeader.appendChild(title);
 //buton minimizare
 const minimizeBtn = document.createElement("button");
 minimizeBtn.id = "minimize-btn";
-minimizeBtn.innerHTML = "<i class=\"fas fa-times\"></i>";
+minimizeBtn.innerHTML = '<i class="fas fa-times"></i>';
 chatHeader.appendChild(minimizeBtn);
 minimizeBtn.onclick = () => {
     chatContainer.classList.toggle("hiden");
     maximizeBtn.classList.toggle("hiden");
-}
+};
 
 //buton maximizare
 const maximizeBtn = document.createElement("button");
 maximizeBtn.id = "maximize-btn";
-maximizeBtn.innerHTML = "<i class=\"fas fa-plus\"></i>";
+maximizeBtn.innerHTML = '<i class="fas fa-plus"></i>';
 maximizeBtn.onclick = () => {
     chatContainer.classList.toggle("hiden");
     maximizeBtn.classList.toggle("hiden");
-}
+};
 body.appendChild(maximizeBtn);
 
 //messages container
@@ -88,46 +87,50 @@ inputContainer.appendChild(textInput);
 //buton trimitere
 const sendBtn = document.createElement("button");
 sendBtn.id = "send-btn";
-sendBtn.innerHTML = "<i class=\"fas fa-arrow-right\"></i>";
+sendBtn.innerHTML = '<i class="fas fa-arrow-right"></i>';
 inputContainer.appendChild(sendBtn);
 sendBtn.onclick = () => {
     // console.log(document.querySelector("textarea").value) //debug
     let sendMessagee = document.querySelector("textarea").value;
-    let conversationToken = window.localStorage.getItem('conversationToken');
+    let conversationToken = window.localStorage.getItem("conversationToken");
     // console.log(conversationToken) //debug
-    fetch("http://localhost:3000/conversation", {
+    if (false)
+        fetch("http://localhost:3000/conversation", {
             method: "POST",
-            headers: { "auth_chat": conversationToken },
-            body: JSON.stringify({ message: sendMessagee })
+            headers: { auth_chat: conversationToken },
+            body: JSON.stringify({ message: sendMessagee }),
         })
         .then((res) => {
-            return res.json()
+            return res.json();
         })
         .then((data2) => {
-            console.log(data2)
+            console.log(data2);
             fetch("http://localhost:3000/conversation", {
                     method: "GET",
-                    headers: { "auth_chat": conversationToken }
+                    headers: { auth_chat: conversationToken },
                 })
                 .then((res) => {
-                    return res.json()
+                    return res.json();
                 })
                 .then((data3) => {
-
                     document.querySelector("textarea").value = "";
-                    populateWithMessages(data3)
-                })
-        })
-}
+                    Array.from(document.getElementsByClassName("message user")).forEach(
+                        (message) => {
+                            message.remove();
+                        }
+                    );
+                    Array.from(
+                        document.getElementsByClassName("message moderator")
+                    ).forEach((message) => {
+                        message.remove();
+                    });
+                    populateWithMessages(data3);
+                });
+        });
+};
 
 const populateWithMessages = (messages) => {
-    Array.from(document.getElementsByClassName("message user")).forEach(message => {
-        message.remove()
-    })
-    Array.from(document.getElementsByClassName("message moderator")).forEach(message => {
-        message.remove()
-    })
-    messages.forEach(message => {
+    messages.forEach((message) => {
         //message container
         let author = "";
         const messageContainer = document.createElement("div");
@@ -168,23 +171,23 @@ const populateWithMessages = (messages) => {
         messageText.innerText = message.message;
         messageContainer.appendChild(messageText);
         messagesContainer.appendChild(messageContainer);
-
-    })
+    });
     var myDiv = document.getElementById("messages-container");
     myDiv.scrollTop = myDiv.scrollHeight;
-}
+};
 
 setInterval(() => {
     //update messages
-    fetch("http://localhost:3000/conversation", {
-            method: "GET",
-            headers: { "auth_chat": window.localStorage.getItem("conversationToken") }
-        })
-        .then((res) => {
-            return res.json()
-        })
-        .then((data3) => {
-            populateWithMessages(data3);
-        });
-
-}, 1000)
+    if (false) {
+        fetch("http://localhost:3000/conversation", {
+                method: "GET",
+                headers: { auth_chat: window.localStorage.getItem("conversationToken") },
+            })
+            .then((res) => {
+                return res.json();
+            })
+            .then((data3) => {
+                populateWithMessages(data3);
+            });
+    }
+}, 1000);

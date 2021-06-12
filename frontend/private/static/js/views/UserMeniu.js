@@ -17,24 +17,24 @@ export default class extends AbstractView {
             this.conversationTokens = new Map();
             this.currentAuthChat;
             this.authToken;
+            this.populatePage()
         }
         //event listeners
     searchEventListener(e) {
-            // if (this.searchWidget.value != "") {
             this.isConversationListModified = true;
             this.conversationList.innerHTML = "";
             let searchedValue = this.searchWidget.value;
             if (searchedValue == "") {
                 //the searched value is the empty string, so we display all conversations
                 // console.log(this.conversationsList); //debug
-                this.createUsers(this.conversationsList);
+                this.createConversations(this.conversationsList);
             } else {
                 this.conversationsList.map((conversation) => {
                     let shortAuthToken = conversation.token.slice(-10);
                     // console.log(shortAuthToken) //debug
                     if (shortAuthToken.includes(searchedValue)) {
                         // console.log(conversation)
-                        this.createUser(conversation);
+                        this.createConversation(conversation);
                     }
                 });
             }
@@ -47,7 +47,7 @@ export default class extends AbstractView {
         document.querySelector(".search-widget").addEventListener("input", (e) => {
             this.searchEventListener(e);
         });
-        window.addEventListener('message', event => this.populatePage(event.data.auth_token))
+        window.addEventListener('message', event => this.populatePage())
 
         document.querySelector(".chat-form img").addEventListener('click', () => this.sendMessage(document.querySelector(".chat-form input").value))
 
@@ -74,9 +74,9 @@ export default class extends AbstractView {
 
         setInterval(() => {
             //update the current message
-            let token = window.sessionStorage.getItem('conversationToken');
+            // let token = window.sessionStorage.getItem('conversationToken');
             // console.log('token' + token) //debug
-            if (token != null) {
+            if (false) { //token != null) {
                 fetch("http://localhost:3000/conversation", {
                         method: "GET",
                         headers: { "auth_chat": token },
@@ -91,28 +91,32 @@ export default class extends AbstractView {
                     // this.populatePage(window.localStorage.getItem("auth_token"))
             }
 
-            console.log('authToken' + this.authToken)
-                // this.populatePagepage(this.authToken)
+            // console.log('authToken' + this.authToken)
+            this.populatePage()
 
         }, 1000)
     }
-    populatePage(auth_token) {
-        this.authToken = window.localStorage.getItem('auth_token');
-        console.log(window.localStorage.getItem("auth_token"))
-        console.log('in populate message ' + this.authToken) //debug
-        fetch("http://localhost:3000/conversation/list", {
-                method: "GET",
-                headers: {
-                    "auth_token": this.authToken
-                }
-            })
-            .then((res) => {
-                return res.json()
-            })
-            .then((data) => {
-                this.conversationsList = data;
-                this.createUsers(data)
-            })
+
+    populatePage() {
+        let admin = window.localStorage.getItem("admin");
+        this.authToken = window.localStorage.getItem("auth_token_" + admin);
+        if (this.authToken) {
+            fetch("http://localhost:3000/conversations/" + admin, {
+                    method: "GET",
+                    headers: {
+                        "auth_token": this.authToken
+                    }
+                })
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    this.conversationsList = data;
+                    this.createConversations(data)
+                })
+        } else {
+            console.log('n-am intrat')
+        }
     }
 
     sendMessage(message) {
@@ -192,7 +196,7 @@ export default class extends AbstractView {
             });
     }
 
-    createUser(conversation) { //todo change in createConversation
+    createConversation(conversation) {
         const divConversation = document.createElement("div");
         divConversation.classList.add("conversation");
         const img = document.createElement("img");
@@ -201,13 +205,17 @@ export default class extends AbstractView {
         divConversation.appendChild(img);
         const divClientName = document.createElement("div");
         divClientName.classList.add("client-name");
-        let shortToken = conversation.token.slice(-10);
+        let shortToken = conversation.auth_chat.slice(-10);
         divClientName.innerText = shortToken;
         this.conversationTokens.set(shortToken, conversation.token);
         divConversation.appendChild(divClientName);
         const divLastMessage = document.createElement("div");
         if (conversation.lastMsg != undefined && conversation.lastMsg.message != undefined) {
-            divLastMessage.innerText = conversation.lastMsg.message;
+            let sentBy = 'Him/Her : '
+            if (conversation.lastMsg.isAdmin) {
+                let sentBy = 'You : '
+            }
+            divLastMessage.innerText = sentBy + conversation.lastMsg.message;
         }
         divLastMessage.classList.add("last-message");
         divConversation.addEventListener("click", () => {
@@ -229,11 +237,17 @@ export default class extends AbstractView {
         divConversation.appendChild(divLastMessage);
         document.querySelector(".conversation-list").appendChild(divConversation);
     }
-    createUsers(conversations) { //change  to create conversations
+    createConversations(conversations) { //change  to create conversations
         this.conversationList.innerHTML = "";
-        conversations.forEach(conversation => {
+        let filteredConversations = conversations.filter(function(e) {
+            return e.lastMsg != undefined;
+        })
+        let sortedConversations = filteredConversations.sort(
+            (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date));
+
+        sortedConversations.forEach(conversation => {
             if (conversation.lastMsg != undefined)
-                this.createUser(conversation);
+                this.createConversation(conversation);
         });
         this.isConversationListModified = false;
     }
