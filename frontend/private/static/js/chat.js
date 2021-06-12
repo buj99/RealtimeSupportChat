@@ -14,7 +14,7 @@ css2.href = "http://localhost:8090/static/styles/chat.css";
 document.head.appendChild(css1);
 document.head.appendChild(css2);
 
-if (window.localStorage.getItem("conversationToken") == null) {
+if (false) {
   fetch(
     fetch("http://localhost:3000/asignchat", {
       method: "GET",
@@ -27,8 +27,8 @@ if (window.localStorage.getItem("conversationToken") == null) {
     })
     .then((data3) => {
         populateWithMessages(data3);
-    });
-
+    }));
+}
 //body element
 let body = document.getElementsByTagName("body")[0];
 //chat container
