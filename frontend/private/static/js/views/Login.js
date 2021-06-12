@@ -13,6 +13,8 @@ export default class extends AbstractView {
 
         loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
+            console.log("button pressed")
+            this.disableSendButton()
             this.credentials = {
                 username: username.value,
                 password: pass.value,
@@ -54,6 +56,10 @@ export default class extends AbstractView {
                 });
         });
 
+    }
+
+    disableSendButton() {
+        document.querySelector('button').disabled = true;
     }
 
     async getHTML() {

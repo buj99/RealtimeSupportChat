@@ -17,27 +17,7 @@ export default class extends AbstractView {
             this.conversationTokens = new Map();
             this.currentAuthChat;
             this.authToken;
-            this.populatePage()
-        }
-        //event listeners
-    searchEventListener(e) {
-            this.isConversationListModified = true;
-            this.conversationList.innerHTML = "";
-            let searchedValue = this.searchWidget.value;
-            if (searchedValue == "") {
-                //the searched value is the empty string, so we display all conversations
-                // console.log(this.conversationsList); //debug
-                this.createConversations(this.conversationsList);
-            } else {
-                this.conversationsList.map((conversation) => {
-                    let shortAuthToken = conversation.token.slice(-10);
-                    // console.log(shortAuthToken) //debug
-                    if (shortAuthToken.includes(searchedValue)) {
-                        // console.log(conversation)
-                        this.createConversation(conversation);
-                    }
-                });
-            }
+            // this.populatePage()
         }
         //load dom
     loadSetupDomElements() {
@@ -69,33 +49,16 @@ export default class extends AbstractView {
             nav.classList.remove('is--open');
         });
 
+        let intervalId = setInterval(() => { this.populatePage() }, 500)
+        window.sessionStorage.setItem("intervalId", intervalId)
 
+        window.addEventListener('popstate', function(event) {
+            clearInterval(window.sessionStorage.getItem("intervalId"))
 
-
-        setInterval(() => {
-            //update the current message
-            // let token = window.sessionStorage.getItem('conversationToken');
-            // console.log('token' + token) //debug
-            if (false) { //token != null) {
-                fetch("http://localhost:3000/conversation", {
-                        method: "GET",
-                        headers: { "auth_chat": token },
-                    })
-                    .then((res) => {
-                        return res.json();
-                    })
-                    .then((data2) => {
-                        this.createMesages(data2)
-                    })
-                    // updateConversations
-                    // this.populatePage(window.localStorage.getItem("auth_token"))
-            }
-
-            // console.log('authToken' + this.authToken)
-            this.populatePage()
-
-        }, 1000)
+        }, false);
     }
+
+
 
     populatePage() {
         let admin = window.localStorage.getItem("admin");
@@ -111,7 +74,8 @@ export default class extends AbstractView {
                     return res.json()
                 })
                 .then((data) => {
-                    this.conversationsList = data;
+                    this.conversationsList = data; // might be in createConversations ?
+
                     this.createConversations(data)
                 })
         }
@@ -149,16 +113,69 @@ export default class extends AbstractView {
             });
     }
 
-    updateMessages(data) {
+    sendMessage(message) {
+        if (this.currentAuthChat == undefined) {
+            console.log('currentAuthChat is undefined')
+        } else {
+            let admin = window.localStorage.getItem("admin");
+            fetch("http://localhost:3000/conversations/" + admin + "/client", {
+                    method: "POST",
+                    headers: {
+                        "auth_chat": this.currentAuthChat,
+                        "auth_token": this.authToken
+                    },
+                    body: JSON.stringify({ message: message })
+                })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    fetch("http://localhost:3000/conversations/" + admin + "/client", {
+                            method: "GET",
+                            headers: { "auth_chat": this.currentAuthChat },
+                        })
+                        .then((res) => {
+                            return res.json();
+                        })
+                        .then((data2) => {
+                            this.createMesages(data2)
+                        })
+                })
 
+            //update the last message sent in the conversationList
+            let shortCurrentAuthToken = this.currentAuthChat.slice(-10);
+            let sentMessage = document.querySelector(".chat-form input").value;
+            Array.from(document.getElementsByClassName("conversation")).forEach(element => {
+                let shortAuthToken = element.getElementsByClassName("client-name")[0].innerHTML
+                if (shortAuthToken == shortCurrentAuthToken) {
+                    //this is the conversation that has to be updated
+                    element.getElementsByClassName("last-message")[0].innerHTML = sentMessage
+                }
+            });
+            //clear the input
+            document.querySelector(".chat-form input").value = "";
+
+        }
     }
-
 
     createConversations(conversations) {
         this.conversationList.innerHTML = "";
-        let filteredConversations = conversations.filter(function(e) {
-            return e.lastMsg != undefined;
-        })
+        let filteredConversations = conversations
+            .filter(function(e) {
+                return e.lastMsg != undefined;
+            })
+            .filter(e => {
+                let searchedValue = this.searchWidget.value;
+                if (searchedValue == "") {
+                    return true;
+                } else {
+                    if (e.name == undefined) {
+                        return "undefined".toLowerCase().includes(searchedValue.toLowerCase())
+                    }
+                    return e.name.toLowerCase().includes(searchedValue.toLowerCase())
+                }
+            })
+
         let sortedConversations = filteredConversations.sort(
             (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date));
 
@@ -183,10 +200,10 @@ export default class extends AbstractView {
         const divClientName = document.createElement("div");
         divClientName.classList.add("client-name");
 
-        let shortToken = conversation.auth_chat.slice(-10);
-        divClientName.innerText = conversation.name;
-
-        this.conversationTokens.set(shortToken, conversation.token);
+        let clientName = conversation.name;
+        if (clientName == undefined) clientName = "undefined"; //this might be removed as we won't allow costumers to send messages without giving a name
+        divClientName.innerText = clientName;
+        this.conversationTokens.set(clientName, conversation.auth_chat);
 
         divConversation.appendChild(divClientName);
         const divLastMessage = document.createElement("div");
@@ -198,12 +215,16 @@ export default class extends AbstractView {
             divLastMessage.innerText = sentBy + conversation.lastMsg.message;
         }
         divLastMessage.classList.add("last-message");
+
         divConversation.addEventListener("click", () => {
-            // functionality for displaying the proper conversation should be implemented here
-            this.chatTitleElemen.innerText = divClientName.innerText;
-            this.currentAuthChat = this.conversationTokens.get(divClientName.innerText);
-            window.sessionStorage.setItem('conversationToken', this.currentAuthChat);
-            fetch("http://localhost:3000/conversation", {
+            let clientName = divClientName.innerText;
+            this.chatTitleElemen.innerText = clientName;
+            this.currentAuthChat = this.conversationTokens.get(clientName);
+            // console.log(this.currentAuthChat)//debug
+            // window.sessionStorage.setItem('conversationToken', this.currentAuthChat);
+
+            let admin = window.localStorage.getItem("admin");
+            fetch("http://localhost:3000/conversations/" + admin + "/" + clientName, {
                     method: "GET",
                     headers: { "auth_chat": this.currentAuthChat },
                 })
@@ -211,6 +232,7 @@ export default class extends AbstractView {
                     return res.json();
                 })
                 .then((data) => {
+                    console.log(data)
                     this.createMesages(data);
                 })
         });
@@ -218,7 +240,14 @@ export default class extends AbstractView {
         document.querySelector(".conversation-list").appendChild(divConversation);
     }
 
-
+    removeElementsByClassName(className) {
+        console.log('remove called')
+        Array.from(document.getElementsByClassName(className)).forEach(
+            (message) => {
+                message.remove();
+            }
+        );
+    }
 
     async getHTML() {
         return `<div class="user-meniu">
