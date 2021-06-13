@@ -17,6 +17,7 @@ export default class extends AbstractView {
             this.conversationTokens = new Map();
             this.currentAuthChat;
             this.authToken;
+            this.conversations;
             // this.populatePage()
         }
         //load dom
@@ -115,7 +116,7 @@ export default class extends AbstractView {
 
     sendMessage(message) {
         if (this.currentAuthChat == undefined) {
-            console.log('currentAuthChat is undefined')
+            window.alert('Select a chat first!')
         } else {
             let admin = window.localStorage.getItem("admin");
             fetch("http://localhost:3000/conversations/" + admin + "/client", {
@@ -159,7 +160,6 @@ export default class extends AbstractView {
     }
 
     createConversations(conversations) {
-        this.conversationList.innerHTML = "";
         let filteredConversations = conversations
             .filter(function(e) {
                 return e.lastMsg != undefined;
@@ -179,10 +179,24 @@ export default class extends AbstractView {
         let sortedConversations = filteredConversations.sort(
             (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date));
 
-        sortedConversations.forEach(conversation => {
-            if (conversation.lastMsg != undefined)
+        //check if there is something different
+        let isThereANewMessage = false;
+        if (this.conversations == undefined) {
+            isThereANewMessage = true;
+        } else {
+            sortedConversations.forEach((conversation, index) => {
+                if (this.conversations[index].lastMsg.date != conversation.lastMsg.date) {
+                    isThereANewMessage = true;
+                }
+            })
+        }
+        if (isThereANewMessage) {
+            this.conversationList.innerHTML = "";
+            sortedConversations.forEach((conversation, index) => {
                 this.createConversation(conversation);
-        });
+            });
+            this.conversations = sortedConversations;
+        }
         this.isConversationListModified = false;
     }
 
@@ -190,10 +204,10 @@ export default class extends AbstractView {
         const divConversation = document.createElement("div");
         divConversation.classList.add("conversation");
         const img = document.createElement("img");
-        if (conversation.name != undefined) {
-            img.src = conversation.photo_link;
-        } else {
+        img.src = conversation.photo_link;
+        img.onerror = function() {
             img.src = "./static/Images/user.svg";
+
         }
         img.alt = "imagine";
         divConversation.appendChild(img);
@@ -208,7 +222,7 @@ export default class extends AbstractView {
         divConversation.appendChild(divClientName);
         const divLastMessage = document.createElement("div");
         if (conversation.lastMsg != undefined && conversation.lastMsg.message != undefined) {
-            let sentBy = 'Him/Her : '
+            let sentBy = conversation.name + ' : ';
             if (conversation.lastMsg.isAdmin) {
                 let sentBy = 'You : '
             }
