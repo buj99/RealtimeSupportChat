@@ -5,76 +5,61 @@ export default class extends AbstractView {
     super(params);
     this.setTitle("Costumize");
   }
+  //handlers
+  saveBtnClickHandler(event) {
+    console.log("save button clicked");
+  }
+  backBtnClickHandler(event) {
+    console.log("back button clicked");
+  }
 
+  loadSetupDomElements() {
+    const saveBtn = document.getElementsByClassName("save-btn")[0];
+    saveBtn.addEventListener("click", this.saveBtnClickHandler);
+    const backBtn = document.getElementsByClassName("back-btn")[0];
+    backBtn.addEventListener("click", this.backBtnClickHandler);
+  }
   async getHTML() {
-    return `<section class="custom-container">
-        <header class="header-costumize">
-          <h1 class="txt">Personalize your chat!</h1>
-        </header>
-
-        <form class="form-costumize">
-          <div class="box theme">
-            <p class="reg">Background theme:</p>
-            <label class="label-costumize" style="width: 200px">
-              <select>
-                <option value="0">Light</option>
-                <option value="1">Dark</option>
-              </select>
-            </label>
+    return `
+    <div class="customize-container">
+        <div class="image-container-costumization">
+          <img src="./static/Images/background.jpg" />
+        </div>
+        <div class="customization-options">
+          <header></header>
+          <div class="background-color picker">
+            <p>Choose background color</p>
+            <input type="color" class="color-picker" />
           </div>
-
-          <div class="box color">
-            <p class="reg-costumize">Text color:</p>
-            <label class="label-costumize" style="width: 200px">
-              <select>
-                <option value="0">Blue</option>
-                <option value="1">Red</option>
-                <option value="2">Black</option>
-                <option value="3">Purple</option>
-              </select>
-            </label>
+          <div class="text-color picker">
+            <p>Choose text color</p>
+            <input type="color" class="color-picker" />
           </div>
-
-          <div class="box welcome-message">
-            <p class="reg">Choose your message:</p>
-            <label class="c-container"
-              >Hello!What cand I help you with?
-              <input type="radio" checked="checked" name="radio" />
-              <span class="checkmark"></span>
-            </label>
-            <label class="c-container"
-              >Hi! I am here to help you!
-              <input type="radio" name="radio" />
-              <span class="checkmark"></span>
-            </label>
-            <label class="c-container"
-              >Hello! Can you explain me your problem?
-              <input type="radio" name="radio" />
-              <span class="checkmark"></span>
-            </label>
+          <div class="welcome-message picker">
+            <p>Say someting before your costumer sends you a message</p>
+            <textarea name="" id="welcomeMsg" cols="30" rows="5"></textarea>
           </div>
+          <div class="font-size picker">
+            <div class="option">
+              <label for="small">Small</label>
+              <input type="radio" name="small" id="small" />
+            </div>
+            <div class="option">
+              <label for="normal">Normal</label>
+              <input type="radio" name="normal" id="normal" />
+            </div>
 
-          <label class="label-costumize" for="number-input">
-            <input
-              class="input-costumize"
-              type="number"
-              placeholder="Font-size"
-              id="number-input"
-            />
-          </label>
-          <div class="box">
-            <button class="button-customize" type="submit">
-              Apply changes
-            </button>
+            <div class="option">
+              <label for="large">Large</label>
+              <input type="radio" name="small" id="large" />
+            </div>
           </div>
-        </form>
-        <footer id="costumize-footer">
-          <a href="/login" data-link>
-            <input class="nav-button" type="button" name="" value="Back " />
-          </a>
-        </footer>
-      </section>
-    
+          <div class="btn-box">
+            <button class="back-btn">Back</button>
+            <button class="save-btn">Save</button>
+          </div>
+        </div>
+      </div>
     `;
   }
 }
