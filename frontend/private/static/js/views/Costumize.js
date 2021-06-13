@@ -23,7 +23,7 @@ export default class extends AbstractView {
     return `
     <div class="customize-container">
         <div class="image-container-costumization">
-          <img src="./static/Images/background.jpg" />
+          <img src="http://localhost:8090/static/Images/background.jpg" />
         </div>
         <div class="customization-options">
           <header></header>
