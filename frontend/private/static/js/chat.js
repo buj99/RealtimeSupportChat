@@ -32,8 +32,10 @@ if (authChat != null) {
             return res.json();
         })
         .then((data) => {
-            populateWithMessages(data);
-            lastMessageDate = data[data.length - 1].date;
+            if (data.length > 0) {
+                populateWithMessages(data);
+                // lastMessageDate = data[data.length - 1].date;
+            }
         });
 }
 
@@ -135,7 +137,7 @@ sendBtn.onclick = () => {
                 window.localStorage.setItem(uniqueAdminToken + "_auth_chat", data.auth_chat)
                 authChat = data.auth_chat;
                 textInput.placeholder = "Type here!";
-                console.log("success!")
+                // console.log("success!") //debug
             })
     } else {
         //we have a message to send
@@ -162,16 +164,16 @@ sendBtn.onclick = () => {
                     })
                     .then((data3) => {
                         // document.querySelector("textarea").value = "";
-                        console.log(data3)
+                        // console.log(data3) console.log
                         populateWithMessages(data3);
                     });
             });
     }
     document.querySelector("textarea").value = "";
-    console.log("am ajuns aici");
 };
 
 const populateWithMessages = (messages) => {
+    console.log(messages)
     removeCurrentMessages()
     messages.forEach((message) => {
         //message container
@@ -182,11 +184,12 @@ const populateWithMessages = (messages) => {
         if (message.isAdmin) {
             author = adminName;
             photoLink = adminPhotoLink;
+            messageContainer.classList.add("user");
         } else {
             author = clientName;
             photoLink = clientPhotoLink;
+            messageContainer.classList.add("moderator");
         }
-        messageContainer.classList.add(author);
 
         //message meta
         const messageMeta = document.createElement("div");
@@ -221,6 +224,7 @@ const populateWithMessages = (messages) => {
         messageContainer.appendChild(messageText);
         messagesContainer.appendChild(messageContainer);
     });
+    lastMessageDate = messages[messages.length - 1].date;
 };
 
 const removeCurrentMessages = () => {
@@ -270,10 +274,10 @@ setInterval(() => {
                 return res.json();
             })
             .then((data) => {
-                if (data[data.length - 1].date != lastMessageDate) {
+                if (data.length > 0 && data[data.length - 1].date != lastMessageDate) {
                     //we have a new message
                     populateWithMessages(data);
-                    lastMessageDate = data[data.length - 1].date;
+                    // lastMessageDate = data[data.length - 1].date;
                 }
             });
 
