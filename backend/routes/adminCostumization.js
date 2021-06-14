@@ -5,6 +5,7 @@ const defaultCostumizations = {
   textColor: "blue",
   welcomeMessage: "Hello!What cand I help you with?",
   fontSize: "normal",
+  admin_photo_link: "",
 };
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -65,7 +66,9 @@ const getCostumizations = (pathParams, req, res) => {
           return;
         }
         //admin exists , send costumizations
-        res.end(JSON.stringify(admin.costumizations));
+        res.end(
+          JSON.stringify({ ...admin.costumizations, username: admin.username })
+        );
       })
       .catch((error) => {
         //error when tring to save in database the new chat
