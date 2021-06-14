@@ -173,7 +173,6 @@ sendBtn.onclick = () => {
 };
 
 const populateWithMessages = (messages) => {
-    console.log(messages)
     removeCurrentMessages()
     messages.forEach((message) => {
         //message container
