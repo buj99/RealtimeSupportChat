@@ -14,7 +14,7 @@ export default class extends AbstractView {
             this.isConversationListModified;
             this.chatTitleElemen;
             //map to store conversationTokens mapped to their shortcuts
-            this.conversationTokens = new Map();
+            // this.conversationTokens = new Map();
             this.currentAuthChat;
             this.authToken;
             this.conversations;
@@ -203,11 +203,11 @@ export default class extends AbstractView {
     createConversation(conversation) {
         const divConversation = document.createElement("div");
         divConversation.classList.add("conversation");
+        divConversation.id = conversation.auth_chat;
         const img = document.createElement("img");
         img.src = conversation.photo_link;
         img.onerror = function() {
             img.src = "./static/Images/user.svg";
-
         }
         img.alt = "imagine";
         divConversation.appendChild(img);
@@ -217,7 +217,7 @@ export default class extends AbstractView {
         let clientName = conversation.name;
         if (clientName == undefined) clientName = "undefined"; //this might be removed as we won't allow costumers to send messages without giving a name
         divClientName.innerText = clientName;
-        this.conversationTokens.set(clientName, conversation.auth_chat);
+        // this.conversationTokens.set(clientName, conversation.auth_chat);
 
         divConversation.appendChild(divClientName);
         const divLastMessage = document.createElement("div");
@@ -230,12 +230,10 @@ export default class extends AbstractView {
         }
         divLastMessage.classList.add("last-message");
 
-        divConversation.addEventListener("click", () => {
+        divConversation.addEventListener("click", (event) => {
             let clientName = divClientName.innerText;
             this.chatTitleElemen.innerText = clientName;
-            this.currentAuthChat = this.conversationTokens.get(clientName);
-            // console.log(this.currentAuthChat)//debug
-            // window.sessionStorage.setItem('conversationToken', this.currentAuthChat);
+            this.currentAuthChat = divConversation.id; //this.conversationTokens.get(clientName);
 
             let admin = window.localStorage.getItem("admin");
             fetch("http://localhost:3000/conversations/" + admin + "/" + clientName, {
@@ -246,7 +244,7 @@ export default class extends AbstractView {
                     return res.json();
                 })
                 .then((data) => {
-                    console.log(data)
+                    // console.log(data) //debug
                     this.createMesages(data);
                 })
         });

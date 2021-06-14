@@ -13,15 +13,18 @@ css2.href = "http://localhost:8090/static/styles/chat.css";
 document.head.appendChild(css1);
 document.head.appendChild(css2);
 
-var lastMessageDate;
-const authToken =
+const adminName = "ChuckNorris";
+const adminPhotoLink = "https://pbs.twimg.com/profile_images/1407346896/89.jpg"
+const uniqueAdminToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMzODVlMjk1ZmQwZmMwMjVkZDQwMjIiLCJpYXQiOjE2MjM0MjY1MzB9.JjTxGGQ_NobydTv6Nwm1oRrs0mRl9k6BvEm4OxpWEu0";
+var lastMessageDate;
 
-
-let authChat = window.localStorage.getItem(authToken + "_auth_chat");
+let authChat = window.localStorage.getItem(uniqueAdminToken + "_auth_chat");
+let clientName = window.localStorage.getItem(uniqueAdminToken + "_name");
+let clientPhotoLink = window.localStorage.getItem(uniqueAdminToken + "_photo_link");
 
 if (authChat != null) {
-    fetch("http://localhost:3000/conversations/admin/chat", {
+    fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
             method: "GET",
             headers: { auth_chat: authChat }
         })
@@ -87,9 +90,9 @@ chatContainer.appendChild(inputContainer);
 //textarea  in care se introduce mesajul
 const textInput = document.createElement("textarea");
 textInput.id = "text-input";
-if (window.localStorage.getItem(authToken + "_name") == null) {
+if (window.localStorage.getItem(uniqueAdminToken + "_name") == null) {
     textInput.placeholder = "Type your name here!";
-} else if (window.localStorage.getItem(authToken + "_auth_chat") == null) {
+} else if (window.localStorage.getItem(uniqueAdminToken + "_auth_chat") == null) {
     textInput.placeholder = "Type your photo url here!";
 } else {
     textInput.placeholder = "Type here!";
@@ -104,18 +107,21 @@ inputContainer.appendChild(sendBtn);
 sendBtn.onclick = () => {
     let sentText = document.querySelector("textarea").value;
 
-    if (window.localStorage.getItem(authToken + "_name") == null) {
+    if (window.localStorage.getItem(uniqueAdminToken + "_name") == null) {
         //the user typed his/her name
-        window.localStorage.setItem(authToken + "_name", sentText)
+        window.localStorage.setItem(uniqueAdminToken + "_name", sentText.split(' ').join(''))
+        clientName = removeWhiteSpaces(sentText);
         textInput.placeholder = "Type your photo url here!";
-    } else if (window.localStorage.getItem(authToken + "_auth_chat") == null) {
+    } else if (window.localStorage.getItem(uniqueAdminToken + "_auth_chat") == null) {
+        window.localStorage.setItem(uniqueAdminToken + "_photo_link", sentText)
+        clientPhotoLink = sentText;
         //the user typed image url, so now we have all the data to create the chat
-        let name = window.localStorage.getItem(authToken + "_name");
+        let name = window.localStorage.getItem(uniqueAdminToken + "_name");
         let photoLink = sentText;
-        fetch("http://localhost:3000/conversations/client", {
+        fetch("http://localhost:3000/conversations/" + clientName, {
                 method: "POST",
                 headers: {
-                    auth_unique_admin_token: authToken
+                    auth_unique_admin_token: uniqueAdminToken
                 },
                 body: JSON.stringify({
                     "name": name,
@@ -126,17 +132,18 @@ sendBtn.onclick = () => {
                 return res.json();
             })
             .then((data) => {
-                window.localStorage.setItem(authToken + "_auth_chat", data.auth_chat)
+                window.localStorage.setItem(uniqueAdminToken + "_auth_chat", data.auth_chat)
+                authChat = data.auth_chat;
                 textInput.placeholder = "Type here!";
                 console.log("success!")
             })
     } else {
         //we have a message to send
 
-        let authChat = window.localStorage.getItem(authToken + "_auth_chat");
+        let authChat = window.localStorage.getItem(uniqueAdminToken + "_auth_chat");
         // console.log(conversationToken) //debug
 
-        fetch("http://localhost:3000/conversations/admin/chat", {
+        fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
                 method: "POST",
                 headers: { auth_chat: authChat },
                 body: JSON.stringify({ message: sentText }),
@@ -146,7 +153,7 @@ sendBtn.onclick = () => {
             })
             .then((data2) => {
                 // console.log(data2) //debug
-                fetch("http://localhost:3000/conversations/admin/chat", {
+                fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
                         method: "GET",
                         headers: { auth_chat: authChat },
                     })
@@ -154,12 +161,14 @@ sendBtn.onclick = () => {
                         return res.json();
                     })
                     .then((data3) => {
-                        document.querySelector("textarea").value = "";
+                        // document.querySelector("textarea").value = "";
+                        console.log(data3)
                         populateWithMessages(data3);
                     });
             });
     }
     document.querySelector("textarea").value = "";
+    console.log("am ajuns aici");
 };
 
 const populateWithMessages = (messages) => {
@@ -167,12 +176,15 @@ const populateWithMessages = (messages) => {
     messages.forEach((message) => {
         //message container
         let author = "";
+        let photoLink = "";
         const messageContainer = document.createElement("div");
         messageContainer.classList.add("message");
         if (message.isAdmin) {
-            author = "moderator";
+            author = adminName;
+            photoLink = adminPhotoLink;
         } else {
-            author = "user";
+            author = clientName;
+            photoLink = clientPhotoLink;
         }
         messageContainer.classList.add(author);
 
@@ -182,10 +194,13 @@ const populateWithMessages = (messages) => {
         messageContainer.appendChild(messageMeta);
 
         //poza suport
-        // const messageImage = document.createElement("img");
-        // messageImage.classList.add("message-image");
-        // messageImage.src = mesaj.photo;
-        // messageMeta.appendChild(messageImage);
+        const messageImage = document.createElement("img");
+        messageImage.classList.add("message-image");
+        messageImage.src = photoLink;
+        messageImage.onerror = function() {
+            messageImage.src = "./static/Images/user.svg";
+        }
+        messageMeta.appendChild(messageImage);
 
         //message author
         const messageAuthor = document.createElement("span");
@@ -226,13 +241,28 @@ const scrollToBottom = () => {
     myDiv.scrollTop = myDiv.scrollHeight;
 }
 
+const removeWhiteSpaces = (name) => {
+    if (name != null && name != undefined) {
+        for (let c of name) {
+            if (c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+
+            } else {
+                name.remove(c);
+            }
+        }
+    } else {
+        name = "";
+    }
+    return name;
+}
+
 setInterval(() => {
     //update messages
 
-    let authChat = window.localStorage.getItem(authToken + "_auth_chat");
+    let authChat = window.localStorage.getItem(uniqueAdminToken + "_auth_chat");
 
     if (authChat != null) {
-        fetch("http://localhost:3000/conversations/admin/chat", {
+        fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
                 method: "GET",
                 headers: { auth_chat: authChat },
             })
@@ -249,7 +279,7 @@ setInterval(() => {
 
         // fetch("http://localhost:3000/admins/customizations/sssad", {
         //         method: "POST",
-        //         headers: { auth_unique_admin_token: authToken },
+        //         headers: { auth_unique_admin_token: uniqueAdminToken },
         //         body: JSON.stringify({
         //             "backgroudTheme": "light",
         //             "textColor": "red",
