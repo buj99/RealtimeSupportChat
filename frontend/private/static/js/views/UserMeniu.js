@@ -1,5 +1,6 @@
 import AbstractView from "./AbstractView.js";
 import { formatDateForChat, navigateTo } from "../utils.js";
+import EmojiPicker from "../emojiPicker.js";
 export default class extends AbstractView {
   constructor(params) {
     super(params);
@@ -12,13 +13,26 @@ export default class extends AbstractView {
     this.conversationList;
     this.isConversationListModified;
     this.chatTitleElemen;
-    //map to store conversationTokens mapped to their shortcuts
-    this.conversationTokens = new Map();
     this.currentAuthChat;
     this.authToken;
     this.conversations;
     // this.populatePage()
   }
+  //load dom
+  //   loadSetupDomElements() {
+  //     const goCostumizationBtn = document.getElementById("costumize-btn");
+  //     goCostumizationBtn.addEventListener("click", () => {
+  //       navigateTo(window.location.href + "/costumize");
+  //     });
+  //     this.chatTitleElemen = document.getElementById("chat-title");
+  //     this.searchWidget = document.querySelector(".search-widget");
+  //     this.conversationList = document.querySelector(".conversation-list");
+  //     document.querySelector(".search-widget").addEventListener("input", (e) => {
+  //       this.searchEventListener(e);
+  //     });
+  //     window.addEventListener("message", (event) => this.populatePage());
+  // }
+
   //load dom
   loadSetupDomElements() {
     new EmojiPicker();
@@ -33,7 +47,6 @@ export default class extends AbstractView {
       this.searchEventListener(e);
     });
     window.addEventListener("message", (event) => this.populatePage());
-
     document
       .querySelector(".chat-form img")
       .addEventListener("click", () =>
@@ -194,7 +207,6 @@ export default class extends AbstractView {
     let sortedConversations = filteredConversations.sort(
       (a, b) => -parseInt(a.lastMsg.date) - parseInt(b.lastMsg.date)
     );
-
     //check if there is something different
     let isThereANewMessage = false;
     if (this.conversations == undefined) {
@@ -221,6 +233,7 @@ export default class extends AbstractView {
   createConversation(conversation) {
     const divConversation = document.createElement("div");
     divConversation.classList.add("conversation");
+    divConversation.id = conversation.auth_chat;
     const img = document.createElement("img");
     img.src = conversation.photo_link;
     img.onerror = function () {
@@ -234,7 +247,6 @@ export default class extends AbstractView {
     let clientName = conversation.name;
     if (clientName == undefined) clientName = "undefined"; //this might be removed as we won't allow costumers to send messages without giving a name
     divClientName.innerText = clientName;
-    this.conversationTokens.set(clientName, conversation.auth_chat);
 
     divConversation.appendChild(divClientName);
     const divLastMessage = document.createElement("div");
@@ -250,12 +262,10 @@ export default class extends AbstractView {
     }
     divLastMessage.classList.add("last-message");
 
-    divConversation.addEventListener("click", () => {
+    divConversation.addEventListener("click", (event) => {
       let clientName = divClientName.innerText;
       this.chatTitleElemen.innerText = clientName;
-      this.currentAuthChat = this.conversationTokens.get(clientName);
-      // console.log(this.currentAuthChat)//debug
-      // window.sessionStorage.setItem('conversationToken', this.currentAuthChat);
+      this.currentAuthChat = divConversation.id;
 
       let admin = window.localStorage.getItem("admin");
       fetch("http://localhost:3000/conversations/" + admin + "/" + clientName, {
@@ -266,10 +276,11 @@ export default class extends AbstractView {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
+          // console.log(data) //debug
           this.createMesages(data);
         });
     });
+
     divConversation.appendChild(divLastMessage);
     document.querySelector(".conversation-list").appendChild(divConversation);
   }
