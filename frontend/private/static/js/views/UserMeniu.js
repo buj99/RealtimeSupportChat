@@ -1,6 +1,5 @@
 import AbstractView from "./AbstractView.js";
 import { formatDateForChat, navigateTo } from "../utils.js";
-import EmojiPicker from "../emojiPicker.js";
 export default class extends AbstractView {
   constructor(params) {
     super(params);

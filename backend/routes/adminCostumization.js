@@ -66,6 +66,7 @@ const getCostumizations = (pathParams, req, res) => {
           return;
         }
         //admin exists , send costumizations
+        res.writeHead(200, headers);
         res.end(
           JSON.stringify({ ...admin.costumizations, username: admin.username })
         );
@@ -109,6 +110,7 @@ const setCostumizations = (pathParams, req, res) => {
     Admin.findById(verified.verified._id).then((admin) => {
       admin.costumizations = JSON.parse(body);
       admin.save();
+      res.writeHead(200, headers);
       res.end();
     });
   });
