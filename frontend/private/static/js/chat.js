@@ -18,6 +18,7 @@ const adminPhotoLink = "https://pbs.twimg.com/profile_images/1407346896/89.jpg"
 const uniqueAdminToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMzODVlMjk1ZmQwZmMwMjVkZDQwMjIiLCJpYXQiOjE2MjM0MjY1MzB9.JjTxGGQ_NobydTv6Nwm1oRrs0mRl9k6BvEm4OxpWEu0";
 var lastMessageDate;
+var configuration;
 
 let authChat = window.localStorage.getItem(uniqueAdminToken + "_auth_chat");
 let clientName = window.localStorage.getItem(uniqueAdminToken + "_name");
@@ -37,6 +38,16 @@ if (authChat != null) {
                 // lastMessageDate = data[data.length - 1].date;
             }
         });
+    await fetch("http://localhost:3000/admins/customizations/sssad", {
+            method: "GET",
+            headers: { auth_unique_admin_token: uniqueAdminToken }
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            configuration = data
+        })
 }
 
 //body element
@@ -189,6 +200,10 @@ const populateWithMessages = (messages) => {
             photoLink = clientPhotoLink;
             messageContainer.classList.add("moderator");
         }
+        if (configuration != undefined) {
+            console.log(configuration.backgroudTheme)
+            messageContainer.style.background = configuration.backgroudTheme;
+        }
 
         //message meta
         const messageMeta = document.createElement("div");
@@ -220,11 +235,17 @@ const populateWithMessages = (messages) => {
         const messageText = document.createElement("p");
         messageText.classList.add("message-text");
         messageText.innerText = message.message;
+        if (configuration != undefined) {
+            messageText.style.color = configuration.textColor;
+            messageText.style.fontSize = "large";
+        }
         messageContainer.appendChild(messageText);
         messagesContainer.appendChild(messageContainer);
     });
     lastMessageDate = messages[messages.length - 1].date;
 };
+
+
 
 const removeCurrentMessages = () => {
     Array.from(document.getElementsByClassName("message user")).forEach(
@@ -280,21 +301,6 @@ setInterval(() => {
                 }
             });
 
-        // fetch("http://localhost:3000/admins/customizations/sssad", {
-        //         method: "POST",
-        //         headers: { auth_unique_admin_token: uniqueAdminToken },
-        //         body: JSON.stringify({
-        //             "backgroudTheme": "light",
-        //             "textColor": "red",
-        //             "welcomeMessage": "Hello!What cand I help you with?",
-        //             "fontSize": "normal"
-        //         })
-        //     })
-        //     .then((res) => {
-        //         return res.json();
-        //     })
-        //     .then((data) => {
-        //         console.log(data)
-        //     })
+
     }
 }, 1000);

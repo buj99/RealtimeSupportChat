@@ -67,44 +67,18 @@ const getCostumizations = (pathParams, req, res) => {
                 //admin exists , send costumizations
                 res.writeHead(200, headers);
                 res.end(
-                    JSON.stringify({
-                        message: "This route can be accesed only using GET method",
-                    })
+                    JSON.stringify({...admin.costumizations, username: admin.username })
                 );
-                return;
+            })
+            .catch((error) => {
+                //error when tring to save in database the new chat
+                console.log(error);
+                // res.statusCode = 500;
+                res.writeHead(500, headers);
+                res.end(JSON.stringify({ message: "Something went rong ." }));
             });
-
-        //check if unique auth admin key is corect
-        const verify = authChatAdminTokenVerify(req, res);
-        if (verify.succes) {
-            //check if admin exist in DB
-            Admin.findById(verify.verified._id)
-                .then((admin) => {
-                    if (!admin) {
-                        //admin doesn't exist
-                        // res.statusCode = 400;
-                        res.writeHead(400, headers);
-                        res.end(
-                            JSON.stringify({ message: "This admin key is not eligible" })
-                        );
-                        return;
-                    }
-                    //admin exists , send costumizations
-                    res.writeHead(200, headers);
-                    res.end(
-                        JSON.stringify({...admin.costumizations, username: admin.username })
-                    );
-                })
-                .catch((error) => {
-                    //error when tring to save in database the new chat
-                    console.log(error);
-                    // res.statusCode = 500;
-                    res.writeHead(500, headers);
-                    res.end(JSON.stringify({ message: "Something went rong ." }));
-                });
-        }
-    };
-}
+    }
+};
 
 const setCostumizations = (pathParams, req, res) => {
     //check if URI is corect
@@ -139,6 +113,7 @@ const setCostumizations = (pathParams, req, res) => {
             res.end();
         });
     });
-}
+};
+
 module.exports.defaultCostumizations = defaultCostumizations;
 module.exports.admins_costumizations_admin = admins_costumizations_admin;
