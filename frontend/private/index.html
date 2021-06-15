@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./static/styles/styles.css" />
+
     <!-- <link rel="stylesheet" href="./static/styles/costumize.css" /> -->
     <!-- <link rel="stylesheet" href="./static/styles/chat.css" />
     <link
@@ -17,10 +18,15 @@
   </head>
 
   <body>
-    <div id="app">
-      
-    </div>
-    <script type="module" src="/static/js/index.js"></script>
+    <div id="app"></div>
+
     <!-- <script type="module" src="/static/js/chat.js"></script> -->
   </body>
+  <script type="module" src="/static/js/index.js"></script>
+  <script src="./static/js/emojiPicker.js"></script>
+  <script>
+    (() => {
+      new EmojiPicker();
+    })();
+  </script>
 </html>

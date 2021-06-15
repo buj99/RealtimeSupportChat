@@ -21,6 +21,7 @@ export default class extends AbstractView {
   }
   //load dom
   loadSetupDomElements() {
+    new EmojiPicker();
     const goCostumizationBtn = document.getElementById("costumize-btn");
     goCostumizationBtn.addEventListener("click", () => {
       navigateTo(window.location.href + "/costumize");
@@ -303,8 +304,7 @@ export default class extends AbstractView {
           
         </div>
         <div class="chat-form">
-
-            <input type="text" placeholder="Type here!" />
+            <input data-emoji-picker="true" type="text" placeholder="Type here!"/>
             <img src="./static/Images/SendIcon.png" alt="Send Message" />
         </div>
     </div>
