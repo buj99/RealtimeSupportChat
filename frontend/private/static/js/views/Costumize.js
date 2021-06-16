@@ -1,4 +1,5 @@
 import AbstractView from "./AbstractView.js";
+import UserMeniu from "./UserMeniu.js";
 
 export default class extends AbstractView {
     constructor(params) {
@@ -41,7 +42,8 @@ export default class extends AbstractView {
     }
 
     backBtnClickHandler(event) {
-        console.log("back button clicked");
+   
+          console.log("Back bttn clicked");
     }
 
     displayImage(event){
@@ -51,7 +53,6 @@ export default class extends AbstractView {
     
     // The URL isn't valid or the resource isn't a picture
     img.onerror = function() { alert("Provided URL does not point to a valid picture. "+myUrl.value) };
-    
     // Ok, we have correct picture; display it
     img.onload = function() {
         document.getElementById("yourImgElement").src = img.src;
@@ -79,7 +80,7 @@ export default class extends AbstractView {
         return `
     <div class="customize-container">
         <div class="image-container-costumization">
-          <img src="http://localhost:8090/static/Images/background.jpg" />
+          <img class="img-customize" src="http://localhost:8090/static/Images/background.jpg"  />
         </div>
         <div class="customization-options">
           <header></header>
@@ -92,8 +93,8 @@ export default class extends AbstractView {
             <input type="color" class="color-picker" />
           </div>
           <div class="welcome-message picker">
-            <p>Say someting before your costumer sends you a message</p>
-            <textarea name="" id="welcomeMsg" cols="30" rows="5"></textarea>
+            <p>Default message </p>
+            <textarea class="txt-picker" id="welcomeMsg" cols="30" rows="5"></textarea>
           </div>
           <div class="font-size picker">
             <div class="option">

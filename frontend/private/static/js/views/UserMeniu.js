@@ -51,15 +51,17 @@ export default class extends AbstractView {
             .addEventListener("click", () =>
                 this.sendMessage(document.querySelector(".chat-form input").value)
             );
+    
+
 
         const threeDotsButton = document.querySelector(".three-dots-button");
-        // let menuBtn = document.querySelector(".menuBtn");
+        
         const nav = document.getElementsByTagName("nav")[0];
 
         threeDotsButton.addEventListener("click", (e) => {
             nav.classList.add("is--open");
         });
-        // menuBtn.addEventListener('click', onClick);
+        
         document.body.addEventListener("click", (e) => {
             console.log(e);
             if (threeDotsButton.contains(e.target) || nav.contains(e.target)) {
@@ -81,8 +83,14 @@ export default class extends AbstractView {
             },
             false
         );
-    }
 
+       
+
+
+    }
+    
+
+    
     populatePage() {
         let admin = window.localStorage.getItem("admin");
         this.authToken = window.localStorage.getItem("auth_token_" + admin);
@@ -303,8 +311,8 @@ export default class extends AbstractView {
         <div class="conversation-list">          
         </div>
         <div class="chat-title">
-            <div class="menuBtn">
-                <img src="./static/Images/BackButton.png" alt="Back Button">
+            <div class="menuBtn" id="menuBtn">
+                <img src="./static/Images/BackButton.png" alt="Back Button">     
             </div>
             <span id="chat-title">
             </span>
