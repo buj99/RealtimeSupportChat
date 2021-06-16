@@ -1,4 +1,5 @@
 import AbstractView from "./AbstractView.js";
+import UserMeniu from "./UserMeniu.js";
 
 export default class extends AbstractView {
     constructor(params) {
@@ -39,8 +40,23 @@ export default class extends AbstractView {
             if (res.status == 200) console.log("de schimbat aici cu un mesaj!");
         });
     }
+
     backBtnClickHandler(event) {
-        console.log("back button clicked");
+   
+          console.log("Back bttn clicked");
+    }
+
+    displayImage(event){
+      var img = new Image();
+      let myUrl = document.getElementById("url-id");
+      img.src=myUrl.value;
+    
+    // The URL isn't valid or the resource isn't a picture
+    img.onerror = function() { alert("Provided URL does not point to a valid picture. "+myUrl.value) };
+    // Ok, we have correct picture; display it
+    img.onload = function() {
+        document.getElementById("yourImgElement").src = img.src;
+    };
     }
 
     loadSetupDomElements() {
@@ -54,12 +70,17 @@ export default class extends AbstractView {
         saveBtn.addEventListener("click", this.saveBtnClickHandler);
         const backBtn = document.getElementsByClassName("back-btn")[0];
         backBtn.addEventListener("click", this.backBtnClickHandler);
+        const previewBtn = document.getElementsByClassName("preview")[0];
+        previewBtn.addEventListener("click",this.displayImage);
+        
     }
+        
+
     async getHTML() {
         return `
     <div class="customize-container">
         <div class="image-container-costumization">
-          <img src="http://localhost:8090/static/Images/background.jpg" />
+          <img class="img-customize" src="http://localhost:8090/static/Images/background.jpg"  />
         </div>
         <div class="customization-options">
           <header></header>
@@ -72,8 +93,8 @@ export default class extends AbstractView {
             <input type="color" class="color-picker" />
           </div>
           <div class="welcome-message picker">
-            <p>Say someting before your costumer sends you a message</p>
-            <textarea name="" id="welcomeMsg" cols="30" rows="5"></textarea>
+            <p>Default message </p>
+            <textarea class="txt-picker" id="welcomeMsg" cols="30" rows="5"></textarea>
           </div>
           <div class="font-size picker">
             <div class="option">
@@ -84,12 +105,25 @@ export default class extends AbstractView {
               <label for="normal">Normal</label>
               <input type="radio" name="choice" id="normal" />
             </div>
-
             <div class="option">
               <label for="large">Large</label>
               <input type="radio" name="choice" id="large" />
             </div>
           </div>
+
+          <div class="admin-name picker">
+              <p>Change admin name </p>
+              <input type="text" class="txt-picker">
+          </div>
+
+          <div class="photo-url picker">
+              <p>Url for your profile picture</p>
+              <input type="url" id="url-id" class="txt-picker">
+              <img id="yourImgElement" class="profile-photo" >
+              <button class="preview">Preview</button>
+            
+          </div>
+
           <div class="btn-box">
             <button class="back-btn">Back</button>
             <button class="save-btn">Save</button>
