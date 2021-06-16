@@ -24,19 +24,20 @@ let authChat = window.localStorage.getItem(uniqueAdminToken + "_auth_chat");
 let clientName = window.localStorage.getItem(uniqueAdminToken + "_name");
 let clientPhotoLink = window.localStorage.getItem(uniqueAdminToken + "_photo_link");
 
+await fetch("http://localhost:3000/admins/customizations/" + clientName, {
+        method: "GET",
+        headers: { auth_unique_admin_token: uniqueAdminToken }
+    })
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+        configuration = data;
+        adminName = configuration.adminName;
+        console.log('done')
+    })
+console.log(adminName);
 if (authChat != null) {
-    await fetch("http://localhost:3000/admins/customizations/" + clientName, {
-            method: "GET",
-            headers: { auth_unique_admin_token: uniqueAdminToken }
-        })
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            configuration = data;
-            adminName = configuration.adminName;
-        })
-    console.log(adminName);
     fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
             method: "GET",
             headers: { auth_chat: authChat }
@@ -124,13 +125,15 @@ sendBtn.onclick = () => {
 
     if (window.localStorage.getItem(uniqueAdminToken + "_name") == null) {
         //the user typed his/her name
-        window.localStorage.setItem(uniqueAdminToken + "_name", sentText.split(' ').join(''))
-        clientName = removeWhiteSpaces(sentText);
-        textInput.placeholder = "Type your photo url here!";
+        if (isInCorrectFormat(sentText)) {
+            window.localStorage.setItem(uniqueAdminToken + "_name", sentText.split(' ').join(''))
+            textInput.placeholder = "Type your photo url here!";
+            document.querySelector("textarea").value = "";
+        }
     } else if (window.localStorage.getItem(uniqueAdminToken + "_auth_chat") == null) {
         window.localStorage.setItem(uniqueAdminToken + "_photo_link", sentText)
         clientPhotoLink = sentText;
-        //the user typed image url, so now we have all the data to create the chat
+        //the user typed image url, so now we have all the necessary data to create the chat
         let name = window.localStorage.getItem(uniqueAdminToken + "_name");
         let photoLink = sentText;
         fetch("http://localhost:3000/conversations/" + clientName, {
@@ -152,6 +155,8 @@ sendBtn.onclick = () => {
                 textInput.placeholder = "Type here!";
                 // console.log("success!") //debug
             })
+
+        document.querySelector("textarea").value = "";
     } else {
         //we have a message to send
 
@@ -181,8 +186,9 @@ sendBtn.onclick = () => {
                         populateWithMessages(data3);
                     });
             });
+
+        document.querySelector("textarea").value = "";
     }
-    document.querySelector("textarea").value = "";
 };
 
 const populateWithMessages = (messages) => {
@@ -264,23 +270,26 @@ const removeCurrentMessages = () => {
 };
 
 const scrollToBottom = () => {
-    var myDiv = document.getElementById("messages-container");
-    myDiv.scrollTop = myDiv.scrollHeight;
-}
-
-const removeWhiteSpaces = (name) => {
+        var myDiv = document.getElementById("messages-container");
+        myDiv.scrollTop = myDiv.scrollHeight;
+    }
+    //theck if the name contains only letters and digits and is not empty
+const isInCorrectFormat = (name) => {
     if (name != null && name != undefined) {
         for (let c of name) {
             if (c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
-
+                continue;
             } else {
-                name.remove(c);
+                alert('White characters are not allowed!')
+                return false;
             }
         }
-    } else {
-        name = "";
     }
-    return name;
+    if (name == "") {
+        alert('The textbox is empty!')
+        return false;
+    }
+    return true;
 }
 
 setInterval(() => {

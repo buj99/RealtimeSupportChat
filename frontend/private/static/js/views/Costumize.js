@@ -37,26 +37,26 @@ export default class extends AbstractView {
                 adminPhotoLink: "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/125568526/original/cd9c93141521436a112722e8c5c0c7ba0d60a4a2/be-your-telegram-group-admin.jpg"
             }),
         }).then((res) => {
-            if (res.status == 200) console.log("de schimbat aici cu un mesaj!");
+            if (res.status == 200) alert("Your new customizations were sent");
         });
     }
 
     backBtnClickHandler(event) {
-   
-          console.log("Back bttn clicked");
+
+        console.log("Back bttn clicked");
     }
 
-    displayImage(event){
-      var img = new Image();
-      let myUrl = document.getElementById("url-id");
-      img.src=myUrl.value;
-    
-    // The URL isn't valid or the resource isn't a picture
-    img.onerror = function() { alert("Provided URL does not point to a valid picture. "+myUrl.value) };
-    // Ok, we have correct picture; display it
-    img.onload = function() {
-        document.getElementById("yourImgElement").src = img.src;
-    };
+    displayImage(event) {
+        var img = new Image();
+        let myUrl = document.getElementById("url-id");
+        img.src = myUrl.value;
+
+        // The URL isn't valid or the resource isn't a picture
+        img.onerror = function() { alert("Provided URL does not point to a valid picture. " + myUrl.value) };
+        // Ok, we have correct picture; display it
+        img.onload = function() {
+            document.getElementById("yourImgElement").src = img.src;
+        };
     }
 
     loadSetupDomElements() {
@@ -71,10 +71,10 @@ export default class extends AbstractView {
         const backBtn = document.getElementsByClassName("back-btn")[0];
         backBtn.addEventListener("click", this.backBtnClickHandler);
         const previewBtn = document.getElementsByClassName("preview")[0];
-        previewBtn.addEventListener("click",this.displayImage);
-        
+        previewBtn.addEventListener("click", this.displayImage);
+
     }
-        
+
 
     async getHTML() {
         return `
