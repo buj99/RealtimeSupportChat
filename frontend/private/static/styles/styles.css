@@ -138,7 +138,11 @@ footer {
 }
 
 /* emilian */
-
+.profile-picture{
+  width: 4em;
+  height:4em;
+  border-radius: 3em;
+}
 .user-meniu {
   width: 100vw;
   height: 100vh;
@@ -176,8 +180,9 @@ footer {
 
 .search-container {
   grid-area: search-container;
-  display: grid;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 2rem;
   border-radius: 10px 0 0 0;
 }

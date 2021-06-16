@@ -297,6 +297,7 @@ export default class extends AbstractView {
         return `<div class="user-meniu">
               <div class="chat-container">
         <div class="search-container">
+            <img src="./static/Images/user.png" alt="profile picture" class="profile-picture">
             <input class="search-widget" type="text" placeholder=" Search" />
         </div>
         <div class="conversation-list">          
