@@ -536,6 +536,7 @@ nav button {
   grid-column-end: 2;
   text-align: center;
 }
+
 .font-size {
   grid-row-start: 4;
   grid-row-end: 6;
@@ -545,11 +546,23 @@ nav button {
 .option {
   margin: 1em 0em;
 }
+.admin-name{
+  grid-row-start: 4;
+  grid-row-end: 6;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.photo-url{
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
 .btn-box {
   grid-row-start: 6;
   grid-row-end: 7;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 4;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -557,6 +570,10 @@ nav button {
 .color-picker {
   width: 10em;
   height: 5em;
+}
+.txt-picker{
+  width:12em;
+  height: 2em;
 }
 
 .image-container-costumization {

@@ -84,12 +84,22 @@ export default class extends AbstractView {
               <label for="normal">Normal</label>
               <input type="radio" name="choice" id="normal" />
             </div>
-
             <div class="option">
               <label for="large">Large</label>
               <input type="radio" name="choice" id="large" />
             </div>
           </div>
+
+          <div class="admin-name picker">
+              <p>Change admin name </p>
+              <input type="text" class="txt-picker">
+          </div>
+
+          <div class="photo-url picker">
+              <p>Url for your profile picture</p>
+              <input type="url" class="txt-picker">
+          </div>
+
           <div class="btn-box">
             <button class="back-btn">Back</button>
             <button class="save-btn">Save</button>
