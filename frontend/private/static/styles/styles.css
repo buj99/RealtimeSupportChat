@@ -182,7 +182,6 @@ footer {
   grid-area: search-container;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 2rem;
   border-radius: 10px 0 0 0;
 }
@@ -520,7 +519,7 @@ nav button {
 .customize-container header {
   grid-row: 1;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 4;
 }
 .background-color {
   grid-row-start: 2;
@@ -562,6 +561,11 @@ nav button {
   grid-row-end: 4;
   grid-column-start: 3;
   grid-column-end: 4;
+}
+.profile-photo{
+  width: 50%;
+  overflow: hidden;
+  border-radius: 50%;
 }
 .btn-box {
   grid-row-start: 6;

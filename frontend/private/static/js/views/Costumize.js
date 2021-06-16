@@ -39,8 +39,23 @@ export default class extends AbstractView {
             if (res.status == 200) console.log("succes!");
         });
     }
+
     backBtnClickHandler(event) {
         console.log("back button clicked");
+    }
+
+    displayImage(event){
+      var img = new Image();
+      let myUrl = document.getElementById("url-id");
+      img.src=myUrl.value;
+    
+    // The URL isn't valid or the resource isn't a picture
+    img.onerror = function() { alert("Provided URL does not point to a valid picture. "+myUrl.value) };
+    
+    // Ok, we have correct picture; display it
+    img.onload = function() {
+        document.getElementById("yourImgElement").src = img.src;
+    };
     }
 
     loadSetupDomElements() {
@@ -54,7 +69,12 @@ export default class extends AbstractView {
         saveBtn.addEventListener("click", this.saveBtnClickHandler);
         const backBtn = document.getElementsByClassName("back-btn")[0];
         backBtn.addEventListener("click", this.backBtnClickHandler);
+        const previewBtn = document.getElementsByClassName("preview")[0];
+        previewBtn.addEventListener("click",this.displayImage);
+        
     }
+        
+
     async getHTML() {
         return `
     <div class="customize-container">
@@ -97,7 +117,10 @@ export default class extends AbstractView {
 
           <div class="photo-url picker">
               <p>Url for your profile picture</p>
-              <input type="url" class="txt-picker">
+              <input type="url" id="url-id" class="txt-picker">
+              <img id="yourImgElement" class="profile-photo" >
+              <button class="preview">Preview</button>
+            
           </div>
 
           <div class="btn-box">
