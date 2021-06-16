@@ -36,7 +36,7 @@ export default class extends AbstractView {
                 adminPhotoLink: "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/125568526/original/cd9c93141521436a112722e8c5c0c7ba0d60a4a2/be-your-telegram-group-admin.jpg"
             }),
         }).then((res) => {
-            if (res.status == 200) console.log("succes!");
+            if (res.status == 200) console.log("de schimbat aici cu un mesaj!");
         });
     }
     backBtnClickHandler(event) {

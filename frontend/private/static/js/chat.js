@@ -13,8 +13,8 @@ css2.href = "http://localhost:8090/static/styles/chat.css";
 document.head.appendChild(css1);
 document.head.appendChild(css2);
 
-const adminName = "ChuckNorris";
-const adminPhotoLink = "https://pbs.twimg.com/profile_images/1407346896/89.jpg"
+var adminName = "";
+// const adminPhotoLink = "https://pbs.twimg.com/profile_images/1407346896/89.jpg"
 const uniqueAdminToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMzODVlMjk1ZmQwZmMwMjVkZDQwMjIiLCJpYXQiOjE2MjM0MjY1MzB9.JjTxGGQ_NobydTv6Nwm1oRrs0mRl9k6BvEm4OxpWEu0";
 var lastMessageDate;
@@ -25,6 +25,18 @@ let clientName = window.localStorage.getItem(uniqueAdminToken + "_name");
 let clientPhotoLink = window.localStorage.getItem(uniqueAdminToken + "_photo_link");
 
 if (authChat != null) {
+    await fetch("http://localhost:3000/admins/customizations/" + clientName, {
+            method: "GET",
+            headers: { auth_unique_admin_token: uniqueAdminToken }
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            configuration = data;
+            adminName = configuration.adminName;
+        })
+    console.log(adminName);
     fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
             method: "GET",
             headers: { auth_chat: authChat }
@@ -38,16 +50,6 @@ if (authChat != null) {
                 // lastMessageDate = data[data.length - 1].date;
             }
         });
-    await fetch("http://localhost:3000/admins/customizations/sssad", {
-            method: "GET",
-            headers: { auth_unique_admin_token: uniqueAdminToken }
-        })
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            configuration = data
-        })
 }
 
 //body element
@@ -192,17 +194,18 @@ const populateWithMessages = (messages) => {
         const messageContainer = document.createElement("div");
         messageContainer.classList.add("message");
         if (message.isAdmin) {
-            author = adminName;
-            photoLink = adminPhotoLink;
-            messageContainer.classList.add("user");
+            if (configuration != undefined) {
+                author = configuration.adminName;
+                photoLink = configuration.adminPhotoLink;
+                messageContainer.style.background = configuration.backgroudTheme;
+            } else {
+                author = "moderator";
+            }
+            messageContainer.classList.add("moderator");
         } else {
             author = clientName;
             photoLink = clientPhotoLink;
-            messageContainer.classList.add("moderator");
-        }
-        if (configuration != undefined) {
-            console.log(configuration.backgroudTheme)
-            messageContainer.style.background = configuration.backgroudTheme;
+            messageContainer.classList.add("user");
         }
 
         //message meta
@@ -235,7 +238,7 @@ const populateWithMessages = (messages) => {
         const messageText = document.createElement("p");
         messageText.classList.add("message-text");
         messageText.innerText = message.message;
-        if (configuration != undefined) {
+        if (message.isAdmin && configuration != undefined) {
             messageText.style.color = configuration.textColor;
             messageText.style.fontSize = "large";
         }
