@@ -5,41 +5,70 @@ export default class extends AbstractView {
     constructor(params) {
             super(params);
             this.setTitle("Costumize");
+            this.admin = window.localStorage.getItem("admin");
+            this.uniqueAdminToken = window.localStorage.getItem("unique_admin_token_" + this.admin);
+
+
         }
         //handlers
+
     saveBtnClickHandler(event) {
-        let backgroudTheme =
-            document.getElementsByClassName("color-picker")[0].value;
-        let textColor = document.getElementsByClassName("color-picker")[1].value;
-        let welcomeMessage = document.getElementById("welcomeMsg").value;
-
-        let isSmallRadioButton = document.getElementsByName("choice")[0].checked;
-        let isLargeRadioButton = document.getElementsByName("choice")[2].checked;
-        let fontSize = "medium";
-        if (isSmallRadioButton) {
-            fontSize = "small";
-        } else if (isLargeRadioButton) {
-            fontSize = "large";
+        let adminName = document.getElementsByClassName("txt-picker")[1].value;
+        let isInCorrectNameFormat = true;
+        if (adminName != null && adminName != undefined) {
+            for (let c of adminName) {
+                if (c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+                    continue;
+                } else {
+                    alert('White characters are not allowed!')
+                    isInCorrectNameFormat = false;
+                }
+            }
         }
+        if (adminName == "") {
+            alert('The textbox is empty!')
+            isInCorrectNameFormat = false;
+        }
+        if (isInCorrectNameFormat) {
+            let adminPhotoLink = document.getElementsByClassName("photo-url picker")[0].value;
+            let backgroudTheme =
+                document.getElementsByClassName("color-picker")[0].value;
+            let textColor = document.getElementsByClassName("color-picker")[1].value;
+            let welcomeMessage = document.getElementById("welcomeMsg").value;
 
-        let admin = window.localStorage.getItem("admin");
-        fetch("http://localhost:3000/admins/customizations/" + admin, {
-            method: "POST",
-            headers: {
-                auth_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMzODVlMjk1ZmQwZmMwMjVkZDQwMjIiLCJpYXQiOjE2MjM1MjkxOTJ9.pNc27gbH9qi3wJtlIn4hES3InINGVte0oT3-MTzrZSE",
-            },
-            body: JSON.stringify({
-                backgroudTheme: backgroudTheme,
-                textColor: textColor,
-                welcomeMessage: welcomeMessage,
-                fontSize: fontSize,
-                adminName: "George",
-                adminPhotoLink: "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/125568526/original/cd9c93141521436a112722e8c5c0c7ba0d60a4a2/be-your-telegram-group-admin.jpg"
-            }),
-        }).then((res) => {
-            if (res.status == 200) alert("Your new customizations were sent");
-        });
+            let isSmallRadioButton = document.getElementsByName("choice")[0].checked;
+            let isLargeRadioButton = document.getElementsByName("choice")[2].checked;
+            let fontSize = "medium";
+            if (isSmallRadioButton) {
+                fontSize = "small";
+            } else if (isLargeRadioButton) {
+                fontSize = "large";
+            }
+
+
+            let admin = window.localStorage.getItem("admin");
+            let authToken = window.localStorage.getItem("auth_token_" + admin);
+            console.log(authToken)
+            fetch("http://localhost:3000/admins/customizations/" + admin, {
+                method: "POST",
+                headers: {
+                    auth_token: authToken,
+                },
+                body: JSON.stringify({
+                    backgroudTheme: backgroudTheme,
+                    textColor: textColor,
+                    welcomeMessage: welcomeMessage,
+                    fontSize: fontSize,
+                    adminName: adminName,
+                    adminPhotoLink: adminPhotoLink
+                }),
+            }).then((res) => {
+                if (res.status == 200) alert("Your new customizations were sent");
+            });
+        }
     }
+
+
 
     backBtnClickHandler(event) {
 
@@ -60,12 +89,37 @@ export default class extends AbstractView {
     }
 
     loadSetupDomElements() {
-        this.smallRadioButton = document.getElementsByName("choice")[0];
-        this.smallRadioButton.onclick = () => {
-            this.fontSize = "small";
-        };
-        this.normalRadioButton = document.getElementsByName("choice")[1];
-        this.largeRadioButton = document.getElementsByName("choice")[2];
+        console.log(this.uniqueAdminToken)
+        fetch("http://localhost:3000/admins/customizations/" + this.admin, {
+                method: "GET",
+                headers: { auth_unique_admin_token: this.uniqueAdminToken }
+            })
+            .then((res) => {
+                return res.json();
+            })
+            .then((configuration) => {
+                console.log(configuration)
+                document.getElementsByClassName("txt-picker")[1].value = configuration.adminName;
+
+                console.log(document.getElementsByClassName("photo-url picker")[0])
+                document.getElementsByClassName("photo-url picker")[0].value = configuration.adminPhotoLink;
+                document.getElementsByClassName("color-picker")[0].value = configuration.backgroudTheme;
+                document.getElementsByClassName("color-picker")[1].value = configuration.textColor;
+                document.getElementById("welcomeMsg").value = configuration.welcomeMessage;
+
+
+                if (configuration.fontSize == "small") {
+                    document.getElementById("small").checked = true;
+                } else if (configuration.fontSize == "large") {
+                    document.getElementById("large").checked = true;
+                } else {
+                    document.getElementById("normal").checked = true;
+                }
+
+                this.smallRadioButton = document.getElementsByName("choice")[0];
+                this.normalRadioButton = document.getElementsByName("choice")[1];
+                this.largeRadioButton = document.getElementsByName("choice")[2];
+            })
         const saveBtn = document.getElementsByClassName("save-btn")[0];
         saveBtn.addEventListener("click", this.saveBtnClickHandler);
         const backBtn = document.getElementsByClassName("back-btn")[0];

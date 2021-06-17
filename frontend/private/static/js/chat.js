@@ -34,7 +34,6 @@ await fetch("http://localhost:3000/admins/customizations/" + clientName, {
     .then((data) => {
         configuration = data;
         adminName = configuration.adminName;
-        console.log('done')
     })
 console.log(adminName);
 if (authChat != null) {
@@ -125,7 +124,7 @@ sendBtn.onclick = () => {
 
     if (window.localStorage.getItem(uniqueAdminToken + "_name") == null) {
         //the user typed his/her name
-        if (isInCorrectFormat(sentText)) {
+        if (isInCorrectNameFormat(sentText)) {
             window.localStorage.setItem(uniqueAdminToken + "_name", sentText.split(' ').join(''))
             textInput.placeholder = "Type your photo url here!";
             document.querySelector("textarea").value = "";
@@ -274,7 +273,7 @@ const scrollToBottom = () => {
         myDiv.scrollTop = myDiv.scrollHeight;
     }
     //theck if the name contains only letters and digits and is not empty
-const isInCorrectFormat = (name) => {
+const isInCorrectNameFormat = (name) => {
     if (name != null && name != undefined) {
         for (let c of name) {
             if (c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
