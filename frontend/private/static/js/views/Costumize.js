@@ -66,6 +66,7 @@ export default class extends AbstractView {
                 if (res.status == 200) alert("Your new customizations were sent");
             });
         }
+        //fontSize,adminPhotoLink,backgroudTheme, adminName,textColor, welcomeMessage
     }
 
 
