@@ -51,17 +51,17 @@ export default class extends AbstractView {
             .addEventListener("click", () =>
                 this.sendMessage(document.querySelector(".chat-form input").value)
             );
-    
+
 
 
         const threeDotsButton = document.querySelector(".three-dots-button");
-        
+
         const nav = document.getElementsByTagName("nav")[0];
 
         threeDotsButton.addEventListener("click", (e) => {
             nav.classList.add("is--open");
         });
-        
+
         document.body.addEventListener("click", (e) => {
             console.log(e);
             if (threeDotsButton.contains(e.target) || nav.contains(e.target)) {
@@ -84,13 +84,13 @@ export default class extends AbstractView {
             false
         );
 
-       
+
 
 
     }
-    
 
-    
+
+
     populatePage() {
         let admin = window.localStorage.getItem("admin");
         this.authToken = window.localStorage.getItem("auth_token_" + admin);
@@ -220,9 +220,8 @@ export default class extends AbstractView {
             isThereANewMessage = true;
         } else {
             sortedConversations.forEach((conversation, index) => {
-                if (
-                    this.conversations[index].lastMsg.date != conversation.lastMsg.date
-                ) {
+                if (this.conversations[index] == undefined && conversation.lastMsg.date != undefined ||
+                    this.conversations[index].lastMsg.date != conversation.lastMsg.date) {
                     isThereANewMessage = true;
                 }
             });
