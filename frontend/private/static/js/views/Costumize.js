@@ -30,7 +30,8 @@ export default class extends AbstractView {
             isInCorrectNameFormat = false;
         }
         if (isInCorrectNameFormat) {
-            let adminPhotoLink = document.getElementsByClassName("photo-url picker")[0].value;
+            console.log(document.getElementsByClassName("txt-picker"))
+            let adminPhotoLink = document.getElementsByClassName("txt-picker")[2].value;
             let backgroudTheme =
                 document.getElementsByClassName("color-picker")[0].value;
             let textColor = document.getElementsByClassName("color-picker")[1].value;
@@ -48,7 +49,6 @@ export default class extends AbstractView {
 
             let admin = window.localStorage.getItem("admin");
             let authToken = window.localStorage.getItem("auth_token_" + admin);
-            console.log(authToken)
             fetch("http://localhost:3000/admins/customizations/" + admin, {
                 method: "POST",
                 headers: {
@@ -89,7 +89,6 @@ export default class extends AbstractView {
     }
 
     loadSetupDomElements() {
-        console.log(this.uniqueAdminToken)
         fetch("http://localhost:3000/admins/customizations/" + this.admin, {
                 method: "GET",
                 headers: { auth_unique_admin_token: this.uniqueAdminToken }
@@ -98,11 +97,9 @@ export default class extends AbstractView {
                 return res.json();
             })
             .then((configuration) => {
-                console.log(configuration)
                 document.getElementsByClassName("txt-picker")[1].value = configuration.adminName;
 
-                console.log(document.getElementsByClassName("photo-url picker")[0])
-                document.getElementsByClassName("photo-url picker")[0].value = configuration.adminPhotoLink;
+                document.getElementsByClassName("txt-picker")[2].value = configuration.adminPhotoLink;
                 document.getElementsByClassName("color-picker")[0].value = configuration.backgroudTheme;
                 document.getElementsByClassName("color-picker")[1].value = configuration.textColor;
                 document.getElementById("welcomeMsg").value = configuration.welcomeMessage;
