@@ -13,16 +13,30 @@ css2.href = "http://localhost:8090/static/styles/chat.css";
 document.head.appendChild(css1);
 document.head.appendChild(css2);
 
-const adminName = "ChuckNorris";
-const adminPhotoLink = "https://pbs.twimg.com/profile_images/1407346896/89.jpg"
+var adminName = "";
+// const adminPhotoLink = "https://pbs.twimg.com/profile_images/1407346896/89.jpg"
 const uniqueAdminToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMzODVlMjk1ZmQwZmMwMjVkZDQwMjIiLCJpYXQiOjE2MjM0MjY1MzB9.JjTxGGQ_NobydTv6Nwm1oRrs0mRl9k6BvEm4OxpWEu0";
 var lastMessageDate;
+var configuration;
 
 let authChat = window.localStorage.getItem(uniqueAdminToken + "_auth_chat");
 let clientName = window.localStorage.getItem(uniqueAdminToken + "_name");
 let clientPhotoLink = window.localStorage.getItem(uniqueAdminToken + "_photo_link");
 
+await fetch("http://localhost:3000/admins/customizations/" + clientName, {
+        method: "GET",
+        headers: { auth_unique_admin_token: uniqueAdminToken }
+    })
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+        configuration = data;
+        adminName = configuration.adminName;
+        console.log('done')
+    })
+console.log(adminName);
 if (authChat != null) {
     fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
             method: "GET",
@@ -111,13 +125,15 @@ sendBtn.onclick = () => {
 
     if (window.localStorage.getItem(uniqueAdminToken + "_name") == null) {
         //the user typed his/her name
-        window.localStorage.setItem(uniqueAdminToken + "_name", sentText.split(' ').join(''))
-        clientName = removeWhiteSpaces(sentText);
-        textInput.placeholder = "Type your photo url here!";
+        if (isInCorrectFormat(sentText)) {
+            window.localStorage.setItem(uniqueAdminToken + "_name", sentText.split(' ').join(''))
+            textInput.placeholder = "Type your photo url here!";
+            document.querySelector("textarea").value = "";
+        }
     } else if (window.localStorage.getItem(uniqueAdminToken + "_auth_chat") == null) {
         window.localStorage.setItem(uniqueAdminToken + "_photo_link", sentText)
         clientPhotoLink = sentText;
-        //the user typed image url, so now we have all the data to create the chat
+        //the user typed image url, so now we have all the necessary data to create the chat
         let name = window.localStorage.getItem(uniqueAdminToken + "_name");
         let photoLink = sentText;
         fetch("http://localhost:3000/conversations/" + clientName, {
@@ -139,6 +155,8 @@ sendBtn.onclick = () => {
                 textInput.placeholder = "Type here!";
                 // console.log("success!") //debug
             })
+
+        document.querySelector("textarea").value = "";
     } else {
         //we have a message to send
 
@@ -168,8 +186,9 @@ sendBtn.onclick = () => {
                         populateWithMessages(data3);
                     });
             });
+
+        document.querySelector("textarea").value = "";
     }
-    document.querySelector("textarea").value = "";
 };
 
 const populateWithMessages = (messages) => {
@@ -181,13 +200,18 @@ const populateWithMessages = (messages) => {
         const messageContainer = document.createElement("div");
         messageContainer.classList.add("message");
         if (message.isAdmin) {
-            author = adminName;
-            photoLink = adminPhotoLink;
-            messageContainer.classList.add("user");
+            if (configuration != undefined) {
+                author = configuration.adminName;
+                photoLink = configuration.adminPhotoLink;
+                messageContainer.style.background = configuration.backgroudTheme;
+            } else {
+                author = "moderator";
+            }
+            messageContainer.classList.add("moderator");
         } else {
             author = clientName;
             photoLink = clientPhotoLink;
-            messageContainer.classList.add("moderator");
+            messageContainer.classList.add("user");
         }
 
         //message meta
@@ -220,11 +244,17 @@ const populateWithMessages = (messages) => {
         const messageText = document.createElement("p");
         messageText.classList.add("message-text");
         messageText.innerText = message.message;
+        if (message.isAdmin && configuration != undefined) {
+            messageText.style.color = configuration.textColor;
+            messageText.style.fontSize = "large";
+        }
         messageContainer.appendChild(messageText);
         messagesContainer.appendChild(messageContainer);
     });
     lastMessageDate = messages[messages.length - 1].date;
 };
+
+
 
 const removeCurrentMessages = () => {
     Array.from(document.getElementsByClassName("message user")).forEach(
@@ -240,23 +270,26 @@ const removeCurrentMessages = () => {
 };
 
 const scrollToBottom = () => {
-    var myDiv = document.getElementById("messages-container");
-    myDiv.scrollTop = myDiv.scrollHeight;
-}
-
-const removeWhiteSpaces = (name) => {
+        var myDiv = document.getElementById("messages-container");
+        myDiv.scrollTop = myDiv.scrollHeight;
+    }
+    //theck if the name contains only letters and digits and is not empty
+const isInCorrectFormat = (name) => {
     if (name != null && name != undefined) {
         for (let c of name) {
             if (c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
-
+                continue;
             } else {
-                name.remove(c);
+                alert('White characters are not allowed!')
+                return false;
             }
         }
-    } else {
-        name = "";
     }
-    return name;
+    if (name == "") {
+        alert('The textbox is empty!')
+        return false;
+    }
+    return true;
 }
 
 setInterval(() => {
@@ -280,21 +313,6 @@ setInterval(() => {
                 }
             });
 
-        // fetch("http://localhost:3000/admins/customizations/sssad", {
-        //         method: "POST",
-        //         headers: { auth_unique_admin_token: uniqueAdminToken },
-        //         body: JSON.stringify({
-        //             "backgroudTheme": "light",
-        //             "textColor": "red",
-        //             "welcomeMessage": "Hello!What cand I help you with?",
-        //             "fontSize": "normal"
-        //         })
-        //     })
-        //     .then((res) => {
-        //         return res.json();
-        //     })
-        //     .then((data) => {
-        //         console.log(data)
-        //     })
+
     }
 }, 1000);
