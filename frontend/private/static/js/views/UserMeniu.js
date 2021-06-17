@@ -332,7 +332,7 @@ export default class extends AbstractView {
             <input class="nav-button" type="button" name="" value="Logout">
          </a> 
          <a href="https://www.oracle.com/ro/java/technologies/javase-downloads.html" data-link>
-            <input class="nav-button" type="button" name="" value="Download">
+            <input class="nav-button" type="button" name="" value="Code example">
          </a> 
             <input id="costumize-btn"class="nav-button" type="button" name="" value="Customize">
         
