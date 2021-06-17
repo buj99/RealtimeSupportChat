@@ -66,14 +66,10 @@ export default class extends AbstractView {
                 if (res.status == 200) alert("Your new customizations were sent");
             });
         }
+        //fontSize,adminPhotoLink,backgroudTheme, adminName,textColor, welcomeMessage
     }
 
 
-
-    backBtnClickHandler(event) {
-
-        console.log("Back bttn clicked");
-    }
 
     displayImage(event) {
         var img = new Image();
@@ -119,8 +115,10 @@ export default class extends AbstractView {
             })
         const saveBtn = document.getElementsByClassName("save-btn")[0];
         saveBtn.addEventListener("click", this.saveBtnClickHandler);
+        /*
         const backBtn = document.getElementsByClassName("back-btn")[0];
         backBtn.addEventListener("click", this.backBtnClickHandler);
+        */
         const previewBtn = document.getElementsByClassName("preview")[0];
         previewBtn.addEventListener("click", this.displayImage);
 
@@ -176,7 +174,7 @@ export default class extends AbstractView {
           </div>
 
           <div class="btn-box">
-            <button class="back-btn">Back</button>
+          <button class="back-btn" onclick="history.back()" >Back</button>
             <button class="save-btn">Save</button>
           </div>
         </div>

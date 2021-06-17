@@ -4,6 +4,7 @@ import Chat from "./views/Chat.js";
 import UserMeniu from "./views/UserMeniu.js";
 import Costumize from "./views/Costumize.js";
 import Register from "./views/Register.js";
+import Codeexample from "./views/Codeexample.js";
 export const router = async () => {
   const root = document.getElementById("app");
   const routes = [
@@ -14,6 +15,7 @@ export const router = async () => {
     { path: "/-username", view: UserMeniu },
     { path: "/-username/@chatname", view: Chat },
     { path: "/-username/costumize", view: Costumize },
+    {path:"/-usrname/codeexample", view: Codeexample},
   ];
 
   //testing routes for match

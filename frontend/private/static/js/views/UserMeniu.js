@@ -39,6 +39,12 @@ export default class extends AbstractView {
         goCostumizationBtn.addEventListener("click", () => {
             navigateTo(window.location.href + "/costumize");
         });
+
+        const goCodeExBtn=document.getElementById("codeex-btn");
+        goCodeExBtn.addEventListener("click",()=>{
+            navigateTo(window.location.href+"/codeexample");
+        } );
+
         this.chatTitleElemen = document.getElementById("chat-title");
         this.searchWidget = document.querySelector(".search-widget");
         this.conversationList = document.querySelector(".conversation-list");
@@ -329,10 +335,8 @@ export default class extends AbstractView {
     <nav class>
         <a href="/login" data-link>
             <input class="nav-button" type="button" name="" value="Logout">
-         </a> 
-         <a href="https://www.oracle.com/ro/java/technologies/javase-downloads.html" data-link>
-            <input class="nav-button" type="button" name="" value="Download">
-         </a> 
+         </a>   
+            <input id="codeex-btn" class="nav-button" type="button" name="" value="Code example">
             <input id="costumize-btn"class="nav-button" type="button" name="" value="Customize">
         
         </nav>
