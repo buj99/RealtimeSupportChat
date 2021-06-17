@@ -59,6 +59,13 @@ const asignChat = async (pathParams, req, res) => {
             admin_id: verify.verified._id,
             name: parsedBody.name,
             photo_link: parsedBody.photo_link,
+            messages: [
+              {
+                message: admin.costumizations.welcomeMessage,
+                isAdmin: true,
+                date: Date.now(),
+              },
+            ],
           });
           newConversation
             .save()

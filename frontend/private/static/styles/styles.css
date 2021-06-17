@@ -625,7 +625,7 @@ nav button {
   }
 
   .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-    height:10em;
+    height:14em;
     font-size:1.2em
   }
   .color-picker{
@@ -643,7 +643,7 @@ nav button {
   }
 
   .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-    height:8em;
+    height:14em;
     font-size:1em;
     padding:0 0.5 0.5 0;
 
@@ -666,8 +666,8 @@ nav button {
 @media screen and (max-width: 650px) {
 
   .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-   height:6em;
-   width:16em;
+   height:5.9em;
+   width:16.5em;
    font-size:1em;
    display:flex;
    flex-direction:row;
@@ -688,12 +688,11 @@ nav button {
 
 }
 
-
 @media screen and (max-width: 450px) {
 
   .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-   height:6em;
-   width:14em;
+   height:6.7em;
+   width:15em;
    font-size:0.9em;
 
  }
@@ -701,7 +700,20 @@ nav button {
    width:7em;
    height:2em;
  }
+.txt-picker{
+  height:2em;
+  width:5em;
+}
+.preview{
+  overflow:hidden;
+  background:#002c88;
+  width:3em;
+}
+.profile-photo{
+  width:5em;
+  height:5em;
 
+}
 .picker{
  justify-content:space-evenly;
  margin-bottom:1em;
