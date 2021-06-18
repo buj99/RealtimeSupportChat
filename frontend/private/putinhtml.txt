@@ -1,0 +1,8 @@
+ <script>
+    const authToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJlNTdhZjgxMjQ5ZDQxYzQ5MzdhNWMiLCJpYXQiOjE2MjMwODcwMjN9.9kqBNFHtMBQtAieuCf8jpjEk4iAzyoR7J0vZLdkCwds";
+    const script = document.createElement("script");
+    script.src = "http://localhost:8090/static/js/chat.js";
+    script.type = "module";
+    document.body.parentNode.appendChild(script);
+  </script>

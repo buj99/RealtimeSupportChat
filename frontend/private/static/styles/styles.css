@@ -752,3 +752,24 @@ h2{
     color: black;
     background: #ccc9dc;
   }
+.download-btn
+{
+  width:8em;
+  height:3em;
+  color: black;
+  background-color:#ccc9dc; 
+  margin: 0.5em 0;
+  padding: 0.5em 1em;
+  border-radius: 0.4em;
+  border-color: #a2bdc7;
+  border: solid;
+  border-width: 0.5em;
+  font-weight: bold;
+  cursor: pointer;
+  
+}
+.download-block{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
