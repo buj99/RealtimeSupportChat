@@ -119,7 +119,13 @@ footer {
   justify-content: center;
   margin-right: 5%;
 }
-
+.login-box-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: right;
+  margin-left: 50%;
+}
 .reg {
   color: #bfe1ed;
   font-size: 1em;
