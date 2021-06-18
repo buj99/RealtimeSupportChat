@@ -226,7 +226,8 @@ export default class extends AbstractView {
             isThereANewMessage = true;
         } else {
             sortedConversations.forEach((conversation, index) => {
-                if (this.conversations[index] == undefined && conversation.lastMsg.date != undefined ||
+                if ((document.getElementsByClassName("conversation").length==0 &&conversations.length!=0)||
+                    this.conversations[index] == undefined && conversation.lastMsg.date != undefined ||
                     this.conversations[index].lastMsg.date != conversation.lastMsg.date) {
                     isThereANewMessage = true;
                 }
