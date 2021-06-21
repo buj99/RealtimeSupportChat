@@ -40,10 +40,10 @@ export default class extends AbstractView {
             navigateTo(window.location.href + "/costumize");
         });
 
-        const goCodeExBtn=document.getElementById("codeex-btn");
-        goCodeExBtn.addEventListener("click",()=>{
-            navigateTo(window.location.href+"/codeexample");
-        } );
+        const goCodeExBtn = document.getElementById("codeex-btn");
+        goCodeExBtn.addEventListener("click", () => {
+            navigateTo(window.location.href + "/codeexample");
+        });
 
         this.chatTitleElemen = document.getElementById("chat-title");
         this.searchWidget = document.querySelector(".search-widget");
@@ -226,7 +226,8 @@ export default class extends AbstractView {
             isThereANewMessage = true;
         } else {
             sortedConversations.forEach((conversation, index) => {
-                if (this.conversations[index] == undefined && conversation.lastMsg.date != undefined ||
+                if ((document.getElementsByClassName("conversation").length == 0 && conversations.length != 0) ||
+                    this.conversations[index] == undefined && conversation.lastMsg.date != undefined ||
                     this.conversations[index].lastMsg.date != conversation.lastMsg.date) {
                     isThereANewMessage = true;
                 }

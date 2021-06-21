@@ -5,6 +5,7 @@ export default class extends AbstractView {
     constructor(params) {
         super(params);
         this.setTitle("Register");
+        this.isRegisterDone = false;
     }
     loadSetupDomElements() {
         this.addEventListenerToRegisterButton();
@@ -18,7 +19,7 @@ export default class extends AbstractView {
             .addEventListener("click", (e) => {
                 e.preventDefault();
                 if (confirmPassword.value === password.value) {
-                    fetch("http://localhost:3000/auth/register", {
+                    fetch("http://localhost:3000/admins", {
                             method: "POST",
                             body: JSON.stringify({
                                 username: username.value,
@@ -26,14 +27,21 @@ export default class extends AbstractView {
                                 confirmPassword: confirmPassword.value,
                             }),
                         })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            console.log(data);
-                            if (data.success === true) {
+                        .then((res) => {
+                            if (res.ok) {
                                 navigateTo(`http://${window.location.host}`);
-                            } else {
-                                alert("Something went rong");
+                                this.isRegisterDone = true
                             }
+                            return res.json()
+                        })
+                        .then((data) => {
+                            console.log(data)
+                            if (this.isRegisterDone) {
+                                alert("You registered successfully!");
+                            } else {
+                                alert(data.message);
+                            }
+
                         });
                 } else {
                     alert("Password confirmation failed");
