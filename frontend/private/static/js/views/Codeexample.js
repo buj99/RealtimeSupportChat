@@ -24,7 +24,7 @@ async getHTML() {
     </div>
 
     <div class="download-block">
-    <h2>Download your js:</h2>
+    <h2>Download your js, and name it "chat.js":</h2>
     <a download href="/putinjs.txt" data-link><input class="download-btn" type="button" name="" value="Click here"> </a>   
     </div>
 
