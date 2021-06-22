@@ -67,7 +67,6 @@ export default class extends AbstractView {
     });
 
     document.body.addEventListener("click", (e) => {
-      console.log(e);
       if (threeDotsButton.contains(e.target) || nav.contains(e.target)) {
         return;
       }
@@ -143,6 +142,7 @@ export default class extends AbstractView {
   }
 
   sendMessage(message) {
+    console.log(this.currentAuthChat);
     if (this.currentAuthChat == undefined) {
       window.alert("Select a chat first!");
     } else {
@@ -317,7 +317,6 @@ export default class extends AbstractView {
   }
 
   removeElementsByClassName(className) {
-    console.log("remove called");
     Array.from(document.getElementsByClassName(className)).forEach(
       (message) => {
         message.remove();

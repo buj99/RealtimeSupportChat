@@ -12,11 +12,11 @@ export default class extends AbstractView {
 
   async getHTML() {
     return `
-        <div class="codeex-container">
+        <div class="codeex-container" >
         <pre>
         <code>
-        &lt script &gt
-    const authToken =
+    &ltscript&gt
+    const unique_admin_token_HTML =
       "${localStorage.getItem(
         `unique_admin_token_${localStorage.getItem("admin")}`
       )}";
@@ -24,7 +24,7 @@ export default class extends AbstractView {
         script.src = "http://localhost:8090/static/js/chat.js";
         script.type = "module";
         document.body.parentNode.appendChild(script);
-    &lt /script &gt</code>
+    &lt/script&gt</code>
         </pre>
         <div/>
     `;

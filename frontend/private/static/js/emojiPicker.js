@@ -108,7 +108,7 @@
                     var emojiInputs = document.querySelectorAll(
                       '[data-emoji-picker="true"]'
                     );
-                    console.log(emojiInputs);
+
                     emojiInputs.forEach(function (element) {
                       _this.generateElements(element);
                     });
@@ -117,7 +117,6 @@
                 {
                   key: "generateElements",
                   value: function generateElements(emojiInput) {
-                    console.log(emojiInput);
                     var clickLink = function clickLink(event) {
                       event.preventDefault();
                       var caretPos = emojiInput.selectionStart;

@@ -7,7 +7,9 @@
 #app {
   height: 100vh;
 }
-
+code {
+  color: white;
+}
 .image-container img {
   height: 100%;
   object-fit: cover;
@@ -144,9 +146,9 @@ footer {
 }
 
 /* emilian */
-.profile-picture{
+.profile-picture {
   width: 4em;
-  height:4em;
+  height: 4em;
   border-radius: 3em;
 }
 .user-meniu {
@@ -554,19 +556,19 @@ nav button {
 .option {
   margin: 1em 0em;
 }
-.admin-name{
+.admin-name {
   grid-row-start: 4;
   grid-row-end: 6;
   grid-column-start: 3;
   grid-column-end: 4;
 }
-.photo-url{
+.photo-url {
   grid-row-start: 2;
   grid-row-end: 4;
   grid-column-start: 3;
   grid-column-end: 4;
 }
-.profile-photo{
+.profile-photo {
   width: 50%;
   overflow: hidden;
   border-radius: 50%;
@@ -584,12 +586,12 @@ nav button {
   width: 10em;
   height: 5em;
 }
-.txt-picker{
-  width:12em;
+.txt-picker {
+  width: 12em;
   height: 2em;
 }
 
-.preview{
+.preview {
   width: 5em;
   height: 2em;
   border: solid;
@@ -621,107 +623,119 @@ nav button {
   cursor: pointer;
 }
 
-
 @media screen and (max-width: 1000px) {
-  .back-btn, .save-btn{
-    width:12em;
-    height:5em;
+  .back-btn,
+  .save-btn {
+    width: 12em;
+    height: 5em;
   }
 
-  .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-    height:14em;
-    font-size:1.2em
+  .photo-url,
+  .background-color,
+  .text-color,
+  .font-size,
+  .admin-name,
+  .welcome-message {
+    height: 14em;
+    font-size: 1.2em;
   }
-  .color-picker{
-    height:3em;
-    width:7em;
-
+  .color-picker {
+    height: 3em;
+    width: 7em;
   }
 }
 
-@media  screen and (max-width:880px) {
-  
-  .back-btn, .save-btn{
-    width:10em;
-    height:3.5em;
+@media screen and (max-width: 880px) {
+  .back-btn,
+  .save-btn {
+    width: 10em;
+    height: 3.5em;
   }
 
-  .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-    height:14em;
-    font-size:1em;
-    padding:0 0.5 0.5 0;
-
+  .photo-url,
+  .background-color,
+  .text-color,
+  .font-size,
+  .admin-name,
+  .welcome-message {
+    height: 14em;
+    font-size: 1em;
+    padding: 0 0.5 0.5 0;
   }
-  .txt-picker{
-    height:3em;
-    width:7em;
+  .txt-picker {
+    height: 3em;
+    width: 7em;
   }
-  .color-picker{
-    height:2em;
-    width:5em;
-
+  .color-picker {
+    height: 2em;
+    width: 5em;
   }
-  .option{
-    display:flex;
+  .option {
+    display: flex;
   }
-  
 }
 
 @media screen and (max-width: 650px) {
-
-  .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-   height:5.9em;
-   width:16.5em;
-   font-size:1em;
-   display:flex;
-   flex-direction:row;
-    justify-content:space-evenly;
- }
- .back-btn, .save-btn{
-   width:8em;
-   height:3em;
- }
- .customization-options{
-    display:inline-block;
-
- }
- .picker{
-  justify-content:space-evenly;
-  margin-bottom:1em;
- }
-
+  .photo-url,
+  .background-color,
+  .text-color,
+  .font-size,
+  .admin-name,
+  .welcome-message {
+    height: 5.9em;
+    width: 16.5em;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .back-btn,
+  .save-btn {
+    width: 8em;
+    height: 3em;
+  }
+  .customization-options {
+    display: inline-block;
+  }
+  .picker {
+    justify-content: space-evenly;
+    margin-bottom: 1em;
+  }
 }
 
 @media screen and (max-width: 450px) {
-
-  .photo-url,.background-color,.text-color,.font-size,.admin-name,.welcome-message{
-   height:6.7em;
-   width:15em;
-   font-size:0.9em;
-
- }
- .back-btn, .save-btn{
-   width:7em;
-   height:2em;
- }
-.txt-picker{
-  height:2em;
-  width:5em;
-}
-.preview{
-  overflow:hidden;
-  background:#002c88;
-  width:3em;
-}
-.profile-photo{
-  width:5em;
-  height:5em;
-
-}
-.picker{
- justify-content:space-evenly;
- margin-bottom:1em;
-}
+  .photo-url,
+  .background-color,
+  .text-color,
+  .font-size,
+  .admin-name,
+  .welcome-message {
+    height: 6.7em;
+    width: 15em;
+    font-size: 0.9em;
+  }
+  .back-btn,
+  .save-btn {
+    width: 7em;
+    height: 2em;
+  }
+  .txt-picker {
+    height: 2em;
+    width: 5em;
+  }
+  .preview {
+    overflow: hidden;
+    background: #002c88;
+    width: 3em;
+  }
+  .profile-photo {
+    width: 5em;
+    height: 5em;
+  }
+  .picker {
+    justify-content: space-evenly;
+    margin-bottom: 1em;
+  }
 }
 /*Code example*/
 .codeex-container {
@@ -732,32 +746,30 @@ nav button {
   flex-direction: column;
   justify-content: space-evenly;
 }
-h1{
+h1 {
   font-size: 2.5em;
-  font-style:normal;
+  font-style: normal;
   text-align: center;
   color: #a0cedf;
 }
-h2{
+h2 {
   font-size: 1.5em;
   font-style: italic;
   text-align: left;
   margin-left: 3em;
   color: #cde0e7;
-
 }
-.codeex-p{
-    font-size: 1em;
-    text-align: center;
-    color: black;
-    background: #ccc9dc;
-  }
-.download-btn
-{
-  width:8em;
-  height:3em;
+.codeex-p {
+  font-size: 1em;
+  text-align: center;
   color: black;
-  background-color:#ccc9dc; 
+  background: #ccc9dc;
+}
+.download-btn {
+  width: 8em;
+  height: 3em;
+  color: black;
+  background-color: #ccc9dc;
   margin: 0.5em 0;
   padding: 0.5em 1em;
   border-radius: 0.4em;
@@ -766,9 +778,8 @@ h2{
   border-width: 0.5em;
   font-weight: bold;
   cursor: pointer;
-  
 }
-.download-block{
+.download-block {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
