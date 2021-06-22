@@ -22,8 +22,7 @@ document.head.appendChild(css2);
 
 var adminName = "";
 // const adminPhotoLink = "https://pbs.twimg.com/profile_images/1407346896/89.jpg"
-const uniqueAdminToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMzODVlMjk1ZmQwZmMwMjVkZDQwMjIiLCJpYXQiOjE2MjM0MjY1MzB9.JjTxGGQ_NobydTv6Nwm1oRrs0mRl9k6BvEm4OxpWEu0";
+const uniqueAdminToken = unique_admin_token_HTML;
 var lastMessageDate;
 var configuration;
 
@@ -40,11 +39,10 @@ await fetch("http://localhost:3000/admins/customizations/" + clientName, {
   .then((res) => {
     return res.json();
   })
-  .then((data) => {
-    configuration = data;
-    adminName = configuration.adminName;
+  .then((conf) => {
+    adminName = conf.adminName;
+    configuration = conf;
   });
-console.log(adminName);
 if (authChat != null) {
   fetch("http://localhost:3000/conversations/" + adminName + "/" + clientName, {
     method: "GET",

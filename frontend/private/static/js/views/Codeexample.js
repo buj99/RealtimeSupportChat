@@ -1,15 +1,34 @@
 import AbstractView from "./AbstractView.js";
 
-
 export default class extends AbstractView {
-    constructor(params) {
-            super(params);
-            this.setTitle("Codeexample");
-            this.admin = window.localStorage.getItem("admin");
-            this.uniqueAdminToken = window.localStorage.getItem("unique_admin_token_" + this.admin);
-        }
+  constructor(params) {
+    super(params);
+    this.setTitle("Codeexample");
+    this.admin = window.localStorage.getItem("admin");
+    this.uniqueAdminToken = window.localStorage.getItem(
+      "unique_admin_token_" + this.admin
+    );
+  }
 
-async getHTML() {
+  async getHTML() {
+    return `
+        <div class="codeex-container">
+        <pre>
+        <code>
+        &lt script &gt
+    const authToken =
+      "${localStorage.getItem(
+        `unique_admin_token_${localStorage.getItem("admin")}`
+      )}";
+        const script = document.createElement("script");
+        script.src = "http://localhost:8090/static/js/chat.js";
+        script.type = "module";
+        document.body.parentNode.appendChild(script);
+    &lt /script &gt</code>
+        </pre>
+        <div/>
+    `;
+
     return `
     <div class="codeex-container">
     <h1>To get your own personalized chat for your website just add the next code.</h1>
@@ -31,5 +50,5 @@ async getHTML() {
     <button class="back-btn" onclick="history.back()" >Back</button>
     </div>
     `;
-    }
+  }
 }

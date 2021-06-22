@@ -135,7 +135,7 @@
                       }
                     };
 
-                    emojiInput.style.width = "95%";
+                    emojiInput.style.width = "85%";
                     emojiInput.style.height = "80%";
                     var emojiContainer = document.createElement("div");
                     emojiContainer.style.position = "relative";
@@ -177,6 +177,7 @@
 
                     var emojiTrigger = document.createElement("a");
                     emojiTrigger.style.position = "absolute";
+                    emojiTrigger.style.color = "#FFFFF";
                     emojiTrigger.style.top = "2px";
                     emojiTrigger.style.right = "2px";
                     emojiTrigger.style.textDecoration = "none";
