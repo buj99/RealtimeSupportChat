@@ -9,8 +9,8 @@
     <header>
       <div class="banner">
         <img src="images.jpg" width="227" height="150" alt="Scholarly HTML logo">
-      </div>
       <h1>Real Time Suport Chat</h1>
+      </div>
     </header>
     <div role="contentinfo">
         <ol role="directory">
@@ -18,7 +18,7 @@
             <li><a href="#introduction"><span>2. </span>Introducere</a></li>
             <li><a href="#structure"><span>3. </span>Structura</a><ol role="directory">
                 <li><a href="#Root"><span>3.1 </span>Tehnologii utilizate</a></li>
-                <li><a href="#article"><span>3.2 </span>Pagina html</a></li>
+                <li><a href="#article"><span>3.2 </span>Paginile site-ului</a></li>
                 <li><a href="#hunk"><span>3.3 </span>Pagina de login</a></li>
                 <li><a href="#inline"><span></span>3.4 </span>Pagina de register</a></li>
                 <li><a href="#references"><span>3.5 </span>Pagina userului(UserMenu)</a></li>
@@ -99,9 +99,12 @@
           </ul>
         <section id="article">
             <!-- review? -->
-        <h3><span>3.2 </span>Pagina html</h3>
+        <h3><span>3.2 </span>Paginile site-lui</h3>
         <p>
-            Documentul este codat in UTF-8 si este transmis cu un tip media text/html.
+          Fiecare pagina a site-lui se bazeaza pe cate un schelet html, cateva stilizari adunate intr-un css numit styles.css, si cate 
+          o un document js care contine functiile necesare functionarii corecte a paginii. 
+          Documentul html este codat in UTF-8 si este transmis cu un tip media text/html.
+          Documentul css 
         </p>
         <p>
           Head-ul trebuie sa contina <code>&lt;meta charset="utf-8"&gt;</code> si un
@@ -112,22 +115,24 @@
         <!-- review? -->
         <h3><span>3.3 </span>Pagina de login</code></h3>
         <p>
-          Pagina de login asigura o modalitate utilizatorului de a se loga pentru ca acesta sa poata beneficia de serviciile site-ului.
+          Pagina de login asigura o modalitate utilizatorului de a se loga printr-un formular pentru ca acesta sa poata beneficia de 
+          serviciile site-ului.
         </p>
       </section>
       <section id="inline">
         <!-- review? -->
         <h3><span>3.4 </span>Pagina de register</h3>
         <p>
-          Pagina de register are functionalitatea de a crea conturi noi pentru utilizatorii site-ului.
+          Pagina de register pune la dispozitie un formular care are rolul de a crea conturi noi pentru utilizatorii site-ului.
         </p>
        </section>
       <section id="references">
         <!-- review? -->
         <h3><span>3.5 </span>Pagina userului (UserMenu)</h3>
         <p>
-          Aceasta pagina contine toate conversatiile administratorului si o bara de navigatie care permitere iesirea din
-          cont, download-ul scriptului pentru chat si intrarea pe o pagina de costumizare.
+          Aceasta pagina pune la dispozitie toate conversatiile administratorului si o bara de navigatie care contine 3 butoane, unul care 
+         permite iesirea din cont, un buton care redirectioneaza catre descarcarea codului necesar pentru chat-ul propriu si un
+          buton care redirectioneaza catre o pagina de costumizare.
         </p>
         
       </section>
@@ -137,13 +142,17 @@
         <h3><span>3.6 </span>Pagina de costumizare</h3>
         <p>
           Pagina de costumizare permite utilizatorului schimbarea temei chat-ului, a culorii scrisului, a dimensiunii
-          fontului si a mesajului de intampinare by default al chat-ului.
+          fontului, a pozei de profil prin intermediul unui URL, pe care o poti previzualiza inainte de a salva modificarile
+          , si a mesajului de intampinare by default al chat-ului.
       </section>
       <section id="HTMLRoles">
         <!-- review? -->
         <h3><span>3.7 </span>Pagina de descarcare</h3>
         <p>
-          Pune la dispozitie scriptul pentru chat-ul costumizat de client.
+          Pune la dispozitie codul pentru chat-ul costumizat de client prin intermediul a 3 link-uri. Unul dintre ele pune la dispozitie 
+          html-ul necesar, altul pune la dispozitie css-ul necesar, iar celalalt pune la dispozitie js-ul necesar. Fisierele ce se descarca
+          trebuie adaugate la codul site-lui clientlui pentru o buna functionare a chat-ului customizat.
+        
         </p>
         
       </section>

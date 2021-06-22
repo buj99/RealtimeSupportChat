@@ -14,17 +14,17 @@ async getHTML() {
     <div class="codeex-container">
     <h1>To get your own personalized chat for your website just add the next code.</h1>
     <div class="download-block">
-    <h2>Download your html:</h2>
+    <h2>Download your html and add it to your html file:</h2>
     <a download href="/putinhtml.txt" data-link><input class="download-btn" type="button" name="" value="Click here"> </a>   
     </div>
 
     <div class="download-block">
-    <h2>Download your css:</h2>  
+    <h2>Download your css and add it to your css file:</h2>  
     <a download href="/putincss.txt" data-link><input class="download-btn" type="button" name="" value="Click here"> </a>   
     </div>
 
     <div class="download-block">
-    <h2>Download your js:</h2>
+    <h2>Download your js, and name it "chat.js":</h2>
     <a download href="/putinjs.txt" data-link><input class="download-btn" type="button" name="" value="Click here"> </a>   
     </div>
 
