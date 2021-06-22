@@ -1,0 +1,109 @@
+.chat-container {
+  display: grid;
+  grid: "search-container chat-title" 2fr "conversation-list chat-message-list" 20fr "conversation-list chat-form" 3fr / 1fr 4fr;
+  width: 98%;
+  height: 95vh;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.search-container,
+.conversation-list {
+  background-color: #0048aa;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.conversation-list {
+  border-radius: 0 0 0 1em;
+}
+
+.search-container {
+  grid-area: search-container;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 10px 0 0 0;
+}
+
+.search-widget {
+  border-radius: 5rem;
+  font-size: 200%;
+}
+
+.conversation-list {
+  grid-area: conversation-list;
+  overflow-y: scroll;
+  max-height: 90.5vh;
+}
+
+.conversation-list::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.conversation-list::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 1.3em;
+}
+
+.conversation-list::-webkit-scrollbar-thumb:hover {
+  background: #7e7e7e;
+}
+
+.conversation {
+  display: grid;
+  grid: "img client-name" 1.5fr "img last-message" 1fr / 1fr 2fr;
+  align-items: center;
+  grid-template-columns: 4rem 1fr max-content;
+  color: #ddd;
+  border-bottom: 1px solid #002c88;
+  margin-left: 1rem;
+}
+
+.conversation:hover {
+  cursor: pointer;
+}
+
+.conversation > img {
+  grid-area: img;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 90%;
+  background: rgb(216, 216, 216);
+  margin: 20%;
+}
+
+.client-name {
+  grid-area: client-name;
+  font-weight: bold;
+  color: #eee;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.5rem;
+  padding: 0 1.5rem;
+}
+
+.last-message {
+  grid-area: last-message;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding: 0 1rem 1rem 1.5rem;
+}
+
+.chat-title,
+.chat-form {
+  background: #eee;
+}
+
+.chat-title {
+  grid-area: chat-title;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 0 10px 0 0;
+  box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.75);
+}
